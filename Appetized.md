@@ -8,7 +8,7 @@ Lots of young people aren't cooking for themselves. Home cooking has many benefi
 
 ### Target Audience
 
- People aged 16-24 are `//TODO`% less likely to cook for themselves [^ Citation needed], this is because `//TODO`.
+but idk it is what i write when im doing the brain em People aged 16-24 are `//TODO`% less likely to cook for themselves [^ Citation needed], this is because `//TODO`.
 
 ### Existing Solutions
 
@@ -48,13 +48,48 @@ Building a recipe blog from scratch can be a expensive and time consuming proces
 
 ### Solution
 
-Appetized will be composed of two applications, `appetized-client` and `appetized-server`
+Appetized will be composed of two applications, `appetized-client` and `appetized-server`. Appetized server will have a database containing recipes, user information, such as login details, and saved recipes. This database will be able to be interacted with via an API that I will implement. The client will provide users a GUI and will request data from the API.
 
-#### `appetized-client`
+Appetized will take from a number of features from existing solutions. Instagram's feed page shows all posts from followed users ordered by upload date, this ensures that you wont see repeated recipes mixed in with new ones and is easy to implement. `//TODO add more things that the solution is insired by`
 
-This will be the user facing portion of the 
+#### Limitations
 
+There are a few limitations with this solution however:
 
+Firstly, a platform like this would have to be moderated by hand, as time constraints mean that there wont be time to create a automated system that could classify the content uploaded and make sure that it is recipes... *for food*. Some websites that are primarily hosting user generated content struggle to keep the things that their users upload are firstly, on topic and secondly (and most importantly) not illegal.
+
+Secondly, I don’t plan to implement a recommendation system, these are incredibly hard to implement, especially on a brand new platform with no data. 
+
+### Features
+
+For Appetized to feel complete, it must do the following:
+
+- Host user uploaded recipes, with an on-site method of creating them.
+- Have social features, like following other users and saving recipes.
+- Have a secure authentication system.
+- Have a way of finding user uploaded recipes.
+
+### Requirements
+
+To be able to access the official version Appetized, all a user will need is a device capable of running a modern web browser, or installing an .apk or .ipa file. The user will also require an internet connection at least once to download the content from the website and save it. Saved recipes will be stored locally, so you will not need an internet connection to view it.   
+
+I plan for Appetized to be open-source, so users can run their own instance of `appetized-server` or `appetized-client`.  Users planning to host `appetized-server` will need a computer that is capable of running Node.js version 12 and the latest version of PostgreSQL. 
+
+To run a local version of the client, a user will just need a computer capable of running Node.js version 12, however, if a user’s computer couldn’t run Node.js, they could manually send queries to the API.
+
+### Success Criteria
+
+|  ID   | Description                                                  | Server                                                       | Client                                                       | Priority |
+| :---: | :----------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- |
+| `id1` | User can upload & edit recipes.                              | Will need to be capable of receiving a recipe and storing it in a database. | Will need a recipe creation/editing page.                    | High     |
+| `id2` | User can view recipes.                                       | Will need to be able to receive requests for a specific recipes and respond. | Will need a page for each recipe that requests it from the server and then displays it. | High     |
+| `id3` | User can create an account.                                  | Will need to be able to receive account creation requests.   | Will need a registration page.                               | High     |
+| `id4` | User can log into their account.                             | Will need to be able to authenticate a user based on their email and password. | Will need a login page.                                      | High     |
+| `id5` | Users stay logged in.                                        | Will need to be able to issue a user a cookie and check this cookie with each request to see if it is authorised. | Will need to be able to receive cookies.                     | High     |
+| `id6` | Users will be able to recover a lost account with a recovery email. | Will need to be capable of sending an email that contains a password recovery link. | Will need a password reset form.                             | Low      |
+| `id7` | Users will be able to save a recipe.                         | Will need to be capable of receiving a recipe save request and store this in a database table. | Will need to be able to display saved recipes in a list. Will need to have a button to save recipes with. | High     |
+| `id8` | Saved recipes will be stored locally.                        | N/A                                                          | Saved recipes need to be stored in local storage.            | Low      |
+| `id9` | Users will be able to follow another user.                   | Will need to be capable of receiving follow and unfollow request. | Will need a page for following and followers as well as a follow/unfollow button for each user. | High     |
 
 ---
 
@@ -66,6 +101,7 @@ This will be the user facing portion of the
 - [ ] How likely people are to cook https://www.food.gov.uk/research/food-and-you
 - [ ] How many percent of people get their recipes from social media
 - [ ] fix blogs grammarWhat You See Is What You Get 
+- [ ] Inspiration
 
 ---
 
