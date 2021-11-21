@@ -1,0 +1,23 @@
+{
+  "name": "appetized-docs",
+  "version": "1.0.0",
+  "description": "This is the writeup for my computer science coursework, its private because the exam board says it has to be. Here's the [writeup](Appetized.md) so far. I'm writing it in Typeora, so it will have some weird MD.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiluw/appetized-docs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hiluw/appetized-docs/issues"
+  },
+  "homepage": "https://github.com/hiluw/appetized-docs#readme",
+  "devDependencies": {
+    "prettier": "^2.4.1"
+  }
+}
