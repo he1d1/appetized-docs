@@ -2,19 +2,31 @@
 
 [TOC]
 
-## Analysis
+<div style="page-break-after: always; break-after: page;"></div>
 
-Lots of young people aren't cooking for themselves. Home cooking has many benefits [^Citation needed] like `//TODO`. A
-possible reason young adults aren't cooking for themselves is that there isn't an online repository that is engaging and
-fun. Progressive Web Apps (PWAs) are suited to recipes because they can deploy to app stores and the web with the same
-code-base [^Citation needed]. A sensible architecture for the project would be the client-server model. A centralised
-system would ensure recipes are up-to-date. Additionally, I can more easily add authentication and social features.
+# Analysis
 
-### Target Audience
+## Problem Identification
 
-People aged 16-24 are `//TODO`% less likely to cook for themselves [^ Citation needed], this is because `//TODO`.
+Lots of young people aren't cooking for themselves. Home cooking has many benefits like being able to choose your own ingredients to meet your dietary requirements or being able to easily make more healthy meal choices. A possible reason young adults aren't cooking at home is because they don’t know many recipes that are really tasty, but also easy to make and don’t take several hours to cook. A solution to this would be to create a recipe sharing platform that is tailored to younger people.
 
-### Existing Solutions
+I think that this problem would ideally be solved using computers because it fits really well into the client-server topology. Recipes can be stored easily in a database, which can then be accessed remotely over the internet. A client could be also developed to display the recipes and provide the user a simple way of viewing and creating recipes to be uploaded back to the server.  
+
+## Computational Methods
+
+The problem is best solved using computational methods because any physical data repositories can only be accessed in person. The use of an online data repository allows anybody in the world to access the data stored in it almost instantly. There are a number of protocols governing traffic over a network that can be used to create an application that takes HTTP requests and responds to them with the requested data or action, this is called a *web API*. The solution requires a user to be able to upload and and download recipes quickly and easily, to achieve this, I will develop a website alongside the server that interacts with the backend. The client will provide a user interface (UI) which will make uploading and reading recipes fast and easy.
+
+This is a better solution than a physical repository of recipes, such as a library filled with recipe books, because of there being no physical limitations on how many recipes can be stored, and they can be searched for, filtered and sorted in milliseconds. The use of a database allows storage of millions of recipes without much overhead. An 8 TB hard drive takes up 3.5 inches of space inside a computer, but can store billions of books worth of data. 
+
+Another problem with a physical solution would be that young people tend to be less interested in going to a library to get information, seeking it online instead. Having the recipes be accessible on a website would allow them to do this and the use of a native mobile wrapper would allow users to be able to download the client from their phone’s app store. 
+
+## Target Audience
+
+The platform would be created for young people who are seeking recipes so they can cook for themselves. As a result, the solution would need to be engaging for young people. If the site doesn’t have any recipes, people wont want to use it, so encouraging users to upload their own recipes is essential. This can be achieved by adding social features to the site, which will potentially drive users to want to create the best recipes on the site, so they can get recognition from other users. This will also help to bring users higher quality recipes, because the best ones will be able to be more easily identified because they have more interactions.
+
+I think that the site would also be great for people who are d
+
+## Existing Solutions
 
 #### Cookbooks
 
@@ -1454,7 +1466,25 @@ If you try to login without a verified email address, you will get an error.
 }
 ```
 
+### Validation
 
+In resolvers, the server will take user input, if the user enters erroneous data, the server will need to reject this data with an error. Whenever a resolver takes user input, it will create an object called `validationErrors`. Any erroneous data will add a field to this object, for example, if the user doesn’t input an email in the `addUser` mutation:
+
+```ts
+// Checks if an email was entered.
+if (!email) validationErrors.email = "Email is required.";
+```
+
+This object, if nonempty, will be included in an error which will be thrown:
+
+```ts
+// If there are any validation errors.
+  if (Object.keys(validationErrors).length > 0) {
+    throw new UserInputError("Failed to add account due to user input.", {
+      ...validationErrors,
+    } as any);
+  } 
+```
 
 # References
 
