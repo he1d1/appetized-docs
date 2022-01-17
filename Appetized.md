@@ -1,60 +1,117 @@
-# Appetized
+<h1>Appetized</h1>
 
-[TOC]
+<div style="page-break-after: always; break-after: page;"></div>
 
-## Analysis
+# Analysis
 
-Lots of young people aren't cooking for themselves. Home cooking has many benefits [^Citation needed] like `//TODO`. A
-possible reason young adults aren't cooking for themselves is that there isn't an online repository that is engaging and
-fun. Progressive Web Apps (PWAs) are suited to recipes because they can deploy to app stores and the web with the same
-code-base [^Citation needed]. A sensible architecture for the project would be the client-server model. A centralised
-system would ensure recipes are up-to-date. Additionally, I can more easily add authentication and social features.
+## Problem Identification
 
-### Target Audience
+Lots of young people aren't cooking for themselves. Home cooking has many benefits like being able to choose your own
+ingredients to meet your dietary requirements or being able to easily make more healthy meal choices. A possible reason
+young adults aren't cooking at home is because they don’t know many recipes that are really tasty, but also easy to make
+and don’t take several hours to cook. A solution to this would be to create a recipe sharing platform that is tailored
+to younger people.
 
-People aged 16-24 are `//TODO`% less likely to cook for themselves [^ Citation needed], this is because `//TODO`.
+I think that this problem would ideally be solved using computers because it fits really well into the client-server
+topology. Recipes can be stored easily in a database, which can then be accessed remotely over the internet. A client
+could be also developed to display the recipes and provide the user a simple way of viewing and creating recipes to be
+uploaded back to the server.
 
-### Existing Solutions
+## Computational Methods
 
-#### Cookbooks
+The problem is best solved using computational methods because any physical data repositories can only be accessed in
+person. The use of an online data repository allows anybody in the world to access the data stored in it almost
+instantly. There are a number of protocols governing traffic over a network that can be used to create an application
+that takes HTTP requests and responds to them with the requested data or action, this is called a _web API_. The
+solution requires a user to be able to upload and download recipes quickly and easily, to achieve this, I will develop a
+website alongside the server that interacts with the backend. The client will provide a user interface (UI) which will
+make uploading and reading recipes fast and easy.
 
-Recipe books are the traditional way of getting recipes. They are often written informally and have images and other
-aids to help with cooking the recipes. I think people use them because they are beginner-friendly, and the ingredients
-and utensils needed are accessible. They also contain a range of information about each recipe, such as nutritional
-information or how long it takes to prep and cook that helps the reader pick out recipes.
+This is a better solution than a physical repository of recipes, such as a library filled with recipe books, because of
+there being no physical limitations on how many recipes can be stored, and they can be searched for, filtered and sorted
+in milliseconds. The use of a database allows storage of millions of recipes without much overhead. An 8 TB hard drive
+takes up 3.5 inches of space inside a computer, but can store billions of books worth of data.
 
-An ideal recipe website would have all the strengths of a cookbook and have the convenience of being accessible anywhere
-and have a greater variety of recipes. A recipe book usually has a theme, so maybe I could add a way of saving recipes
-into organised cookbooks for offline usage.
+Another problem with a physical solution would be that young people tend to be less interested in going to a library to
+get information, seeking it online instead. Having the recipes be accessible on a website would allow them to do this
+and the use of a native mobile wrapper would allow users to be able to download the client from their phone’s app store.
 
-A disadvantage of cookbooks is that you need to buy them or take them out from a library. They tend to be pretty pricey,
-with them costing around £5 to £20.
+## Target Audience
 
-#### Social Media
+The platform would be created for young people who are seeking recipes, so they can cook for themselves. As a result,
+the solution would need to be engaging for young people. If the site does not have any recipes, people won't want to use
+it, so encouraging users to upload their own recipes is essential. This can be achieved by adding social features to the
+site, which will potentially drive users to want to create the best recipes on the site, so they can get recognition
+from other users. This will also help to bring users higher quality recipes, because the best ones will be able to be
+more easily identified because they have more interactions (saves, likes, follows etc.)
 
-`//TODO`% of people get their recipes from social media platforms like Facebook or Instagram.
+When tailoring a product to young people, there are several factors to consider that may pose challenges to the adoption
+of the product by the target audience. Primarily, young people almost exclusively access the internet with their phones.
+As a result, I think adopting a mobile-first design philosophy would greatly benefit the usability and quality of the
+application. Furthermore, the target audience tend to use apps on their phone rather than a web browser, this makes the
+capability for the product to be released on mobile app stores an essential feature of a solution to this problem.
 
-##### Instagram
+To summarise, the target audience of the application is young people learning to cook for themselves.
 
-The way to share recipes on Instagram is via video. However, the video player is limited in functionality, making it a
-frustrating experience when cooking. The length of videos on Instagram is between 3 and 60 seconds [^ Citation needed],
-which means that intricate recipes are usually rushed through and missing vital details. There is also no way to pause
-or rewind, which means if you missed something, you have to start the video again.
+## Existing Solutions
 
-##### Facebook
+There are already a number of different ways young people get their recipes, and they all seem to have unique strengths
+and weaknesses. To create an ideal solution to the problem, it will be important to implement each of their benefits,
+while avoiding whatever pitfalls of the existing solutions.
 
-Some people also get their recipes from Facebook recipe pages. These pages usually post images or videos like those on
-Instagram linking to an external recipe website that they run for more detailed instructions. However, there isn’t a way
-to save or pin a recipe for later. Saving is an essential feature because it can be hard to find a post again.
+### Cookbooks
 
----
+Recipe books are the traditional way to find recipes. They are often written informally which can make the actual
+process of reading them more inviting and engaging. Cookbooks also tend to be beginner-friendly, and the ingredients and
+utensils needed are fairly accessible, this allows for people on a lower budget to produce great food. They also contain
+a range of information about each recipe, such as nutritional information, or how long it takes to prep and cook that
+helps the reader pick out recipes.
 
-I think the main reason that people get their recipes off of social media is that most mobile users prefer using an app
-over using a web browser. [^ Citation needed]
+Cookbooks have been around for long enough that they have a perfect balance between readability and detail. They tend to
+be made up of the same elements:
 
-#### Recipe Blogs
+- Title
+- Description
+- Metadata such as time of writing
+- Categories the recipe falls into (e.g. cuisine, starter or main)
+- Cooking and prep time
+- Ingredients
+- Steps and tips in chronological order
 
-`//TODO fix grammar`
+Implementing these will allow the users of the application to represent any recipe. Additionally, allowing users to be
+able to search for recipes with these categories will make it easier to find the perfect recipe.
+
+However, young people aren’t reading physical books as much as they used to, so even though recipe books might have the
+perfect format for young people, the fact that it's a product you have to go and buy might be a deal-breaker for a lot
+of the target audience. Convenience is an important thing to have in a potential solution and having access to the
+recipes on a mobile phone is the best to implement it.
+
+Additionally, unless you go to the library, cookbooks can be quite expensive. I think anybody should have free access to
+recipes, so I don’t plan to monetise access to the recipes themselves.
+
+### Social Media
+
+Some people get their recipes from existing social media apps, I think this is quite a flawed solution to the problem,
+however, each of the different social media platforms have their own disadvantages.
+
+- Instagram is a photo/video sharing app that is sometimes used to share recipes. The video player is limited in
+  functionality, making it a frustrating experience when cooking. The length of videos on Instagram is between 3 and 60
+  seconds, which means that intricate recipes are usually rushed through and missing vital details. There is also no way
+  to pause or rewind, which means if you missed something, you have to start the video again. The discoverability of the
+  recipes on Instagram is great, with the use of hashtags. I think hashtags aren’t the best way to categorise recipes,
+  though, so I am going to be implementing more specific parameters to search for recipes. This will include things like
+  cuisine, and the type of meal.
+
+- Facebook is a more traditional social media site, where you can post text alongside some images. Some people also get
+  their recipes from Facebook recipe pages. These pages usually post images or videos like those on Instagram linking to
+  an external recipe website that they run for more detailed instructions. However, there isn’t a way to save or pin a
+  recipe for later. Saving is an essential feature because it can be hard to find a post again. I am going to give users
+  the ability to save recipes, which can be used offline too.
+
+People may be using social media because it is convenient to use it on their phone, through an app store. This, again,
+shows why it is important to give the website have the capability to be deployed onto those stores.
+
+### Recipe Blogs
 
 Recipe blogs are another popular way to get recipes, they are usually ran by a chef and have just their recipes. These
 are great for the same reasons as a cookbook, having a personal touch.
@@ -62,354 +119,983 @@ are great for the same reasons as a cookbook, having a personal touch.
 A lot of blogs are built with a [WYSIWYG][wysiwyg] (_What You See Is What You Get_, pronounced: “wiz-e-wig”) website
 editor, these can be good for beginners because they are easy to use, and you can make a website relatively fast. There
 are however, a large number of drawbacks to these editors. Primarily, WYSIWYG sites often have terrible performance, SEO
-and layout optimisation on mobile. The slow speed results from sharing the server with a ton of other websites and the
+and user experience on mobile. The slow speed results from sharing the server with a ton of other websites and the
 generated code itself being poorly optimised. WYSIWYG editors also tend to not encourage mobile-first design, making the
 user build the desktop site, and then rearrange the elements to better fit mobile. Most of the time, people using
-WYSIWYG editors won't have learned about UI best practises, resulting in a bad user experience, especially on mobile.
-Due to the poor performance and layout, the SEO on generated sites is already going to be low, but there also isn’t a
-way to implement advanced SEO. Google Search allows websites to give [structured data][structured data] which allows web
+WYSIWYG editors don’t teach their users about UX, resulting in a poor experience, especially on phones or tablets. Due
+to the poor performance and layout, the SEO on generated sites is already going to be low, but there also isn’t a way to
+implement advanced SEO. Google Search allows websites to give [structured data][structured data] which allows web
 developers to have their sites appear in Google’s Rich results, this is an important way to drive traffic to a recipe
 blog. However, on website builders, there isn’t a way to automatically have this data appear on your sites. On Wix, you
 have to individually add structured data for each page even though its already in the websites CMS, this is an obscure
 feature and most recipe bloggers won't pay attention to it.
 
+The blogs are also not centralised, which makes it unfeasible to implement certain features like recipe downloading or
+social interactions.
+
 Building a recipe blog from scratch can be an expensive and time-consuming process and isn’t accessible to a lot of
 people. This could be solved with a recipe sharing website that is focused on great SEO and ease of use.
 
-### Solution
+---
 
-Appetized will be composed of two applications, `appetized-client` and `appetized-server`. Appetized server will have a
-database containing recipes, user information, such as login details, and saved recipes. This database will be able to
-be interacted with via an API that I will implement. The client will provide users a GUI and will request data from the
-API.
+To summarise, all the current ways that are used to get recipes have their own unique disadvantages, which make them all
+not a great solution to the problem. Recipe books can’t be used anywhere and are costly. Existing social media are not
+tailored to this purpose, so they lack the specific features needed for a good solution. Recipe blogs aren’t centralised
+and the tools to create a great user experience aren’t accessible in the context of recipes. My application will
+incorporate positives from existing solutions while avoiding the disadvantages that they each have.
 
-Appetized will take from a number of features from existing solutions. Instagram's feed page shows all posts from
-followed users ordered by upload date, this ensures that you won't see repeated recipes mixed in with new ones and is
-easy to implement. `//TODO add more things that the solution is insired by`
+## Solution
 
-#### Limitations
+The solution will be a mixture of all the great features of the existing solutions. To achieve this, it will need to be
+made up of two separate applications, a client and server. The client will provide a user interface to create and
+interact with the solution’s content. The server will consist of a database and an API which will allow the client to
+perform CRUD operations on the database, given they are authorised to do so.
 
-There are a few limitations with this solution however:
+Development of the client will focus on accessibility and user experience (UX). Accessibility is a key element of
+creating a good application, because it makes the solution easier to use for people, especially those who are disabled.
+The A11Y project provide guidelines to create a more inclusive and representative application. Making accommodations for
+people who need them will allow a larger group of people to be able to use the solution. It is also important to design
+a great user experience (UX). Creating an application that is beautiful and natural to use is an important because it
+will make the site more usable. To ensure that the UX is good, when designing the user interface (UI), I will employ
+mobile-first design, as I assume that the majority of the applications users will be visiting from a phone. This ensures
+that the largest group of users gets the best possible experience.
 
-Firstly, a platform like this would have to be moderated by hand, as time constraints mean that there won't be time to
-create an automated system that could classify the content uploaded and make sure that it is recipes... _for food_. Some
-websites that are primarily hosting user generated content struggle to keep the things that their users upload are
-firstly, on topic and secondly (and most importantly) not illegal.
+The backend will consist of a GraphQL API, as it allows me flexibility in creating the frontend application. It will
+give the client the ability to request any data from it, with filtering, sorting and searching capabilities. This will
+be where the bulk of the site's authorization will go, therefore I will also be implementing its authentication here as
+well.
 
-Secondly, I don’t plan to implement a recommendation system, these are incredibly hard to implement, especially on a
-brand-new platform with no data.
+I will create the project using the Agile software development methodology, and therefore will be splitting the process
+of creating the application into individual sprints. I will decompose the different parts of the application to make
+more manageable, self-contained sections of the app. I plan to have 5 sprints:
 
-### Features
+1. Database Schema - Design and implement a database schema that is capable of meeting the success criteria of the
+   project.
+2. GraphQL API - Create a GraphQL API with authentication to allow creating read update and delete items in the
+   database, given they are authorized to do so.
+3. CDN - Implement a content delivery network to serve images to the client.
+4. Email - Give the server the ability to send emails for account creation and recovery.
+5. Client - Build out the frontend of the application
 
-For Appetized to feel complete, it must do the following:
+## Limitations
 
-- Host user uploaded recipes, with an on-site method of creating them.
-- Have social features, like following other users and saving recipes.
-- Have a secure authentication system.
-- Have a way of finding user uploaded recipes.
+- The project will cost a bit of money to run, I plan to use a cloud services provider, like AWS, to host the project.
+  Most cloud providers have a free tier, however, in the long term, there will be some minor costs associated with
+  hosting the solution.
+- The project is going to use some tools that I have limited experience using, so this may increase the amount of time
+  that the project will take to complete. I plan to mitigate this by reading the documentation for the tools I am
+  planning to use. This will allow me to have a good understanding of the different dependencies of the project, which
+  allow me to create an optimal solution.
+- The scope of the project is fairly large, so it may be unfeasible to finish it within the time constraints. By
+  implementing the core features first, I can ensure that I have a minimum viable product finished before the deadline.
+  I can then iterate on it to build out a more complete solution.
+- I will not be able to implement some nice-to-haves, such as a recommendation algorithm, because alone they are similar
+  in scope to the rest of the project. However, there are libraries available that implement these features that can be
+  used, which can make creating a project of this size possible in the timeframe given.
 
-### Requirements
+## Requirements
 
-To be able to access the official version Appetized, all a user will need is a device capable of running a modern web
-browser, or installing an .apk or .ipa file. The user will also require an internet connection at least once to download
-the content from the website and save it. Saved recipes will be stored locally, so you will not need an internet
-connection to view it.
+### Software
 
-I plan for Appetized to be open-source, so users can run their own instance of `appetized-server` or `appetized-client`.
-Users planning to host `appetized-server` will need a computer that is capable of running Node.js version 12 and the
-latest version of PostgreSQL.
+**Development dependencies:** The solution will be developed in TypeScript. The backend will be using Express, with
+Apollo Server, to create the API, and Prisma, to access the database. The client will use Svelte, with the SvelteKit
+meta-framework. An Amazon AWS account will be required for parts of the solution to be able to work, like the CDN or
+email service. I am going to use an IDE called WebStorm to develop the solution because of its great refactoring tools,
+which will make the project easier to develop and maintain.
 
-To run a local version of the client, a user will just need a computer capable of running Node.js version 12, however,
-if a user’s computer couldn’t run Node.js, they could manually send queries to the API.
+**Runtime dependencies:** Typescript is a superset of JavaScript, so the source code can be transpiled into JS, which
+will allow the client to be hosted on a web server and run in any browser. The backend can be run using Node.js, a
+JavaScript runtime. A database will also be needed, and I am going to use MySQL because of its full-text search
+capabilities.
+
+### Hardware
+
+I am going to be developing the solution on two different systems, my desktop and laptop. I will be using a version
+control system, Git to ensure that there aren’t conflicts when merging the code between the two systems. My desktop has
+a 3.6GHz processor and 16 GB of RAM. My laptop also has a 3.6GHz processor but has 8 GB of RAM.
+
+The project won't require any specific hardware to host, due to it relying on cloud providers. However, a user of the
+site will need a smartphone or computer with a web browser to access the client. The API on its own has the same
+features, but requires someone to send requests in the terminal or API client, which is a lot less user-friendly.
 
 ### Success Criteria
 
-|  ID   | Description                                                         | Server                                                                                                            | Client                                                                                                    | Priority |
-| :---: | :------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------- |
-| `id1` | User can upload & edit recipes.                                     | Will need to be capable of receiving a recipe and storing it in a database.                                       | Will need a recipe creation/editing page.                                                                 | High     |
-| `id2` | User can view recipes.                                              | Will need to be able to receive requests for a specific recipes and respond.                                      | Will need a page for each recipe that requests it from the server and then displays it.                   | High     |
-| `id3` | User can create an account.                                         | Will need to be able to receive account creation requests.                                                        | Will need a registration page.                                                                            | High     |
-| `id4` | User can log into their account.                                    | Will need to be able to authenticate a user based on their email and password.                                    | Will need a login page.                                                                                   | High     |
-| `id5` | Users stay logged in.                                               | Will need to be able to issue a user a cookie and check this cookie with each request to see if it is authorised. | Will need to be able to receive cookies.                                                                  | High     |
-| `id6` | Users will be able to recover a lost account with a recovery email. | Will need to be capable of sending an email that contains a password recovery link.                               | Will need a password reset form.                                                                          | Low      |
-| `id7` | Users will be able to save a recipe.                                | Will need to be capable of receiving a recipe save request and store this in a database table.                    | Will need to be able to display saved recipes in a list. Will need to have a button to save recipes with. | High     |
-| `id8` | Saved recipes will be stored locally.                               | N/A                                                                                                               | Saved recipes need to be stored in local storage.                                                         | Low      |
-| `id9` | Users will be able to follow another user.                          | Will need to be capable of receiving follow and unfollow request.                                                 | Will need a page for following and followers as well as a follow/unfollow button for each user.           | High     |
+| Module   | Reference | Criteria                                                                                   | Justification                                                                        | Testing                                                                                                                              |
+|----------|-----------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| Database | 1.1.1     | Database has a table containing recipes.                                                   | Allows the storage of recipes so they can be accessed by other users.                | Can check with SQL if the table has been created.                                                                                    |
+|          | 1.1.2     | The database contains a users table.                                                       | Allows for authentication to be developed.                                           | Can check with SQL if the table has been created.                                                                                    |
+|          | 1.1.3     | There is a table containing ratings for recipes.                                           | Makes it so the recipes can be better sorted to make users receive better recipes.   | Can check with SQL if the table has been created.                                                                                    |
+|          | 1.1.4     | A table containing users following other users exists.                                     | Avoids many to many relationships.                                                   | Can check with SQL if the table has been created.                                                                                    |
+|          | 1.1.5     | A table containing users saving a recipe exists.                                           | Avoids many to many relationships.                                                   | Can check with SQL if the table has been created.                                                                                    |
+|          | 1.1.6     | A table containing ingredients exists.                                                     | Avoids having duplicate values in the recipes table.                                 | Can check with SQL if the table has been created.                                                                                    |
+|          | 1.1.7     | There is a table containing images.                                                        | Allows images to be owned by a user, and more easily accessible.                     | Can check with SQL if the table has been created.                                                                                    |
+|          | 1.1.8     | There is a table including steps of a recipe.                                              | Avoids storing plain JSON in the database.                                           | Can check with SQL if the table has been created.                                                                                    |
+| API      | 1.2.1     | Allow the user to create, read, update, and delete their own recipes on the site.          | So users can create and view their own content on the site.                          | Can query the server for these features.                                                                                             |
+|          | 1.2.2     | Allow anyone to read, save and unsaved recipes on the site.                                | So users can access recipes by other users to discover new recipes to cook.          | Can query the server for these features.                                                                                             |
+|          | 1.2.3     | Allow the user to create, read, update and delete their own account and profile.           | In the case that users want to change something about their profile.                 | Can query the server for these features.                                                                                             |
+|          | 1.2.4     | Allow users to access other user’s profiles.                                               | So users can find recipes based on the author more easily.                           | Can query the server for these features.                                                                                             |
+| Email    | 1.4.1     | A confirmation email is sent to a user on creation of their account.                       | To make sure that the user has entered their email correctly and that it exists.     | Create an account and check emails, then click the link, check the database to see if the email is verified.                         |
+|          | 1.4.2     | Users can request an email containing a link that will allow them to reset their password. | If the user forgets their password or wants to reset it.                             | Can click the reset password button, and see if the email is sent, then change the password, attempt to login with the new password. |
+| Client   | 2.1.1     | Recipes can be displayed.                                                                  | Essential feature of the client.                                                     | Try to load a recipe.                                                                                                                |
+|          | 2.1.2     | Recipes can be edited.                                                                     | Maybe the user wants to make their recipe more detailed or tastier.                  | Try to edit a recipe, then load it to see if it has changed.                                                                         |
+|          | 2.1.3     | User account can be displayed.                                                             | To make finding recipes by a certain person easier.                                  | Try to load a user’s profile.                                                                                                        |
+|          | 2.1.4     | User profile can be edited.                                                                | If the user wants to change their details.                                           | Try to edit my profile and see if it changes.                                                                                        |
+|          | 2.1.5     | Website is accessible.                                                                     | So a wider range of people can easily use the site.                                  | Use Google Chrome Lighthouse to see the accessibility score.                                                                         |
+|          | 2.1.6     | Website has good SEO.                                                                      | To make the recipes discoverable.                                                    | Use Google Chrome Lighthouse to see the SEO score.                                                                                   |
+|          | 2.1.7     | Website is performant.                                                                     | To make the site work well on mobile, ensuring it has good performance is important. | Use Google Chrome Lighthouse to see the performance score.                                                                           |
+| CDN      | 2.2.1     | Users can upload images to the site                                                        | Images make the recipes more easy to follow.                                         | Try to upload an image and see if it shows up in the cloud storage providers GUI.                                                    |
+|          | 2.2.2     | The location of uploaded images are stored in the site’s database.                         | So the client can get all of a recipes images.                                       | Can check if the uploaded image is in the images table with SQL.                                                                     |
+|          | 2.2.3     | Images uploaded can be accessed by the client.                                             | So they can be displayed conveniently to the user.                                   | Can try to load a recipe containing an image.                                                                                        |
+
+# Sprint 1
+
+This first sprint will consist of designing and then creating the database for the application. The database is the
+backbone of the solution, so it will need to be thoughtfully designed. I am going to make sure that the database follows
+normalization rules, to ensure that create, read, update and delete (CRUD) operations can take place without breaking
+other parts of the database.
+
+I am going to create the schema and perform CRUD operations on the database with an object relational mapper (ORM). This
+will allow me to access the database in a type-safe way, which will decrease the potential risk of bugs. The data put
+into the database will also be sanitised, which will reduce the risk of critical vulnerabilities like SQL injection. The
+ORM I am going to be using is called Prisma.
 
 ## Design
 
-Appetized will be made up of two applications, a client and a server.
+<figure>
+	<img style="border-radius: 1rem" alt="Entity relation diagram of the database" src="https://github.com/hiluw/appetized-docs/blob/main/assets/railway.png?raw=true">
+	<!--suppress HtmlUnknownAttribute -->
+    <figcaption align="center"><b>Figure 1</b>: Entity relationship diagram of the database</figcaption>
+</figure>
 
-### Server
+This is an entity relationship diagram of what the database will look like. I am going to use join tables to make sure
+that the database is normalised, so CRUD operations can take place without creating redundancies. There are a lot of
+different types of data needed for the solution, so I used decomposition to ensure that the data is appropriately linked
+together and split up logically into tables.
 
-The server will be built up of four different sections. There will be a database, which will contain all of the site’s data, except images, and will not be publicly accessible. There will also be a cloud storage bucket, which will host all of the images. Another section will be an object-relational mapping (ORM) tool, which will be used to read and write from the database with objects rather than a database query language like SQL. There will also be an application programming interface (API) which will allow the client to make requests to the server. 
+### Initializing the project
 
-I think this platform will need authentication so users can have the correct authorisation to edit the site’s data. Without authentication, anyone could delete other people’s recipes. I am going to implement authentication with JSON Web Tokens (JWT). A JWT is a token made up of three parts, a header, a payload and a signature. The header contains information about the JWT. The payload contains some information that in Appetized case will be a user’s ID. The payload is encrypted with a private key and, can be verified using the signature.
+The first step in creating the database schema is to initialise the project.
 
-#### API
-
-The application programming interface (API) will receive and respond to requests in the GraphQL query language. GraphQL is an alternative to the standard way of implementing an API, REST. When building a large application, like Appetized, REST has a number of downsides. REST works by having a different endpoint for each request. For example, to get a recipe i might go to `www.appetized.developer.lu/recipe/293478`, this will return all of the information about the recipe `293478`. The main problem with this approach is if I only needed a small section of the response, I will still have to download all of this extra data that is going to go unused. Additionally, If I wanted information that wasn’t returned at that endpoint, I would have to fetch data from another endpoint. As a result, REST APIs use a lot of unnecessary bandwidth. A GraphQL server uses a single endpoint, however, you can request specific data. This will keep the number of requests and their sizes down, which will help the server and the client perform better.
-
-##### Type Definitions
-
-GraphQL has a type system with a very limited number of built in types (`String`,  `ID`, `Boolean`, `Float` and `Int`).  I am planning to implement my own types so the data that can be requested is more organised. 
-
-The `User` type will contain publicly accessible data about a user and the content they have uploaded onto the site.  
-
-| Field Name        | Type       | Description                                                  |
-| :---------------- | :--------- | :----------------------------------------------------------- |
-| `id`              | `ID!`      | A unique identifier for a user.                              |
-| `name`            | `String!`  | The persons full name.                                       |
-| `username`        | `String!`  | A unique and human readable name to identify a user.         |
-| `joinDate`        | `Date!`    | The date a user created their account (Greenwich mean time). |
-| `editDate`        | `Date`     | The date a user last edited any account details (Greenwich mean time). |
-| `profilePicture`  | `Image`    | An image to represent a user.                                |
-| `uploadedRecipes` | `[Recipe]` | All of the recipes a user has uploaded.                      |
-| `following`       | `[User]`   | All of the accounts a user is following.                     |
-| `followers`       | `[User]`   | All of the accounts that are following a user.               |
-| `savedRecipes`    | `[Recipe]` | All of the recipes a user has saved.                         |
-
-The `Recipe` type will contain the instructions of a recipe and some metadata about it. It is based off of the [Schema.org recipe type][recipe type] so it can be used easily as [structured data][]. This allows it to show up in rich search results.
-
-| Field Name     | Type                        | Description                                         |
-| -------------- | --------------------------- | --------------------------------------------------- |
-| `id`           | `ID!`                       | A unique identifier for a recipe.                   |
-| `image`        | `Image!`                    | An image of the completed recipe.                   |
-| `name`         | `String!`                   | The title of the recipe.                            |
-| `author`       | `User!`                     | The user who posted the recipe.                     |
-| `rating`       | `Rating`                    | A rating out of 5 of the quality of the recipe.     |
-| `prepTime`     | `Int`                       | How many minutes it takes to prepare the recipe.    |
-| `cookTime`     | `Int`                       | How many minutes the dish will spend cooking.       |
-| `uploadDate`   | `Date`                      | The date the recipe was created.                    |
-| `editDate`     | `Date`                      | The date the recipe was last edited.                |
-| `description`  | `String`                    | A short description of the dish.                    |
-| `keywords`     | `[String]`                  | A list of alternate words that describe the recipe. |
-| `calories`     | `Int`                       | How many calories are in the recipe.                |
-| `cuisine`      | `String`                    | The region the dish is connected to.                |
-| `ingredients`  | `[QuantitativeIngredient!]` | A list of ingredients with their quantity.          |
-| `instructions` | `[Instruction!]`            | A list of steps.                                    |
-| `yeild`        | `QuantitativeIngredient`    | How much the recipe will make.                      |
-| `savedBy`      | `[User]`                    | Who has saved the recipe.                           |
-
-The `Image` type will contain the URL to an image and some information about it.
-
-| Field Name   | Type      | Description                                              |
-| ------------ | --------- | -------------------------------------------------------- |
-| `url`        | `String!` | The URL of where the image is stored.                    |
-| `alt`        | `String`  | A description of the images for users of screen readers. |
-| `author`     | `User!`   | The user who uploaded the image.                         |
-| `uploadDate` | `Date!`   | The date that the image was uploaded to the site.        |
-
-`Rating` will be a type that gives information about the overall rating of a recipe.
-
-| Field Name     | Type      | Description                                    |
-| -------------- | --------- | ---------------------------------------------- |
-| `totalRatings` | `Int!`    | The number of ratings that have been received. |
-| `stars`        | `Float!`  | The overall rating of the recipe.              |
-| `ratedBy`      | `[User!]` | The users who have left a rating.              |
-
-The `Date` type will give a date and time in Greenwich Mean Time.
-
-| Field Name | Type    |
-| ---------- | ------- |
-| `year`     | `Int!`  |
-| `month`    | `Int!`  |
-| `day`      | `Int!`  |
-| `hour`     | `Int`   |
-| `minute`   | `Int`   |
-| `second`   | `Float` |
-
- The `QuantitativeIngredient` type will have an ingredient, how much of it and the unit.
-
-| Field Name   | Type          | Description                                                  |
-| ------------ | ------------- | ------------------------------------------------------------ |
-| `ingredient` | `Ingredient!` | The ingredient itself.                                       |
-| `amount`     | `Float!`      | The amount of the ingredient.                                |
-| `unit`       | `String!`     | The unit the ingredient is measured in. (For example “litre”) |
-
-The `Ingredient` type will contain the name of the ingredient and an array of user submitted images of that ingredient.
-
-| Field Name | Type       |
-| ---------- | ---------- |
-| `name`     | `String!`  |
-| `images`   | `[Image!]` |
-
-The `Instruction` type will be a union between the `Step` and `StepSection` types.
-
-The `Step` type is going to be contain some data about a step and will either contain a `Direction` or a `Tip`
-
-| Field Name | Type       | Description                        |
-| ---------- | ---------- | ---------------------------------- |
-| `name`     | `String`   | The title of the step              |
-| `text`     | `String!`  | The actual instruction             |
-| `url`      | `String`   | The URL of the step.               |
-| `image`    | `Image`    | An image of the step.              |
-| `tip`      | `Boolean!` | If the step is a tip or direction. |
-
-The `StepSection` type that contains several steps.
-
-| Field Name | Type      |
-| ---------- | --------- |
-| `name`     | `String!` |
-| `steps`    | `[Step!]` |
-
-##### Resolvers 
-
-In GraphQL there are three types of request, mutations, queries and subscriptions. A mutation is a request that will modify data and return a value. Appetized’s mutations will cause a change in the database. Queries are for reading data. Subscriptions are like queries, but the data they return can be changed over time. There aren’t any uses for subscriptions in Appetized however, so just queries and mutations will be used. 
-
-Mutations and queries are written as functions called resolvers. The value returned by the resolver is what is sent as a response to the caller. Resolvers take 4 arguments:
-
-- `obj` The parent object. For example, if someone requested a list recipes and their authors, the recipes would be what is stored in `obj`
-- `args` The arguments passed into the request. For example the mutation: `login(email:  "email@lewie.me", password: "aoeu")`'s arguments would be email and password. 
-- `context` is a object that is provided to a resolver and holds information such as the user that is logged in. On Appetized, this will an object containing the user Id, from the payload of the decoded JWT.
-- `info` Contains information about the request.
-
-Here is a pseudo-code algorithm for how the context will be set for resolvers (If I use Apollo Server and TypeORM and JavaScript). 
-
-```typescript
-// The context is set in the constructor for the GraphQL server.
-const server = new ApolloServer({
-	typeDefs,
-	resolvers,
-	context: ({ req, res }) => {
-		// The context that will be returned if a user Id is not found.
-		const context = {
-			req: req,
-			res: res,
-			id: null,
-		};
-
-		// req is an object which contains information about the request made to the server.
-		const accessToken = req.cookies['accessToken'];
-		const refreshToken = req.cookies['refreshToken'];
-
-		// If the user has an access token.
-		if (accessToken !== null) {
-			try {
-				// Gets the user's id and how many times they have changed their password.
-				const { id, passwordChanges } = jwt.verify(
-					accessToken,
-					process.env.ACCESS_TOKEN,
-				);
-                // If password has changed since the user has last logged in.
-				if (passwordChanges !== db.User.passwordChanges) {
-					return context;
-				}
-				context.user = id;
-				return context;
-			} catch (err) {
-				//If verification fails, it will return the context with a null id.
-				return context;
-			}
-		} else if (refreshToken !== null) {
-			try {
-				// Gets the user's id and how many times they have changed their password.
-				const { id, passwordChanges } = jwt.verify(
-					refresh,
-					process.env.ACCESS_TOKEN,
-				);
-                // If password has changed since the user has last logged in.
-				if (passwordChanges !== db.User.passwordChanges) {
-					return context;
-				}
-				// Creates new access token.
-				res.cookies(
-					'accessToken',
-					sign(
-						{ userId: user.id, count: count },
-						process.env.ACCESS_TOKEN,
-					),
-                    { expiresIn: '1h' },
-				);
-				// Creates new refresh token.
-				res.cookies(
-					'refreshToken',
-					sign(
-						{ userId: user.id, count: count },
-						process.env.REFRESH_TOKEN,
-					),
-                    { expiresIn: '30d' },
-				);
-                // returns the context with user Id
-				context.user = id;
-				return context;
-			} catch (err) {
-				//If verification fails, it will return the context with a null id.
-				return context;
-			}
-		}
-		//If the user has no access or refresh token, context with a null id wil be ruterned.
-		return context;
-	},
-});
+```bash
+$ npm init -y
+$ pnpm install -D prisma typescript prettier ts-node @types/node
+$ tsc --init
+$ npx prisma init
 ```
 
-There will be a very large number of revolvers for Appetized, and they will follow a similar format, so here is one example of what one will look like. Here is what the `login` mutation might look like:
+This will initialise the project in the current directory, and create a `package.json` and a `tsconfig.json`, as well as
+install the necessary dependencies for this sprint. A directoryUser will also be created called prisma `prisma` which
+will contain a file called `schema.prisma`. This is where I will be writing the schema for the database.
 
-```typescript
-export default {
-	Mutation: {
-		login: async (_, { email, password }, { req, res, id }) => {
-			// If user is already logged in, return true;
-			if (id) return true;
-			// Find the password hash of the user attempting to log in.
-			const { passwordHash } =
-				(await db.User.findOne({ email: email })) ?? '';
-			// Check if password is correct.
-			await argon2
-				.verify(passwordHash, password)
-				.then((passwordCorrect) => {
-					if (passwordCorrect) {
-						// Creates new access token.
-						res.cookies(
-							'accessToken',
-							sign(
-								{ userId: user.id, count: count },
-								process.env.ACCESS_TOKEN,
-							),
-							{ expiresIn: '1h' },
-						);
-						// Creates new refresh token.
-						res.cookies(
-							'refreshToken',
-							sign(
-								{ userId: user.id, count: count },
-								process.env.REFRESH_TOKEN,
-							),
-							{ expiresIn: '30d' },
-						);
-					}
-					// Return if the password is correct.
-					return passwordCorrect;
-				});
-		},
-	},
-};
+```prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
 ```
 
-#### Images
-
-Images will not be stored on the server, instead they will be stored on a cloud storage bucket. Their URL will be stored in the database as well as its metadata. Most cloud providers have their own proprietary library to upload files. This can cause vendor lock in, as if you need to change provider, you will need to edit the code you have written. 
-
-I am going to use AWS primarily because of [Rekognition][amazon rekognition], which I can use for content moderation. They also have free tiers for their cloud storage and lambda functions.
-
-## Sprint 1
-
-The first sprint will be dedicated to setting up the backend and implementing authentication. I have chosen to use Apollo Server and TypeORM in this stage of the project. I plan to implement five resolvers in this sprint, `login`, `logout`, `addUser`, `editUser`, and `deleteUser`.
-
-Firstly, I need to write write the entry point for the backend of the project, `app.ts`. It will be responsible for configuring and starting up different parts of the backend.
+This is the contents of `schema.prisma`, generated by the `$ npx prisma init` command. By adding different types of data
+to the file, a model can be created which Prisma can use to generate a database. Prisma will also create a database
+client that can be used to perform type safe CRUD operations. The client generated by Prisma can be used by the GraphQL
+API to fetch and store data for use in the client like this:
 
 ```ts
-import resolvers from "./resolvers";
-import typeDefs from "./typeDefs";
-import { PrismaClient } from "@prisma/client";
-import { config } from "dotenv";
-import { startApolloServer } from "./server";
-import { Tedis } from "tedis";
-import nodemailer from "nodemailer";
-import { SESClientConfig } from "@aws-sdk/client-ses";
+const myProfile = prisma.users.findUnique({ where: { id: "123" } }); // Gets user with ID "123"
+```
 
-const aws = require("@aws-sdk/client-ses");
+The code above would get the user with the ID of ‘123’ by executing the SQL statement:
+
+```sql
+SELECT * FROM users WHERE id = "123"
+```
+
+### Important Variables and Data Structures
+
+There will only be one variable created in this whole sprint, `prisma`, it will be the database client. This variable
+will be exported, so it can be accessed in other file.
+
+The schema itself also falls under this header. There will be quite a few tables:
+
+- `users`: This table will contain all the users that are registered in the application.
+    - `id`: This is the primary key for the table. (Unique string)
+    - `name`: This is the name of the user. (Optional string)
+    - `email`: This is the email of the user. (Unique string)
+    - `password`: This is a hash of the user's password. (String)
+    - `profilePicture`: This is the URL of the user's profile picture. (Optional Image)
+    - `createdAt`: This is the date the user was created. (Date)
+    - `emailVerified`: This is a boolean that indicates whether the user has verified their email. (Boolean)
+    - `recipes`: This is a list of recipes that the user has created. (List of Recipe)
+    - `saved`: This is a list of recipes that the user has saved. (List of Recipe)
+    - `following`: This is a list of users that the user is following. (List of User)
+    - `followers`: This is a list of users that are following the user. (List of User)
+    - `iat`: This is the date that the most recent valid authentication token was issued. (Date)
+- `recipes`: This table will contain all the recipes that are uploaded by the users.
+    - `id` This is the primary key for the table. (Unique string)
+    - `name` This is the title of the recipe. (String)
+    - `author` This is the account that created the recipe. (User)
+    - `authorId` This is the ID of the account that created the recipe. (String)
+    - `description` This is the description of the recipe. (Optional string)
+    - `image` This is an image of the recipe. (Optional Image)
+    - `imageId` This is the ID of the image. (Unique string)
+    - `createdAt` This is the date the recipe was created. (Date)
+    - `steps` This is a list of steps that make up the recipe. (List of Step)
+    - `category` This is the category (For example: breakfast, starter, etc.). (Optional string)
+    - `cuisine` This is the cuisine of the recipe. (Optional string)
+    - `ingredients` This is a list of ingredients that are used in the recipe. (List of Ingredient)
+    - `cookTime` This is the amount of time it takes to cook the recipe. (Optional integer)
+    - `prepTime` This is the amount of time it takes to prepare the recipe. (Optional integer)
+    - `savedBy` This is a list of users that have saved the recipe. (List of User)
+- `ingredients`: This table will contain all the ingredients that are used in the recipes.
+    - `id` This is the primary key for the table. (Unique string)
+    - `name` This is the name of the ingredient. (String)
+    - `quantity` This is the quantity of the ingredient. (String)
+    - `recipe` This is the recipe that the ingredient is used in. (Recipe)
+    - `recipeId` This is the ID of the recipe that the ingredient is used in. (String)
+- `images`: This table will contain all the images that are used across the solution.
+    - `id` This is the primary key for the table. (Unique string)
+    - `url` This is the URL of the image. (String)
+    - `recipe` This is the recipe that the image is used in. (Optional recipe)
+    - `step` This is the step that the image is used in. (Optional step)
+    - `profile` This is the profile that the image is used in. (Optional User)
+    - `userId` This is the ID of the user's profile that the image is used in. (Optional string)
+- `steps`: This table will contain each step of the recipe.
+    - `id` This is the primary key for the table. (Unique string)
+    - `name` This is the name of the step. (Optional string)
+    - `createdAt` This is the date the step was created. (Date)
+    - `content` This is the content of the step. (String)
+    - `image` This is an image of the step. (Optional Image)
+    - `imageId` This is the ID of the image. (Optional string)
+    - `recipe` This is the recipe that the step is used in. (Recipe)
+    - `recipeId` This is the ID of the recipe that the step is used in. (String)
+
+### Validation
+
+The database won't be public facing because it contains sensitive information, which is why I am developing the API in
+the first place. As a result validation is not strictly necessary, however, I will add some basic validation, such as
+unique and required constraints. This is because they are easier to implement on the data layer than on the application
+layer.
+
+In Prisma, constrains are added in the schema by writing attributes. Attributes sit at the end of the field definition.
+For example, unique constraints are added by writing `@unique` after the field.
+
+### Testing
+
+This sprint's testing is going to be limited relative to the other sprints. This is because the database on its own
+can't do that much other than basic CRUD operations. As a result, I will create some basic integration tests to make
+sure that the database is working as expected. This will use Docker Compose to spin up a local database and then run a
+suite of tests against it.
+
+## Development
+
+I ran the previously mentioned commands, and it outputted the following:
+
+```bash
+$ npm init -y
+```
+
+```bash
+$ pnpm install -D prisma typescript prettier ts-node @types/node
+
+```
+
+```bash
+$ tsc --init
+```
+
+```bash
+$ npx prisma init
+
+✔ Your Prisma schema was created at prisma/schema.prisma
+  You can now open it in your favorite editor.
+
+Next steps:
+1. Set the DATABASE_URL in the .env file to point to your existing database. If your database has no tables yet, read https://pris.ly/d/getting-started
+2. Set the provider of the datasource block in schema.prisma to match your database: postgresql, mysql, sqlite, sqlserver or mongodb (Preview).
+3. Run prisma db pull to turn your database schema into a Prisma schema.
+4. Run prisma generate to generate the Prisma Client. You can then start querying your database.
+
+More information in our documentation:
+https://pris.ly/d/getting-started
+```
+
+As you can see, `npx prisma init` has outputted the next steps to follow when creating the schema. It has also created a
+file named `.env`. A `.env` file contains environmental variables, such as API keys, or in this case, the database’s
+connection URL. I also created a file named `.gitignore`, which tells the version control system, git, to ignore the
+specified files. I included `.env` in the `.gitignore` because the database URL needs to stay private because
+publicising it could lead to the database being compromised. Accidentally committing the file to the version history
+could make it easier to leak sensitive information. I also included the `.idea/` and `node_modules/` directories in
+the `.gitignore` file. `.idea/` contains configuration files specific to the local instance of the IDE I’m using.
+`node_modules/` contains the dependencies of the project, the reason I am telling git to ignore them is because they
+will be built locally from the source code when first getting the project running locally, so including them is
+unnecessary.
+
+I also needed to import the prisma client the TypeScript project:
+
+```ts
+export const prisma = new PrismaClient();
+```
+
+Next, I set the database provider in the `schema.prisma`, I set this to “mysql”. I also added the
+line `previewFeatures = ["fullTextSearch", "fullTextIndex"]` to enable the use of full text search within Prisma.
+
+Finally, I wrote the schema in the same file, here it what I wrote:
+
+```prisma
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(uuid())
+  name           String?
+  username       String   @unique
+  email          String   @unique
+  password       String
+  profilePicture Image?
+  createdAt      DateTime @default(now())
+  emailVerified  Boolean
+  recipes        Recipe[] @relation("author")
+  saved          Recipe[] @relation("save")
+  following      User[]   @relation("follow")
+  followers      User[]   @relation("follow")
+  iat            Int?     @default(0)
+
+  @@fulltext([username])
+  @@fulltext([username, name])
+}
+
+model Image {
+  id      String  @id @default(uuid())
+  url     String
+  recipe  Recipe?
+  step    Step?
+  profile User?   @relation(fields: [userId], references: [id])
+  userId  String?
+}
+
+model Recipe {
+  id          String       @id @default(uuid())
+  name        String
+  author      User         @relation("author", fields: [authorId], references: [id])
+  authorId    String
+  description String?
+  image       Image?       @relation(fields: [imageId], references: [id])
+  imageId     String?      @unique
+  createdAt   DateTime     @default(now())
+  steps       Step[]
+  category    String?
+  cuisine     String?
+  ingredients Ingredient[]
+  cookTime    Int?
+  prepTime    Int?
+  savedBy     User[]       @relation("save")
+
+  @@fulltext([name, description])
+  @@fulltext([name, description, cuisine, category])
+}
+
+model Step {
+  id        String   @id @default(uuid())
+  name      String?
+  createdAt DateTime @default(now())
+  content   String
+  image     Image?   @relation(fields: [imageId], references: [id])
+  imageId   String?  @unique
+  recipe    Recipe?  @relation(fields: [recipeId], references: [id])
+  recipeId  String?
+
+  @@fulltext([name, content])
+}
+
+model Ingredient {
+  id       String  @id @default(uuid())
+  name     String
+  quantity String
+  recipe   Recipe? @relation(fields: [recipeId], references: [id])
+  recipeId String  @unique
+
+  @@fulltext([name])
+}
+
+```
+
+When the command `npx prisma db push` is run, Prisma will generate the SQL needed to implement this schema in MySQL.
+Next, it will execute the SQL and generate the database client:
+
+```bash
+✔ Generated Prisma Client (3.8.1 | library) to ./node_modules/@prisma/client in 224ms
+```
+
+## Testing
+
+Initially, I wanted to check that the real database had been successfully created. I connected to the database using the
+`mysql` command line tool, and I checked that the database had been created:
+
+```bash
+$ mysql
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| railway            |
+| sys                |
++--------------------+
+5 rows in set (0.18 sec)
+```
+
+Now that I knew the database was successfully created, it was now a good time to write the integration tests. As
+mentioned, I am going to be using Docker Compose to run a local database, which will then be tested against. To do this,
+we will need to create a Docker Compose file. This will be named `docker-compose.yml` and will be located in the root of
+the project. The file will look like this:
+
+```yml
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: test
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    restart: always
+    networks:
+      - default
+```
+
+Then I needed to start the database using `docker-compose up -d`. After it starts I need to get the ID of the container
+by running `docker ps`. Then I can finally connect to the database with:
+
+```bash
+$ sudo docker exec -it ecf3bb60f406 mysql -p
+```
+
+I then enter the password for the database (`test`) and I can run the command `show databases;` to check that the
+database has been created.
+
+```bash 
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| test               |
++--------------------+
+5 rows in set (0.00 sec)
+```
+
+Now I know that the database for testing and development are both working, I need to write a script that will run the
+tests. This can be placed in the scripts section of the `package.json` file. The script will look like this:
+
+```json
+"scripts": {
+  "test": "docker-compose up -d && dotenv -e .env.test nyc ts-mocha ./test/**.test.ts  && docker-compose down"
+}
+```
+
+I then need to create a `.env.test` file. This file will contain the database connection information.
+
+Now I can create the file `test/prisma.test.ts` and start writing the tests. The file needs to have two funcitons that
+run before and after each test. These will create the testing suite and make sure the database has been cleared.
+
+
+
+## Evaluation
+
+This sprint has been successfully completed, here are the success criteria that have been finished:
+
+| Reference | Criteria                                                           |     Testing      | Completion |
+|:---------:|--------------------------------------------------------------------|:----------------:|:----------:|
+|   1.1.1   | Database has a table containing recipes.                           | All tests passed |     ✅      |
+|   1.1.2   | The database contains a users table.                               | All tests passed |     ✅      |      
+|   1.1.3   | There is a table containing ratings for recipes.                   | All tests passed |     ✅      |
+|   1.1.4   | A table containing users following other users exists.             | All tests passed |     ✅      |
+|   1.1.5   | A table containing ingredients exists.                             | All tests passed |     ✅      |
+|   1.1.6   | A table containing users saving a recipe exists.                   | All tests passed |     ✅      |
+|   1.1.7   | There is a table containing images.                                | All tests passed |     ✅      |
+|   1.1.8   | There is a table including steps of a recipe.                      | All tests passed |     ✅      |
+|   2.2.2   | The location of uploaded images are stored in the site’s database. |       N/A        |     ❎      |
+
+All of this sprint’s finished success criteria are similar, so I will discuss them as one. They have been successful, as
+the database is now up and running along with the database client. Now the database has been created, it will be
+possible to start creating the GraphQL API. 2.2.2 is now able to be completed, however I want to implement this later
+on, because it will be more appropriate to develop alongside the other parts of the CDN.
+
+### Maintainability
+
+The database has been created in a way where performing CRUD operations won't break dependent columns. Tables and rows
+can also be added or deleted without having to reset the database, so it is maintainable to a reasonable extent. If the
+database is further normalised, it would be more maintainable, however, it would make it more difficult to use, so I
+think that I have struck a good balance between usability and maintainability.
+
+### Limitations
+
+From my testing the database seems quite slow and more advanced Postgres features like indexes are not yet possible with
+Prisma. I may have to later create migration files to be able to speed up the database to a more acceptable level.
+Additionally, the database on its own is not a good solution to the problem, it has no authorization or authentication,
+and its validation is very limited, because I plan to implement those on the application tier, rather than the data
+tier.
+
+# Sprint 2
+
+I am going to spend the second sprint developing the API. I will need to develop authentication and authorization, as
+well as make important decisions surrounding the structure of the client, as it will rely on this sprints work heavily.
+
+## Design
+
+An application programming interface (API) is a set of methods and protocols that allow two applications to interact
+with each other. As the solution is using the client-server architecture, the API will be used to allow the two
+different sides to communicate with each other. This is an essential part of the solution, because it gives the client
+access to read or edit the information stored in the database. It also allows authorization to be more easily
+implemented, because the API will be able to issue tokens to the client, and the client will be able to use these tokens
+to authenticate.
+
+There are two main ways to implement an API, one is using GraphQL, and the other is using REST. A key difference between
+REST and GraphQL is that REST is bade up of several distinct endpoints, each serving a different purpose. GraphQL is
+instead designed to be a single endpoint, which is a combination of multiple queries and mutations. These queries and
+mutations are then accessed by the client with the GraphQL query language. A good analogy I use to describe them is that
+REST is a restaurant with a strict menu and GraphQL is a buffet. Therefore, GraphQL a very powerful way to access data
+from the database, as it allows for more complex queries to be made, and allows for the client to be more flexible. The
+main advantages of REST over GraphQL are that it is easier to implement, and has better error handling. However, I am
+going to go with GraphQL, as it is more flexible, giving the client more control over the data it is accessing. This
+will ensure that unneeded data is not being sent to the client, which will reduce the bandwidth used. It also ensures
+that loading times on the client are reduced, and the database is not being accessed too often.
+
+A GraphQL API is made up of a schema, which contains different types of data available to the client. The schema is made
+up of two parts the type definitions and the resolvers. The type definitions describe the different fields which are
+available to the client, and the resolvers are functions that process the requests made for those fields.
+
+There are two different ways GraphQL is being implemented in TypeScript, one is using the schema-first approach, and the
+other is using a code-first approach. Schema driven development is the first way GraphQL was implemented, and is more
+easily readable and writable. Code-first development is more difficult to read and write, but tends to be more type
+safe. I am going to go with the schema-first approach, because the extra time spent on writing the more type safe  
+code-first schema could instead be used on writing type declarations, which achieves the same purpose, but is more
+readable.
+
+The GraphQL server I am going to use is Apollo, which is a schema-first implementation of GraphQL in JavaScript. Apollo
+Server has the added benefit of being able to be used with Express.js, a popular Node.js framework. This will allow me
+to manage the requests and responses sent through the API more easily, allowing for me to use cookies for
+authentication.
+
+In Apollo, there is the option to pass an object to the context parameter, which is used to pass data to the resolvers.
+I will use this to give resolvers the authentication status of the user, as well as the status of the request and the
+response. This will allow the solution a more flexible way of handling different kinds of requests like authentication,
+and I will use this to great effect.
+
+### Schema
+
+The schema is a very important part of the solution. The whole client will rely on it to hydrate the page with data, and
+make edits. As a result, I am going to be very careful with the planning of it because making breaking changes to it
+later down the line will cause the client to need to be updated in several places. Additionally, the schema won't match
+the database exactly because the database contains sensitive information, such as password hashes. Therefore, I am going
+to have to design a schema and consider each field carefully.
+
+#### Type Definitions
+
+The type definitions are the different types of data that are available to the client. I will need to create a type for
+each table in the database. Additionally, I will need to add two extra types, `Query` and `Mutation`. The query and
+mutation types define the actual requests and responses that the API will be able to make. A query is a request for
+data, which doesn't change any data stored on the server. A mutation, on the other hand, is a request to change data on
+the server.
+
+The first type definition I am going to write is the `User` type. This type will contain publicly available information
+pertaining to a user of the site. As I mentioned, certain database columns will not be included in the API, such as the
+user's password hash, their email address, and the expiration date of their tokens. This is private information, and
+therefore, I am not going to include it in the API. The columns that I am going to include are:
+
+- `id`: The ID of the user. This will be useful for requesting data about the user in other queries.
+- `username`: The username of the user. This will be used to log in to the site, and can be used in place of the ID to
+  request data about the user.
+- `name`: The name of the user. This is an optional field and is used to display the user's name in a more personal way.
+- `profilePicture`: This will contain the image used as their profile picture. This is also an optional field.
+- `createdAt`: The date and time that the user was created. This can be used to sort users by their creation date.
+- `recipes`: This will contain the recipes that the user has created.
+- `savedRecipes`: This will contain the recipes that the user has saved. This will be used on the client to download
+  recipes in local storage. Having this information in the database will make it easier to sync this across devices.
+- `following`: This will contain the users that the user is following.
+- `followers`: This will contain the users that are following the user.
+
+The fields that return an array of data, `recipes`, `savedRecipes`, `following` and `followers` will take parameters
+when they are called. These parameters will be used to perform cursor based pagination on the data that is returned. The
+parameters will be `take`, `from`, and `sort`. The `take` parameter will be used to specify how many items to return.
+The `from` parameter will take the ID that the data returned should start from. The `sort` parameter will take an object
+that tells the server how to sort the data. Cursor based pagination is a very common way of paginating data, and I am
+going to use it because it is easy to implement, and for the number of records being used in this solution, it is the
+most efficient way of paginating. The `recipes` and `savedRecipes` will return the type `RecipeResponse`, which is a
+union of `Recipe` and `Error`. The `following` and `followers` will return the type `UserResponse`, which is a union
+of `User` and `Error`.
+
+The next type definition is going to be `Image`. This will contain the information needed to display an image on the
+client. The fields that I am going to include are:
+
+- `id`: The ID of the image. This will be used to request data about the image in other queries.
+- `url`: The URL of the image. This will be used to display the image on the client.
+- `uploader`: The user that uploaded the image. This is only used when the image is a profile picture.
+- `recipe`: The recipe that the image is associated with. This is only used when the image is used in a recipe.
+- `step`: The step that the image is associated with. This is only used when the image is used in a specific step in a
+  recipe.
+
+The resolvers for `Image` will not be implemented in this sprint. This is because image handling is being implemented
+later on in the project. However, I think that creating the type definition for `Image`  should be done now, so that I
+don't have to implement breaking changes in the schema later on.
+
+The next type definition is going to be `Recipe`. This will contain the information about a recipe on the site. The
+fields that I am going to include are:
+
+- `id`: The ID of the recipe. This will be used to request data about the recipe in other queries.
+- `name`: This is going to be the title of the recipe.
+- `author`: The user that created the recipe.
+- `description`: This is going to be the description of the recipe.
+- `image`: This will contain the image that is display with the recipe.
+- `createdAt`: The date and time that the recipe was created. This can be used to sort recipes by their creation date.
+- `steps`: This will contain the steps that the recipe has.
+- `category`: This will contain the category that the recipe belongs to (e.g. "Dinner", "Starter").
+- `cuisine`: This will contain the cuisine that the recipe belongs to (e.g. "Italian", "American").
+- `ingredients`: This will contain the ingredients that the recipe uses.
+- `cookTime`: This will contain the amount of time it takes to cook the recipe.
+- `prepTime`: This will contain the amount of time it takes to prepare the recipe.
+- `savedBy`: This will contain the users that have saved the recipe.
+
+The recipe type also has some fields that return an array, `savedBy`, `ingredients` and `steps`. These fields will take
+parameters when they are called. These parameters will be `take`, `from`, and `sort`. These parameters act in the same
+way as in the `User` type. The `savedBy` field will return a `UserResponse` type, which is a union of `User` and `Error`
+. The `ingridients` will return a `IngredientResponse` type, which is a union of `Ingredient` and `Error`. The `steps`
+will return a `StepResponse` type, which is a union of `Step` and `Error`.
+
+The next type definition will be `Step`. This will contain the data used in each step of a recipe. The fields that I am
+going to include are:
+
+- `id`: The ID of the step. This will be used to request data about the step in other queries.
+- `name`: This will be the name of the step.
+- `createdAt`: The date and time that the step was created. This can be used to sort steps by their creation date.
+- `content`: This will contain the content of the step.
+- `image`: This will contain the image that is associated with the step.
+- `recipe`: This will contain the recipe that the step is associated with.
+
+The next type definition will be `Ingredient`. This will contain the data used in each ingredient of a recipe. The
+fields that I am going to create are:
+
+- `id`: The ID of the ingredient. This will be used to request data about the ingredient in other queries.
+- `name`: This will be the name of the ingredient.
+- `quantity`: This will be the quantity of the ingredient.
+- `recipe`: This will contain the recipe that the ingredient is associated with.
+
+Next, I will create the `Error` type. This will be used to return errors to the client. The fields that I am going to
+include are:
+
+- `code`: This will contain the error code.
+- `message`: This will contain the error message.
+
+Next, I will create the `Query` type. This will contain all the queries that the client can make. The fields that I am
+going to include are:
+
+- `user`: given an ID or username, this will return the user with that ID or username. If neither of these parameters
+  are given, this will return the currently logged-in user. This will return a `UserResponse` type, which is a union of
+  `User` and `Error`.
+- `image`: given an ID, this will return the image with that ID. This will return a `ImageResponse` type, which is a
+  union of `Image` and `Error`.
+- `recipe`: given an ID, this will return the recipe with that ID. This will return a `RecipeResponse` type, which is a
+  union of `Recipe` and `Error`.
+- `step`: given an ID, this will return the step with that ID. This will return a `StepResponse` type, which is a union
+  of `Step` and `Error`.
+- `ingredient`: given an ID, this will return the ingredient with that ID. This will return a `IngredientResponse` type,
+  which is a union of `Ingredient` and `Error`.
+
+- `users`: this will return all the users in the database if no parameters are given. The parameters will be
+  `query`, `take`, `from`, and `sort`. These allow the client to search for users by their name or username, and perform
+  pagination.
+- `recipes`: this will return all the recipes in the database if no parameters are given. The parameters will be
+  `query`, `take`, `from`, and `sort`. These allow the client to search for recipes, and perform pagination.
+- `steps`: this will return all the steps in the database if no parameters are given. The parameters will be
+  `query`, `take`, `from`, and `sort`. These allow the client to search for steps, and perform pagination.
+- `ingredients`: this will return all the ingredients in the database if no parameters are given. The parameters will be
+  `query`, `take`, `from`, and `sort`. These allow the client to search for ingredients, and perform pagination.
+
+Next, I will create the `Mutation` type. This will contain all the mutations that the client can make. The fields that I
+am going to include are:
+
+- `createUser`: this will create a new user. The parameters will be `user`, which will be the type `CreateUserInput`,
+  and `image` which will be of the type `ImageInput`. This will return a `UserResponse` type, which is a union of `User`
+  and `Error`.
+- `loginUser`: this will log in a user. The parameters will be `usernameOrEmail` and`password`. This will return a
+  `UserResponse` type, which is a union of `User` and `Error`.
+- `logoutUser`: this will log out the currently logged-in user. This will return a bool.
+- `editUser`: this will edit the currently logged-in user. The parameters will be `user`, which will be the type
+  `EditUserInput`, and `image` which will be of the type `ImageInput`. This will return a `UserResponse` type, which is
+  a union of `User` and `Error`.
+- `deleteUser`: this will delete the currently logged-in user. This will return a bool.
+- `followUser`: this will follow the user with the given ID. The parameters will be `id`. This will return
+  a `UserResponse` type, which is a union of `User` and `Error`.
+- `unfollowUser`: this will unfollow the user with the given ID. The parameters will be `id`. This will return
+  a `UserResponse` type, which is a union of `User` and `Error`.
+- `createRecipe`: this will create a new recipe. The parameters will be `recipe`, which will be the type
+  `CreateRecipeInput`, and `image` which will be of the type `ImageInput`. This will return a `RecipeResponse` type,
+  which is a union of `Recipe` and `Error`.
+- `editRecipe`: this will edit the recipe with the given ID. The parameters will be `id`, `recipe`, which will be the
+  type `EditRecipeInput`, and `image` which will be of the type `ImageInput`. This will return a `RecipeResponse` type,
+  which is a union of `Recipe` and `Error`.
+- `deleteRecipe`: this will delete the recipe with the given ID. The parameters will be `id`. This will return a bool.
+- `saveRecipe`: this will save the recipe with the given ID. The parameters will be `id`. This will return a bool.
+- `unsaveRecipe`: this will un save the recipe with the given ID. The parameters will be `id`. This will return a bool.
+- `createStep`: this will create a new step. The parameters will be `step`, which will be the type `StepInput`, and
+  `image` which will be of the type `ImageInput`. This will return a `StepResponse` type, which is a union of `Step` and
+  `Error`.
+- `editStep`: this will edit the step with the given ID. The parameters will be `id`, `step`, which will be the type
+  `StepInput`, and `image` which will be of the type `ImageInput`. This will return a `StepResponse` type, which is a
+  union of `Step` and `Error`.
+- `deleteStep`: this will delete the step with the given ID. The parameters will be `id`. This will return a bool.
+- `createIngredient`: this will create a new ingredient. The parameters will be `ingredient`, which will be the type
+  `IngredientInput`. This will return a `IngredientResponse` type, which is a union of `Ingredient` and `Error`.
+- `editIngredient`: this will edit the ingredient with the given ID. The parameters will be `id`, `ingredient`, which
+  will be the type `IngredientInput`. This will return a `IngredientResponse` type, which is a union of `Ingredient` and
+  `Error`.
+- `deleteIngredient`: this will delete the ingredient with the given ID. The parameters will be `id`. This will return a
+  bool.
+
+In some GraphQL APIs, there is an additional `Subscription` type. These allow the client to make websocket connections
+to the server. I will not be implementing this in this project, because the real-time functionality is not needed for
+this project.
+
+Next in the type definitions are the different input types, these are used to define the input parameters for the other
+type definitions.
+
+- `CreateUserInput`: this is the input type for the `createUser` mutation. It has the following fields:
+    - `name`: this is the name of the user.
+    - `email`: this is the email of the user.
+    - `username`: this is the username of the user.
+    - `password`: this is the password of the user.
+- `EditUserInput`: The username and password will not be editable by the user at this stage of the project. I am going
+  to add the ability to do this when adding the email functionality.
+    - `name`: this is the name of the user.
+    - `username`: this is the username of the user.
+- `CreateRecipeInput`: this is the input type for the `createRecipe` mutation. It has the following fields:
+    - `name`: this is the title of the recipe.
+    - `description`: this is the description of the recipe.
+    - `category`: this is the category of the recipe.
+    - `cuisine`: this is the cuisine of the recipe.
+    - `cookTime`: this is the cook time of the recipe.
+    - `prepTime`: this is the prep time of the recipe.
+- `EditRecipeInput`: this is the input type for the `editRecipe` mutation. It has the following fields:
+    - `name`: this is the title of the recipe.
+    - `description`: this is the description of the recipe.
+    - `category`: this is the category of the recipe.
+    - `cuisine`: this is the cuisine of the recipe.
+    - `cookTime`: this is the cook time of the recipe.
+    - `prepTime`: this is the prep time of the recipe.
+- `StepInput`: this is the input type for the `createStep` mutation. It has the following fields:
+    - `name`: this is the name of the step.
+    - `content`: this is the actual message of the step.
+- `IngredientInput`: this is the input type for the `createIngredient` mutation. It has the following fields:
+    - `name`: this is the name of the ingredient.
+    - `quantity`: this is the quantity of the ingredient.
+- `UserSort`: this is used to sort an array of users. It will contain all the fields in the `User` type with an
+  additional `_count` field. Each of the fields will either be of the type `Direction` or a different kind of sorting
+  input.
+- `RecipeSort`: this is used to sort an array of recipes. It will contain all the fields in the `Recipe` type with an
+  additional `_count` field. Each of the fields will either be of the type `Direction` or a different kind of sorting
+  input.
+- `StepSort`: this is used to sort an array of steps. It will contain all the fields in the `Step` type with an
+  additional `_count` field. Each of the fields will either be of the type `Direction` or a different kind of sorting
+  input.
+- `IngredientSort`: this is used to sort an array of ingredients. It will contain all the fields in the `Ingredient`
+  type with an additional `_count` field. Each of the fields will either be of the type `Direction` or a different kind
+  of sorting input.
+
+Next are in the type definitions the different union types created:
+
+- `UserResponse`: this is the union type for the `User` type. It will contain either the `User` type or the `Error`
+  type.
+- `RecipeResponse`: this is the union type for the `Recipe` type. It will contain either the `Recipe` type or the
+  `Error` type.
+- `StepResponse`: this is the union type for the `Step` type. It will contain either the `Step` type or the `Error`
+  type.
+- `IngredientResponse`: this is the union type for the `Ingredient` type. It will contain either the `Ingredient` type
+  or the `Error` type.
+
+Finally, the `Direction` enum will be created, it will have a value of `ASC` and `DESC`.
+
+#### The resolvers
+
+Resolvers are functions that are run when a request is made to the API. They are passed the arguments in the request as
+parameters, as well as the user's authentication information. This information can then be used to resolve any requests
+that the user sends.
+
+The resolvers for authentication are important to get right, as they are the ones that the whole project's security rely
+on. Here are the mutations used on the site:
+
+`loginUser` (takes a username or email, and password as parameters) will firstly check weather the user is trying to log
+in with an email or a username. It will do this by checking their input against a simple regular expression that checks
+for characters that are not allowed in usernames, but are allowed in emails. The result of this check will be used to
+determine what will be passed into the database query. This query will then find a user with that email or username. If
+no user is found, or their email isn't verified, an error will be returned. If the user is found, the password attempt
+will be verified against the hash in the database. If the password is correct, the user will be issued two tokens, an
+access token and a refresh token, these can be used to authenticate future requests by them. If the password is
+incorrect, an error will be returned.
+
+`logoutUser` will first, calculate the current number of seconds since the epoch, a UNIX timestamp. This will then be
+added to the database as the new value for `iat`. This will ensure that the token is no longer valid. Next, the user's
+access token and refresh token will be cleared, and then the function will return true.
+
+`createUser` will run a number of checks on the user's input. Returning an error if the data provided is invalid. Next,
+the database will be checked to see if the username or email already exists. If it does, an error will be returned to
+the client. The user's password will then be hashed using argon2, and then the user is stored in the database. This will
+be changed a lot in future sprints to add email verification and image upload.
+
+`editUser` will take the user's input and check that its valid and won't break any unique constants. This data will then
+be added to the database.
+
+`deleteUser` will delete the logged-in user from the database. When adding email verification, I may require the user to
+verify their email before they can delete their account.
+
+`followUser` will take the user's input and check that the user is logged in. If they are, and they are not trying to
+follow themselves, the user will be added to the database as a follower of the user they are trying to follow.
+
+`unfollowUser` will take the user's input and check that the user is logged in. If they are, they will be removed from
+the database as a follower of the user they are trying to unfollow.
+
+`createRecipe` will take a user's input of a recipe, check that they are logged-in, and if they are, it will create the
+recipe in the database.
+
+`editRecipe` will take a recipe's ID and what changes they want to make to the recipe. If they are logged in and own the
+recipe, it will edit the recipe in the database.
+
+`deleteRecipe` will take a recipe's ID and check that the user is logged in. If they are, and they own the recipe, it
+will be deleted from the database.
+
+`saveRecipe` will take a recipe's ID and check that the user is logged in. If they are, they will save the recipe. This
+will allow user's to save their own recipes, because saving a recipe has the utility of downloading it, so allowing them
+to add to the save counter is a good idea.
+
+`unsaveRecipe` will take a recipe's ID and check that the user is logged in. If they are, they will un save the recipe
+from the user in the database.
+
+`createStep` will take a recipe's ID and a step's content. If the user is logged in and owns the recipe, it will add
+that step to the database.
+
+`editStep` will take a step's ID and what changes they want to make to the step. If the user is logged in and owns the
+step, it will edit the step in the database.
+
+`deleteStep` will take a step's ID and check that the user is logged in. If they are, and they own the step, it will be
+deleted from the database.
+
+`createIngredient` will take a recipe's ID and an ingredient's content. If the user is logged in and owns the recipe, it
+will add that ingredient to the database.
+
+`editIngredient` will take an ingredient's ID and what changes they want to make to the ingredient. If the user is
+logged in and owns the ingredient, it will edit the ingredient in the database.
+
+`deleteIngredient` will take an ingredient's ID and check that the user is logged in. If they are, and they own the
+ingredient, it will be deleted from the database.
+
+The different queries discussed in the type definitions are self-explanatory. As a result, I have not included a
+description of their function here.
+
+There are also some miscellaneous resolvers that don't resolve a field:
+
+- `UserResponse` will determine weather a response is of the type `User` or `Error`.
+- `RecipeResponse` will determine weather a response is of the type `Recipe` or `Error`.
+- `StepResponse` will determine weather a response is of the type `Step` or `Error`.
+- `IngredientResponse` will determine weather a response is of the type `Ingredient` or `Error`.
+- `Direction` will turn the directions from an enum into a string, which can then be read by the database.
+
+### Context
+
+As previously mentioned, the context is the object that is passed to every resolver. It contains the user's ID, if they
+are logged in, and Express's request and response objects. The context is created with a function that I am going to
+create called `context`. This function will be run each time a request is received. The first thing it will do is check
+the user's access token. If the user has an access token, the context will check the database to see if it is expired.
+If the access token is still valid, the context will return the user's ID. If the access token is expired, the context
+will check the refresh token. If the refresh token is valid, the context will refresh the access and refresh tokens, and
+then return the user's ID. If the refresh token is invalid, the context will return a null user ID. This will give the
+resolvers the ability to know if the user is logged in or not.
+
+### Validation
+
+The validation of the user's input is done in the resolvers. Each resolver will have different validation rules, so they
+are implemented on a case-by-case basis. The bulk of the validation will go in the `createUser` and `editUser`
+resolvers. They will both have the same rules, here they are:
+
+1. The username must be between 3 and 20 characters long.
+2. The username must only contain letters, or hyphens.
+3. The username must not start or end with a hyphen.
+4. The username must not contain two consecutive hyphens.
+5. The email must contain an @ symbol.
+6. The email must not be greater than 100 characters long.
+7. The password must be greater than 8 characters long.
+8. The password must be less than 100 characters long.
+9. The username must be supplied.
+10. The email must be supplied.
+11. The password must be supplied.
+12. The email must be unique.
+13. The username must be unique.
+
+### Testing
+
+I will test this sprint with a combination of unit tests and integration tests. The unit tests will take place in the
+same way as the database client, in the `test/test.ts` file. The integration tests will be done by hand using Apollo
+Studio, a GraphQL client.
+
+## Development
+
+The first thing to do was to create a new branch for the development of the project. I will name it `dev`.
+
+```bash
+$ git checkout -b dev
+```
+
+This will ensure that changes can be made to the project without affecting the master branch.
+
+Next, I am going to install the dependencies relevant to this sprint. These are:
+
+- `apollo-server-express` - The GraphQL server.
+- `jsonwebtoken` - The library that will be used to create and verify access tokens.
+- `argon2` - The library that will be used to hash the password.
+- `cookie-parser` - The library that will be used to populate the request object with an object containing the user's
+  cookies.
+- `cors` - The library that will allow me to create a CORS policy.
+- `dotenv` - The library that will be used to read the environment variables.
+- `express` - A web framework for Node.js.
+- `graphql` - The JavaScript implementation of GraphQL.
+- `graphql-tag` - A library that will be used to parse GraphQL typedefs.
+
+I install these dependencies using the command:
+
+```bash
+$ pnpm install apollo-server-express jsonwebtoken argon2 cookie-parser cors dotenv express graphql graphql-tag
+```
+
+Next, I am going to flesh out the `src/app.ts` file. It needs to initialize the Apollo server. I am going to do this
+with a function called `startApolloServer`. This function will be called in the `src/app.ts` file, but will reside in a
+new file called `src/server.ts`.
+
+Now `src/app.ts` will look like this:
+
+```ts
+import { startApolloServer } from './server';
+import { config } from "dotenv";
+import { PrismaClient } from '@prisma/client';
+import resolvers from './schema/resolvers';
+import typeDefs from './schema/typeDefs';
 
 // Sets .env config as default.
 config();
@@ -417,72 +1103,6 @@ config();
 // Connects to database.
 export const prisma = new PrismaClient();
 
-// Configures AWS SES.
-let ses = new aws.SES({
-  region: "us-east-2",
-  endpoint: "https://email.us-east-2.amazonaws.com",
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
-} as SESClientConfig);
-
-// Creates nodemailer transport.
-export let transporter = nodemailer.createTransport({
-  SES: {
-    ses,
-    aws,
-  },
-} as any);
-
-// Starts Redis server.
-export const redis = new Tedis({
-  host: process.env.REDIS_HOST ?? "localhost",
-  port: parseInt(process.env.REDIS_PORT ?? "6379"),
-});
-
-// Starts server.
-startApolloServer(typeDefs, resolvers).then((server) => {
-  console.log(
-    `${process.env.NODE_ENV?.charAt(
-      0
-    ).toUpperCase()}${process.env.NODE_ENV?.slice(
-      1
-    )} server ready.\nGraphQL explorer at: http://localhost:4000${
-      server.graphqlPath
-    }`
-  );
-});
-```
-
-The line `config()` gives the package `dotenv` the default configuration. `dotenv` loads environmental variables. In this project, they will be stored in a file called `.env`, which will contain any information that is specific to the environment that the application is running in, for example, the password to the database will be different on each instance of the server so this will be fed into the server via a `.env` file. 
-
-`export const prisma = new PrismaClient()` creates a new instance of [Prisma][prisma], the ORM I have decided to use. The `export` keyword allows other files in the project to access it. 
-
-`let ses = new aws.SES({...})` creates a client for the [Amazon Simple Email Service][SES]. It gets an object passed into the constructor containing configuration. The object contains the region, endpoint and AWS credentials.
-
-```ts
-export let transporter = nodemailer.createTransport({
-  SES: {
-    ses,
-    aws,
-  },
-} as any);
-```
-
-Creates a wrapper around the SES client using `nodemailer`. This wrapper will automatically create MIME formatted emails. It is exported so it can be accessed by resolvers to send emails.
-
-```ts
-// Starts Redis server.
-export const redis = new Tedis({
-  host: process.env.REDIS_HOST ?? "localhost",
-  port: parseInt(process.env.REDIS_PORT ?? "6379"),
-});
-```
-
-Starts the Redis client, this is used to store the tokens used in email verification, and may be used to store session tokens. It is exported to be used in other parts of the server.
-
-```ts
 // Starts Apollo server.
 startApolloServer(typeDefs, resolvers).then((server) => {
   // Console message.
@@ -498,20 +1118,12 @@ startApolloServer(typeDefs, resolvers).then((server) => {
 });
 ```
 
-Calls a function I have written that starts [Express][express] and [Apollo Server][Apollo Server], then, prints a message to the console. 
+Inside the callback function, I am logging the URL for Apollo Studio, this will be used for integration testing, so
+having the URL will be helpful. `NODE_ENV` is a variable that will be set to either `development` or `production`,
+depending on the circumstances the server was started under. Production will have strict security rules, while
+development will have more lax rules that allow for easier testing.
 
-```bash
-Development server ready.
-GraphQL explorer at: http://localhost:4000/
-```
-
-The first word, i.e. the environment that the server is running in. This will be either “Development”, or “Production”. These environments have a few differences, for example, cookies will behave differently when in development so they can be accessed in any domain, however in production, they will need to be only accessible by the client for security reasons.
-
-The next line gives the URL to a GraphQL explorer, where I test the server.
-
-![GraphQL Explorer](https://github.com/hiluw/appetized-docs/raw/main/assets/GraphQL%20explorer.png)
-
-Here is the code for `startApolloServer()`
+`src/server.ts` will look like this:
 
 ```ts
 // Stars Apollo Server.
@@ -522,7 +1134,7 @@ import cookieParser from "cookie-parser";
 import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { context } from "./context";
-import { prisma, redis } from "./app";
+import { prisma } from "./app";
 
 export async function startApolloServer(
   typeDefs: DocumentNode,
@@ -535,33 +1147,13 @@ export async function startApolloServer(
   // This creates req.cookies
   app.use(cookieParser());
 
+  app.use(express.json({ limit: "11mb" }));
+
   app.use((res, req, next) => {
     // This is required for Apollo Server to work with Express.
     // @ts-ignore
     req.context = {};
     next();
-  });
-
-  // Email confirmation
-  app.use("/verify/:token", async ({ params: { token } }, _, next) => {
-    const id: string = (await redis.get(token)) as string;
-
-    if (!id) {
-      return next();
-    }
-
-    await redis.del(token);
-
-    console.log(id);
-
-    await prisma.user.update({
-      where: { id },
-      data: {
-        emailVerified: true,
-      },
-    });
-
-    return next();
   });
 
   // Same ApolloServer initialization as before, plus the drain plugin.
@@ -578,7 +1170,10 @@ export async function startApolloServer(
     app,
     path: "/",
     cors: {
-      origin: "https://studio.apollographql.com",
+      origin:
+        process.env.NODE_ENV === "development"
+          ? "https://studio.apollographql.com"
+          : "http://localhost:3000",
       credentials: true,
     },
   });
@@ -588,632 +1183,372 @@ export async function startApolloServer(
 
   return server;
 }
-
 ```
 
-This function firstly starts express, and then creates a HTTP server. Then, the `cookie-parser` middleware is registered and the context object is set to null. Next the route for email verification is created. When a user visits the `/verify/token` path, the value of token is checked in Redis, and then the user associated with that token will have their email verified. After that, Apollo Server is started and the `context()` function I created is passed into the constructor. Finally, the server is started, and the the server starts listening at port 4000.
+This starts up the server and applies the necessary middleware and configuration. The `cors` property is used to allow
+the server to communicate with the GraphQL explorer, or the client, depending on the value of `NODE_ENV`.
 
-The context function checks weather a user is authenticated and handles their cookies, returning their Id if they are authenticated.
+The file references a function, `context()`, that does not yet exist, so I will create that in `src/context.ts`. Here is
+the contents of the file.
 
 ```ts
-export function context({ req, res }: any): Object {
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { cookies } from "./cookies";
+import { prisma } from "./app";
+
+export async function context({ req, res }: any): Promise<Object> {
   try {
-    const { id, logouts } = jwt.verify(
+    // Access Token
+    const { id, iat } = jwt.verify(
       req.cookies["accessToken"] ?? null,
       process.env.ACCESS_TOKEN as string
-    ) as any;
-    return { req, res, id, logouts };
-  } catch (e) {
-    try {
-      const { id, logouts } = jwt.verify(
-        req.cookies["refreshToken"] ?? null,
-        process.env.REFRESH_TOKEN as string
-      ) as any;
-      cookies(res, id, logouts);
-      return { req, res, id, logouts };
-    } catch (e) {
+    ) as JwtPayload;
+
+    // If the amount of logins is valid.
+    const user = await prisma.user.findFirst({
+      where: { id, iat: { lt: iat } },
+    });
+
+    // If the user is logged in hydrate context.
+    if (user) return { req, res, id };
+    else {
+      // User has been logged out on different device.
+      // Clears the user's cookies.
+      res.clearCookie("accessToken");
+      res.clearCookie("refreshToken");
       return { req, res, id: null, logouts: null };
     }
+  } catch (e) {
+    // Refresh Token
+    // If the user's access token is expired.
+    try {
+      const { id, iat } = jwt.verify(
+        req.cookies["refreshToken"] ?? null,
+        process.env.REFRESH_TOKEN as string
+      ) as JwtPayload;
+
+      // If the amount of logins is valid.
+      const user = await prisma.user.findFirst({
+        where: { id, iat: { lt: iat } },
+      });
+
+      // If the user is logged in hydrate context.
+      if (user) {
+        // User's access token has expired, needs to be reissued.
+        cookies(res, id);
+        return { req, res, id };
+      } else {
+        // User has been logged out on different device.
+        // Clears the user's cookies.
+        res.clearCookie("accessToken");
+        res.clearCookie("refreshToken");
+        return { req, res, id: null };
+      }
+    } catch (e) {
+      res.clearCookie("accessToken");
+      res.clearCookie("refreshToken");
+      return { req, res, id: null };
+    }
   }
 }
 ```
 
-If the user needs a new set of access and refresh tokens, the `cookies()` function is called. 
+This function is called each time a request is made to the server. It is the basis for the sites' authentication because
+it provides the resolvers with the user's id, which abstracts the cookies away from the resolvers.
+
+The function `cookies()` also needs to be created. It resides in the file `src/cookies.ts`. Here it is:
 
 ```ts
-import { Secret, sign } from "jsonwebtoken";new 
+import { Secret, sign } from "jsonwebtoken";
 import { CookieOptions } from "express";
 
-export function cookies(res: any, id: string, logouts: number) {
+export function cookies(res: any, id: string) {
+  // Clear old cookies
+  res.clearCookie("accessToken");
+  res.clearCookie("refreshToken");
+
+  // Access token expires in an hour, used for authentication.
   res.cookie(
     "accessToken",
-    sign({ id: id, logouts: logouts }, process.env.ACCESS_TOKEN as Secret),
+    sign({ id: id }, process.env.ACCESS_TOKEN as Secret),
     {
-      expiresIn: "1h",
+      expires: new Date(Date.now() + 60 * 60 * 1000),
       httpOnly: true,
       sameSite: process.env.NODE_ENV === "production" ? "lax" : "none",
       secure: true,
     } as CookieOptions
   );
+  // Refresh token expires in a week, used to generate new access tokens
   res.cookie(
     "refreshToken",
-    sign({ userId: id, logouts: logouts }, process.env.REFRESH_TOKEN as Secret),
+    sign({ id: id }, process.env.REFRESH_TOKEN as Secret),
     {
-      expiresIn: "30d",
+      expires: new Date(Date.now() + 28 * 24 * 60 * 60 * 1000),
       httpOnly: true,
       sameSite: process.env.NODE_ENV === "production" ? "lax" : "none",
       secure: true,
     } as CookieOptions
   );
 }
-
 ```
 
-`cookies()` issues the user with an access token and a refresh token. 
+This is a great example of the `NODE_ENV` property. The `sameSite` property is used to determine whether the cookie
+should be sent to different domains. If the `NODE_ENV` is set to `production`, the cookie will be sent to different
+domains. If the `NODE_ENV` is set to `development`, the cookie will be sent to the same domain. This allows the cookies
+to be easily tested, because the GraphQL explorer sits on a different domain than the actual server, so it wil be able
+to see the cookies, when the `sameSite` property is set to `lax`.
 
-### Resolvers
-
-The 5 resolvers I am going to implement this sprint are all going to be mutations.
-
-Resolvers are imported in `server.ts` and passed to `startApolloServer()` as an object containing functions.
-
-This object is made in the `resolvers.ts`, the functions it contains are located in different files.
-
-```ts
-import { login } from "./user/login";
-import { logout } from "./user/logout";
-import { addUser } from "./user/addUser";
-import { editUser } from "./user/editUser";
-import { deleteUser } from "./user/deleteUser";
-
-export default {
-  Query: {},
-  Mutation: {
-    addUser,
-    deleteUser,
-    editUser,
-    login,
-    logout
-  },
-};
-```
-
-Here is the resolver for logging in:
+Now that the groundwork for the schema to be implemented has been laid out, the next step is to implement the type
+definitions in the GraphQL schema language. I will do this in the file `src/schema/typeDefs.ts`.
 
 ```ts
-import { AuthenticationError, UserInputError } from "apollo-server-express";
-import { prisma } from "../app";
-import argon2 from "argon2";
-import { cookies } from "../cookies";
-
-export const login = async (
-  _: any,
-  { email, password }: any,
-  { res, id }: any
-) => {
-  // An object that stores any validation errors that occur during the login process.
-  const validationErrors: any = {};
-
-  // Checks if user is already logged in.
-  if (id) throw new AuthenticationError("Already logged in.");
-
-  // Checks if user has entered an email.
-  if (!email) validationErrors.email = "Email is required.";
-
-  // Checks if user has entered a password.
-  if (!password) validationErrors.password = "Password is required.";
-
-  // Finds user in database from their email.
-  const user = await prisma.user.findUnique({
-    where: {
-      email: email,
-    },
-  });
-
-  // Throws validation errors
-  if (Object.keys(validationErrors).length > 0) {
-    throw new UserInputError("Failed to login due to user input.", {
-      ...validationErrors,
-    } as any);
-  }
-  // returns true if the user exists and their password is correct.
-  if (user && (await argon2.verify(user.passwordHash, password))) {
-    if (!user.emailVerified) {
-      throw new AuthenticationError("Email not verified.");
-    }
-    // Creates new set of tokens.
-    cookies(res, user.id, user.logouts);
-    return {
-      success: true,
-      message: "Login successful.",
-      code: 200,
-    };
-  } else {
-    // Throws error if user does not exist or password is incorrect.
-    throw new AuthenticationError("Incorrect email or password.");
-  }
-};
-
-```
-
-Here is the resolver for logging out: 
-
-```ts
-import { AuthenticationError } from "apollo-server-express";
-import { prisma } from "../app";
-
-export const logout = async (_: any, __: any, { res, id }: any) => {
-  // Checks if user is already logged out.
-  if (!id) throw new AuthenticationError("Not logged in.");
-
-  // Clears the user's cookies.
-  res.clearCookie("accessToken");
-  res.clearCookie("refreshToken");
-
-  // Increments the user's logouts.
-  await prisma.user
-    .update({
-      where: {
-        id: id,
-      },
-      data: {
-        logouts: { increment: 1 },
-      },
-    })
-    .catch(() => {
-      throw Error("Failed to logout");
-    });
-
-  return {
-    success: true,
-    message: "Logout successful",
-    code: 200,
-  };
-};
-```
-
- Here is the resolver for registering a new account, please note that images will be implemented in a later sprint:
-
-```ts
-import { AuthenticationError, UserInputError } from "apollo-server-express";
-import argon2 from "argon2";
-import { prisma, redis, transporter } from "../app";
-import { User } from "apollo-server-core/src/plugin/schemaReporting/operations";
-import { v4 } from "uuid";
-
-export const addUser = async (
-  _: any,
-  { email, user: { name, username, password }, image }: any,
-  { id }: any
-) => {
-  // An object that stores any validation errors that occur while creating a user.
-  const validationErrors: any = {};
-
-  // Checks if a name was entered.
-  if (!name) validationErrors.name = "Name is required.";
-
-  // Checks if a username was entered.
-  if (!username) validationErrors.username = "Username is required.";
-
-  // Checks if a password was entered.
-  if (!password) validationErrors.password = "Password is required.";
-
-  // Checks if password is long enough
-  if (password.length < 8)
-    validationErrors.password = "Password must be at least 8 characters.";
-
-  // Checks if password is short enough
-  if (password.length > 128)
-    validationErrors.password = "Password must be less than 128 characters.";
-
-  // Checks if an email was entered.
-  if (!email) validationErrors.email = "Email is required.";
-
-  // Checks if an image was entered.
-  if (image) {
-    // Checks if the image is too big.
-    if (image.imageBase64.length > 10 * 1000000) {
-      validationErrors.image = "Image must be less than 10MB.";
-    }
-    // TODO implement images.
-    validationErrors.image = "Images have not yet been implemented";
-  }
-
-  // Checks if already logged in.
-  if (id) throw new AuthenticationError("Already logged in.");
-
-  // Hashes the password.
-  const passwordHash = await argon2.hash(password);
-
-  // Creates a user in the database.
-  const user =
-    (await prisma.user
-      .create({
-        data: {
-          email,
-          username,
-          name,
-          passwordHash,
-        },
-      })
-      // If the creation of the user fails.
-      .catch(({ code, meta: { target } }) => {
-        // P2002: Unique constraint violation.
-        if (code == "P2002")
-          // For each field with a unique constraint violation.
-          target.forEach((err: string) => {
-            // Set the error message for that field.
-            validationErrors[err] = `${
-              // Capitalize the first letter of the field name.\
-              err.charAt(0).toUpperCase() + err.slice(1)
-            } is already in use.`;
-          });
-      })) ?? ({} as User);
-
-  // If there are any validation errors.
-  if (Object.keys(validationErrors).length > 0) {
-    throw new UserInputError("Failed to add account due to user input.", {
-      ...validationErrors,
-    } as any);
-  }
-
-  // Generates a uuid for the email verification and stores it in redis.
-  const token = v4();
-  await redis.set(token, user?.id);
-
-  // Sends an email to the user with a verification link.
-  await transporter.sendMail({
-    from: `Appetized <no-reply@${process.env.EMAIL_URL}>`,
-    to: email,
-    subject: "Verify your email",
-    html: `<a href="${
-      process.env.SERVER_URL ?? "http://localhost:4000"
-    }/verify/${token}">Verify your email</a>`,
-  });
-
-  // If the user was created successfully.
-  return {
-    success: true,
-    message: "User created",
-    code: 200,
-  };
-};
-
-```
-
-Here is the resolver for editing your account: 
-
-```ts
-import { AuthenticationError, UserInputError } from "apollo-server-express";
-import { prisma } from "../app";
-
-export const editUser = async (
-  _: any,
-  { name, username, image }: any,
-  { id, logouts }: any
-) => {
-  // An object that stores any validation errors that occur while editing a user.
-  const validationErrors: any = {};
-
-  // If the user is not logged in.
-  if (!id) throw new AuthenticationError("Already logged in.");
-
-  // Checks if an image was entered.
-  if (image) {
-    // Checks if the image is too big.
-    if (image.imageBase64.length > 10 * 1000000) {
-      validationErrors.image = "Image must be less than 10MB.";
-    }
-    // TODO implement images.
-    validationErrors.image = "Images have not yet been implemented";
-  }
-
-  const user: any = await prisma.user.findUnique({
-    where: {
-      id,
-    },
-    select: {
-      id: true,
-      name: true,
-      username: true,
-      logouts: true,
-    },
-  });
-
-  console.log(user);
-
-  if (user?.logouts !== logouts)
-    throw new AuthenticationError("Session is expired.");
-
-  // Check new username is different from old username.
-  if (user?.username === username)
-    validationErrors.username = "Username is already in use.";
-
-  if (user?.name === name) validationErrors.name = "Name is already in use.";
-
-  // If the creation of the user fails.
-  await prisma.user
-    .update({
-      where: {
-        id,
-      },
-      data: {
-        name,
-        username,
-      },
-    })
-    // If updating the user fails
-    .catch(({ code, meta: { target } }: any) => {
-      // P2002: Unique constraint violation.
-      if (code == "P2002")
-        // For each field with a unique constraint violation.
-        target.forEach((err: string) => {
-          // Set the error message for that field.
-          validationErrors[err] = `${
-            // Capitalize the first letter of the field name.\
-            err.charAt(0).toUpperCase() + err.slice(1)
-          } is already in use.`;
-        });
-    });
-  // If there are any validation errors.
-  if (Object.keys(validationErrors).length > 0) {
-    throw new UserInputError("Failed to add account due to user input.", {
-      ...validationErrors,
-    } as any);
-  }
-
-  // User edited successfully.
-  return {
-    success: true,
-    message: "User edited",
-    code: 200,
-  };
-};
-
-```
-
-Here is the resolver for deleting your account:
-
-```ts
-import { AuthenticationError } from "apollo-server-express";
-import { prisma } from "../app";
-
-export const deleteUser = async (
-  _: any,
-  __: any,
-  { res, id, logouts }: any
-) => {
-  // If the user is not logged in.
-  if (!id) throw new AuthenticationError("Not logged in.");
-
-  const user: any = await prisma.user.findUnique({
-    where: { id },
-    select: { id: true, logouts: true },
-  });
-
-  if (!user || user?.logouts !== logouts)
-    throw new AuthenticationError("Session is expired.");
-
-  await prisma.user.delete({
-    where: {
-      id,
-    },
-  });
-
-  // Clears the user's cookies.
-  res.clearCookie("accessToken");
-  res.clearCookie("refreshToken");
-
-  return {
-    success: true,
-    message: "User deleted",
-    code: 200,
-  };
-};
-
-```
-
-### Type Definitions
-
-I have created the type definitions for the entire app, except for the resolvers, here they are:
-
-```ts
-import { gql } from "graphql-tag";
+import gql from "graphql-tag";
 
 export default gql`
-  type Recipe {
-    id: ID!
-    image: Image!
-    name: String!
-    author: User!
-    rating: Rating
-    prepTime: Int
-    cookTime: Int
-    uploadDate: Date
-    editDate: Date
-    description: String
-    keywords: [String]
-    calories: Int
-    category: String
-    cuisine: String
-    ingredients: [QuantitativeIngredient!]
-    instructions: [Instruction!]
-    yield: QuantitativeIngredient
-    savedBy: [User]
-  }
-
-  input RecipeInput {
-    name: String!
-    prepTime: Int
-    cookTime: Int
-    description: String
-    keywords: [String]
-    calories: Int
-    category: String
-    cuisine: String
-  }
-
   type User {
     id: ID!
-    name: String!
+    name: String
     username: String!
-    joinDate: Date!
-    editDate: Date
     profilePicture: Image
-    uploadedRecipes: [Recipe]
-    following: [User]
-    followers: [User]
-    savedRecipes: [Recipe]
-  }
-
-  input UserInput {
-    name: String!
-    username: String!
-    password: String!
+    createdAt: String!
+    recipes(take: Int, from: ID, sort: RecipeSort): [Recipe]
+    savedRecipes(take: Int, from: ID, sort: RecipeSort): [Recipe]
+    following(take: Int, from: ID, sort: UserSort): [User]
+    followers(take: Int, from: ID, sort: UserSort): [User]
   }
 
   type Image {
+    id: ID!
+    uploader: User!
     url: String!
-    alt: String
+    recipe: Recipe
+    Step: Step
+  }
+
+  type Recipe {
+    id: ID!
+    name: String!
     author: User!
-    uploadDate: Date!
+    description: String
+    image: Image
+    createdAt: String!
+    steps(take: Int, from: ID, sort: StepSort): [Step]
+    category: String
+    cuisine: String
+    ingredients(take: Int, from: ID, sort: IngredientSort): [Ingredient]
+    cookTime: Int
+    prepTime: Int
+    savedBy(take: Int, from: ID, sort: UserSort): [User]
   }
 
-  input ImageInput {
-    imageBase64: String!
-    alt: String
-  }
-
-  type Rating {
-    totalRatings: Int!
-    stars: Float!
-    ratedBy: [User!]
-  }
-
-  input RatingInput {
-    rating: Float!
-  }
-
-  type Date {
-    year: Int!
-    month: Int!
-    day: Int!
-    hour: Int
-    minute: Int
-    second: Float
-  }
-
-  input DateInput {
-    year: Int!
-    month: Int!
-    day: Int!
-    hour: Int
-    minute: Int
-    second: Float
-  }
-
-  type QuantitativeIngredient {
-    ingredient: Ingredient!
-    amount: String!
-    unit: String!
-  }
-
-  input QuantitativeIngredientInput {
-    ingredient: IngredientInput!
-    amount: String!
-    unit: String!
+  type Step {
+    id: ID!
+    name: String
+    createdAt: String
+    content: String!
+    image: Image
+    recipe: Recipe!
   }
 
   type Ingredient {
+    id: ID!
     name: String!
-    images: [Image]
+    quantity: String!
+    recipe: Recipe
+  }
+
+  type Error {
+    code: Int!
+    message: String!
+  }
+
+  type Query {
+    user(id: ID, username: String): UserResponse!
+    image(id: ID!): ImageResponse!
+    recipe(id: ID!): RecipeResponse!
+    step(id: ID!): StepResponse!
+    ingredient(id: ID!): IngredientResponse!
+
+    users(query: String, take: Int, from: ID, sort: UserSort): [User]
+    recipes(query: String, take: Int, from: ID, sort: RecipeSort): [Recipe]
+    steps(query: String, take: Int, from: ID, sort: StepSort): [Step]
+    ingredients(
+      query: String
+      take: Int
+      from: ID
+      sort: IngredientSort
+    ): [Ingredient]
+  }
+
+  type Mutation {
+    createUser(user: CreateUserInput!, image: ImageInput): UserResponse!
+    loginUser(usernameOrEmail: String!, password: String!): UserResponse!
+    logoutUser: Boolean!
+    editUser(user: EditUserInput, image: ImageInput): UserResponse!
+    deleteUser: Boolean!
+    followUser(id: ID!): UserResponse!
+    unfollowUser(id: ID!): UserResponse!
+
+    createRecipe(recipe: CreateRecipeInput!, image: ImageInput): RecipeResponse!
+    editRecipe(
+      id: ID!
+      recipe: EditRecipeInput
+      image: ImageInput
+    ): RecipeResponse!
+    deleteRecipe(id: ID!): Boolean!
+    saveRecipe(id: ID!): RecipeResponse!
+    unsaveRecipe(id: ID!): RecipeResponse!
+
+    createStep(recipe: ID!, step: StepInput, image: ImageInput): StepResponse!
+    editStep(id: ID!, step: StepInput, image: ImageInput): StepResponse!
+    deleteStep(id: ID!): Boolean!
+
+    createIngredient(
+      recipe: ID!
+      ingredient: IngredientInput
+    ): IngredientResponse!
+    editIngredient(id: ID!, ingredient: IngredientInput): IngredientResponse!
+    deleteIngredient(id: ID!): Boolean!
+  }
+
+  input CreateUserInput {
+    name: String
+    email: String!
+    password: String!
+    username: String!
+  }
+
+  input EditUserInput {
+    name: String
+    username: String
+  }
+
+  input ImageInput {
+    base64: String!
+  }
+
+  input CreateRecipeInput {
+    name: String!
+    description: String
+    category: String
+    cuisine: String
+    cookTime: Int
+    prepTime: Int
+  }
+
+  input EditRecipeInput {
+    name: String
+    description: String
+    category: String
+    cuisine: String
+    cookTime: Int
+    prepTime: Int
+  }
+
+  input StepInput {
+    name: String
+    content: String!
   }
 
   input IngredientInput {
     name: String!
-    images: [ImageInput]
+    quantity: String!
   }
 
-  type Instruction {
-    name: String
-    text: String!
-    url: String
-    image: Image
-    tip: Boolean!
+  input UserSort {
+    _count: Direction
+    id: Direction
+    name: Direction
+    username: Direction
+    createdAt: Direction
+    recipes: RecipeSort
+    savedRecipes: RecipeSort
+    following: UserSort
+    followers: UserSort
   }
 
-  input InstructionInput {
-    name: String
-    text: String!
-    url: String
-    image: ImageInput
-    tip: Boolean!
+  input RecipeSort {
+    _count: Direction
+    id: Direction
+    name: Direction
+    author: UserSort
+    description: Direction
+    createdAt: Direction
+    steps: StepSort
+    category: Direction
+    cuisine: Direction
+    ingredients: IngredientSort
+    cookTime: Direction
+    prepTime: Direction
+    savedBy: UserSort
   }
 
-  type Response {
-    success: Boolean!
-    code: Int
-    message: String
-    meta: String
+  input StepSort {
+    _count: Direction
+    id: Direction
+    name: Direction
+    createdAt: Direction
+    content: Direction
+    recipe: RecipeSort
   }
 
-  union Any =
-      Recipe
-    | User
-    | Image
-    | Rating
-    | Date
-    | QuantitativeIngredient
-    | Ingredient
-    | Instruction
-    | Response
-
-  type Query {
-    getContext: String
+  input IngredientSort {
+    _count: Direction
+    id: Direction
+    name: Direction
+    quantity: Direction
+    recipe: Direction
   }
 
-  type Mutation {
-    login(email: String!, password: String!): Response!
-    logout: Response!
-    forgotPassword(email: String!, password: String!): Boolean!
+  union UserResponse = User | Error
+  union ImageResponse = Image | Error
+  union RecipeResponse = Recipe | Error
+  union StepResponse = Step | Error
+  union IngredientResponse = Ingredient | Error
 
-    addUser(email: String!, user: UserInput!, image: ImageInput): Response!
-    editUser(name: String, username: String, image: ImageInput): Response!
-    deleteUser: Response!
-
-    makeImage(image: ImageInput): Image!
-    deleteImage(url: String): Boolean!
-
-    addRecipe(
-      recipe: RecipeInput
-      image: ImageInput
-      ingredients: [QuantitativeIngredientInput!]
-      instructions: [InstructionInput!]
-      yield: QuantitativeIngredientInput
-    ): Recipe!
-    editRecipe(
-      recipe: RecipeInput!
-      image: ImageInput
-      ingredients: [QuantitativeIngredientInput]
-      instructions: [InstructionInput!]
-      yield: QuantitativeIngredientInput
-    ): Recipe!
-    deleteRecipe(id: ID!): Boolean!
+  enum Direction {
+    ASC
+    DESC
   }
 `;
 
 ```
 
-They are imported in `server.ts`, and then passed into the `ApolloServer` constructor. 
+Now if I start the server and open the Apollo Playground, I can see the schema I just created. However, there is
+currently no script created to start the server. I am going to modify the `package.json` file to add two scripts to
+start the server in development mode and production mode. For development purposes, two small scripts are required,
+`cross-env` and `nodemon`. The `cross-env` script will set the `NODE_ENV` environment variable and the `nodemon` script
+will restart the server whenever the source code changes. This is useful in development because it allows me to rapidly
+prototype the server without having to manually type a command each time I save a change to the source code.
 
-### Evidence
+I can install these scripts by running the following command in the terminal:
 
-When the command `yarn dev` or `npm run dev` is executed, the development server starts and a link is put in the console to the GraphQL Explorer. 
-
-`» yarn dev` 
 ```bash
-yarn run v1.22.15
-$ cross-env NODE_ENV=development nodemon --exec ts-node src/app.ts
+$ pnpm install -D cross-env nodemon
+```
+
+Now I can edit the `package.json` file and change the `scripts` section to this:
+
+```json
+{
+  "scripts": {
+    "start": "cross-env NODE_ENV=production ts-node src/app.ts",
+    "dev": "cross-env NODE_ENV=development nodemon --exec ts-node src/app.ts",
+    "build": "tsc --build",
+    "test": "mocha -r ts-node/register test/test.ts"
+  }
+}
+```
+
+Now I can start the server by running the following command in the terminal:
+
+```bash
+$ npm run dev
+```
+
+This will output:
+
+```
 [nodemon] 2.0.13
 [nodemon] to restart at any time, enter `rs`
 [nodemon] watching path(s): *.*
@@ -1223,265 +1558,1448 @@ Development server ready.
 GraphQL explorer at: http://localhost:4000/
 ```
 
-<img src="https://github.com/hiluw/appetized-docs/raw/main/assets/GraphQL%20explorer.png" style="float: right; width: 50%; padding: 0 16px;">This is what I am going to use to test this sprint, as I have not yet developed the client. You use it to query the server and get responses, the same way as the client will. It also supports cookies, so authentication can be tested.
+By clicking the link, I get bought to this page:
 
-The first mutation to be implemented was `login`, however, without `addUser` there is no account to login to, so I had to manually add a user to the database. Then I used the GraphQL explorer to login to the account. I was having some trouble getting the Explorer to connect to the GraphQL server, this was because I hadn’t added the correct cross-origin resource sharing (CORS) headers in each request. CORS headers allow resources to be accessed from a different domain, and the Explorer is at `https://studio.apollographql.com`, so I had to add that domain to the `Access-Control-Allow-Origin` header. Additionally, `Access-Control-Allow-Credentials` had to be set to `include` so the cookies would be sent to the Explorer. I implemented these headers by adding a `cors` object to the `ApolloServer` middleware:
+![A landing page for Apollo Explorer](https://github.com/hiluw/appetized-docs/raw/main/assets/Apollo.png)
+
+The button leads to the GraphQL explorer. I can now see the schema I just created.
+
+![A GraphQL schema](https://github.com/hiluw/appetized-docs/raw/main/assets/explorer.png)
+
+The type definitions have now been successfully created! However, I still need to create the resolvers. The typedefs on
+their own don't do much, but the resolvers are the heart of the Apollo server.
+
+I created a new file called `src/schema/resolvers.ts` and added the following code:
 
 ```ts
-// before
-server.applyMiddleware({
-    app,
-    path: "/",
-  });
-// after
-server.applyMiddleware({
-    app,
-    path: "/",
-    cors: {
-      origin: "https://studio.apollographql.com",
-      credentials: true,
+import query from "./query";
+import mutation from "./mutations";
+import user from "./user";
+import recipe from "./recipe";
+
+export default {
+  Query: {
+    ...query,
+  },
+  Mutation: {
+    ...mutation,
+  },
+  User: {
+    ...user,
+  },
+  Recipe: {
+    ...recipe,
+  },
+  UserResponse: {
+    __resolveType(user: { code: number }) {
+      if (user.code) {
+        return "Error";
+      } else {
+        return "User";
+      }
     },
-  });
-```
-
-So now I could test the mutation, please note that the password “aoeuhtns” is not a real password and is just me mashing my keyboard
-
-![Testing Login](https://raw.githubusercontent.com/hiluw/appetized-docs/main/assets/login.png)
-
-As you can see, I got the status code `200` which means that the login was successful.  I then opened the developer tools in my browser and checked the cookies that the Explorer now have:
-
-![Firefox dev tools showing the access and refresh tokens](https://raw.githubusercontent.com/hiluw/appetized-docs/main/assets/cookies.png)
-
-If I try to login again, I will get the error:
-
-```json
-{
-  "errors": [
-    {
-      "message": "Already logged in.",
-      "locations": [
-        {
-          "line": 2,
-          "column": 3
-        }
-      ],
-      "path": [
-        "login"
-      ],
-      "extensions": {
-        "code": "UNAUTHENTICATED",
-        "exception": {
-          "stacktrace": [
-            "AuthenticationError: Already logged in.",
-            "    at Object.login (/usr/local/src/appetized-server/src/user/login.ts:15:17)",
-            "    at field.resolve (/usr/local/src/appetized-server/node_modules/apollo-server-core/src/utils/schemaInstrumentation.ts:100:18)",
-            "    at resolveField (/usr/local/src/appetized-server/node_modules/graphql/execution/execute.js:464:18)",
-            "    at /usr/local/src/appetized-server/node_modules/graphql/execution/execute.js:261:18",
-            "    at /usr/local/src/appetized-server/node_modules/graphql/jsutils/promiseReduce.js:23:10",
-            "    at Array.reduce (<anonymous>)",
-            "    at promiseReduce (/usr/local/src/appetized-server/node_modules/graphql/jsutils/promiseReduce.js:20:17)",
-            "    at executeFieldsSerially (/usr/local/src/appetized-server/node_modules/graphql/execution/execute.js:258:37)",
-            "    at executeOperation (/usr/local/src/appetized-server/node_modules/graphql/execution/execute.js:236:55)",
-            "    at executeImpl (/usr/local/src/appetized-server/node_modules/graphql/execution/execute.js:116:14)"
-          ]
-        }
+  },
+  ImageResponse: {
+    __resolveType(image: { code: number }) {
+      if (image.code) {
+        return "Error";
+      } else {
+        return "Image";
       }
-    }
-  ],
-  "data": null
-}
-```
-
-If i try to login with an incorrect email or password I get the error: 
-
-```json
-{
-  "errors": [
-    {
-      "message": "Incorrect email or password.",
-      "locations": [
-        {
-          "line": 2,
-          "column": 3
-        }
-      ],
-      "path": [
-        "login"
-      ],
-      "extensions": {
-        "code": "UNAUTHENTICATED",
-        "exception": {
-          "stacktrace": [
-            "AuthenticationError: Incorrect email or password.",
-            "    at Object.login (/usr/local/src/appetized-server/src/user/login.ts:50:11)"
-          ]
-        }
+    },
+  },
+  RecipeResponse: {
+    __resolveType(recipe: { code: number }) {
+      if (recipe.code) {
+        return "Error";
+      } else {
+        return "Recipe";
       }
-    }
-  ],
-  "data": null
-}
+    },
+  },
+  IngredientResponse: {
+    __resolveType(recipe: { code: number }) {
+      if (recipe.code) {
+        return "Error";
+      } else {
+        return "Ingredient";
+      }
+    },
+  },
+  StepResponse: {
+    __resolveType(recipe: { code: number }) {
+      if (recipe.code) {
+        return "Error";
+      } else {
+        return "Step";
+      }
+    },
+  },
+  Direction: {
+    ASC: "asc",
+    DESC: "desc",
+  },
+};
 ```
 
-There are also errors for if you don’t input an email or password, for example, I get this if I don’t enter an email address: 
+This file imports the resolvers from the other files and exports them as one object. This is so `src/app.ts` can pass
+them to the `startApolloServer()` function.
+
+There are also some basic resolvers in the file I have already created. They are very short and simple, so it's not
+worth extracting them into their own file.
+
+The next file I am going to create is `src/schema/query/index.ts`. This file will export all the queries in the
+`src/schema/query` directory.
 
 ```ts
-{
-  "errors": [
+import singular from "./singular";
+import plural from "./plural";
+
+export default {
+  ...singular,
+  ...plural,
+};
+```
+
+This file calls the `singular` and `plural` files and exports them as one object. Here is the code for the `singular`:
+
+```ts
+import { prisma } from "../../app";
+
+export default {
+  user: async (
+    _ = null,
+    { id, username }: { id: string; username: string },
+    { id: uuid }: { id: string }
+  ) => {
+    if (id) {
+      return (
+        (await prisma.user.findUnique({
+          where: { id: id },
+        })) ?? {
+          // Id is not found
+          code: 404,
+          message: "User not found",
+        }
+      );
+    } else if (username) {
+      return (
+        (await prisma.user.findUnique({
+          where: { username: username },
+        })) ?? {
+          // Username is not found
+          code: 404,
+          message: "User not found",
+        }
+      );
+    } else if (uuid) {
+      return (
+        (await prisma.user.findUnique({
+          where: { id: uuid },
+        })) ?? {
+          // Something is very broken
+          code: 500,
+          message: "Something is very broken",
+        }
+      );
+    } else {
+      return {
+        // Not logged in and no user provided.
+        code: 401,
+        message: "Not logged in and no user provided.",
+      };
+    }
+  },
+  recipe: async (_ = null, { id }: { id: string }) => {
+    return (
+      (await prisma.recipe.findUnique({
+        where: { id: id },
+      })) ?? {
+        // Id is not found
+        code: 404,
+        message: "Recipe not found",
+      }
+    );
+  },
+  image: async (_ = null, { id }: { id: string }) => {
+    return (
+      (await prisma.image.findUnique({ where: { id: id } })) ?? {
+        // Id is not found
+        code: 404,
+        message: "Image not found",
+      }
+    );
+  },
+  step: async (_ = null, { id }: { id: string }) => {
+    return (
+      (await prisma.step.findUnique({ where: { id: id } })) ?? {
+        // Id is not found
+        code: 404,
+        message: "Step not found",
+      }
+    );
+  },
+  ingredient: async (_ = null, { id }: { id: string }) => {
+    return (
+      (await prisma.ingredient.findUnique({ where: { id: id } })) ?? {
+        // Id is not found
+        code: 404,
+        message: "Ingredient not found",
+      }
+    );
+  },
+};
+```
+
+And here is the code for `plural`:
+
+```ts
+import { prisma } from "../../app";
+
+export default {
+  users: async (
+    _ = null,
     {
-      "message": "Failed to login due to user input.",
-      "locations": [
-        {
-          "line": 2,
-          "column": 3
-        }
-      ],
-      "path": [
-        "login"
-      ],
-      "extensions": {
-        "email": "Email is required.",
-        "code": "BAD_USER_INPUT",
-        "exception": {
-          "stacktrace": [
-            "UserInputError: Failed to login due to user input.",
-            "    at Object.login (/usr/local/src/appetized-server/src/user/login.ts:32:11)"
-          ]
-        }
+      query,
+      take,
+      from,
+      sort,
+    }: { query: string; take: number; from: string; sort: any },
+    { req, res, id }: { req: any; res: any; id: string }
+  ) => {
+    return await prisma.user.findMany({
+      where: {
+        OR: [
+          {
+            name: {
+              search: query,
+            },
+          },
+          {
+            username: {
+              search: query,
+            },
+          },
+        ],
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+  recipes: async (
+    _ = null,
+    {
+      query,
+      take,
+      from,
+      sort,
+    }: { query: string; take: number; from: string; sort: any },
+    { req, res, id }: { req: any; res: any; id: string }
+  ) => {
+    return await prisma.recipe.findMany({
+      where: {
+        OR: [
+          {
+            name: {
+              search: query,
+            },
+          },
+          {
+            description: {
+              search: query,
+            },
+          },
+          {
+            cuisine: {
+              search: query,
+            },
+          },
+          {
+            category: {
+              search: query,
+            },
+          },
+        ],
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+  steps: async (
+    _ = null,
+    {
+      query,
+      take,
+      from,
+      sort,
+    }: { query: string; take: number; from: string; sort: any },
+    { req, res, id }: { req: any; res: any; id: string }
+  ) => {
+    return await prisma.step.findMany({
+      where: {
+        OR: [
+          {
+            name: {
+              search: query,
+            },
+          },
+          {
+            content: {
+              search: query,
+            },
+          },
+        ],
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+  ingredients: async (
+    _ = null,
+    {
+      query,
+      take,
+      from,
+      sort,
+    }: { query: string; take: number; from: string; sort: any },
+    { req, res, id }: { req: any; res: any; id: string }
+  ) => {
+    return await prisma.ingredient.findMany({
+      where: {
+        name: {
+          search: query,
+        },
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+};
+```
+
+These are simple queries and don't require explanation outside their own comments.
+
+Next, I am going to add the `src/schema/mutations/index.ts` file. This is also a file that just imports and exports
+objects for use in the `src/app.ts` file. Here it is:
+
+```ts
+import auth from "./auth";
+import user from "./user";
+import recipe from "./recipe";
+import ingredient from "./ingredient";
+import step from "./step";
+
+export default {
+  ...auth,
+  ...user,
+  ...recipe,
+  ...ingredient,
+  ...step,
+};
+```
+
+This file also just imports and export other files that are in the same directory. Here is the code for `auth`:
+
+```ts
+import { prisma } from "../../app";
+import argon2 from "argon2";
+import { cookies } from "../../cookies";
+
+export default {
+  loginUser: async (
+    _ = null,
+    {
+      usernameOrEmail,
+      password,
+    }: { usernameOrEmail: string; password: string },
+    { __, res }: any
+  ) => {
+    //Check if usernameOrEmail is an email or username
+    const where = usernameOrEmail.includes("@")
+      ? { email: usernameOrEmail }
+      : { username: usernameOrEmail };
+
+    const user = await prisma.user.findUnique({ where });
+
+    if (!user) {
+      return {
+        code: 400,
+        message: "Email or username is incorrect",
+      };
+    }
+
+    if (!user.emailVerified) {
+      return {
+        code: 400,
+        message: "Email is not verified",
+      };
+    }
+
+    if (await argon2.verify(user.password, password)) {
+      cookies(res, user.id);
+
+      return user;
+    } else {
+      return {
+        code: 400,
+        message: "Password is incorrect",
+      };
+    }
+  },
+  logoutUser: async (_ = null, __: any, { res, id }: any) => {
+    //seconds since epoch
+    const iat = Math.floor(Date.now() / 1000);
+
+    await prisma.user.update({
+      where: { id },
+      data: {
+        iat,
+      },
+    });
+
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
+
+    return true;
+  },
+};
+```
+
+Here is the code for `user`:
+
+```ts
+import { prisma, s3 } from "../../app";
+import argon2 from "argon2";
+
+export default {
+  createUser: async (
+    _ = null,
+    {
+      user,
+    }: {
+      user: {
+        name?: string;
+        username: string;
+        email: string;
+        password: string;
+      };
+    }
+  ) => {
+    //Check username is valid
+    if (user.username.length < 3) {
+      return {
+        code: 400,
+        message: "Username must be at least 3 characters long",
+      };
+    }
+
+    if (user.username.length > 20) {
+      return {
+        code: 400,
+        message: "Username must be less than 20 characters long",
+      };
+    }
+
+    if (user.username.match(/^[a-z-]+$/) === null) {
+      return {
+        code: 400,
+        message: "Username must only contain lowercase letters and dashes",
+      };
+    }
+
+    if (user.username.match(/^[a-z][a-z-]+[a-z]$/) === null) {
+      return {
+        code: 400,
+        message: "Username must start and end with a lowercase letter",
+      };
+    }
+
+    //Check email is valid
+    if (user.email.indexOf("@") === -1) {
+      return {
+        code: 400,
+        message: "Email is invalid",
+      };
+    }
+
+    if (user.email.length > 100) {
+      return {
+        code: 400,
+        message: "Email must be less than 100 characters long",
+      };
+    }
+
+    //Check password is valid
+    if (user.password.length < 8) {
+      return {
+        code: 400,
+        message: "Password must be at least 8 characters long",
+      };
+    }
+
+    if (user.password.length > 100) {
+      return {
+        code: 400,
+        message: "Password must be less than 100 characters long",
+      };
+    }
+
+    // Check all required fields are present
+    if (!user.username) {
+      return {
+        code: 400,
+        message: "Username is required",
+      };
+    }
+
+    if (!user.email) {
+      return {
+        code: 400,
+        message: "Email is required",
+      };
+    }
+
+    if (!user.password) {
+      return {
+        code: 400,
+        message: "Password is required",
+      };
+    }
+
+    // Check if user already exists
+    const userExists = await prisma.user.findFirst({
+      where: {
+        OR: [
+          {
+            username: user.username,
+          },
+          {
+            email: user.email,
+          },
+        ],
+      },
+    });
+
+    if (userExists) {
+      if (
+        userExists.username === user.username &&
+        userExists.email === user.email
+      ) {
+        return {
+          code: 400,
+          message: "Username and email already exists",
+        };
+      }
+      if (userExists.email === user.email) {
+        return {
+          code: 400,
+          message: "Email already exists",
+        };
+      }
+      if (userExists.username === user.username) {
+        return {
+          code: 400,
+          message: "Username already exists",
+        };
       }
     }
-  ],
-  "data": null
-}
-```
 
-Next, I added `logout`, there are only two cases for `logout` the user is not logged in, and therefore cannot be logged out, or the user gets logged out. 
+    user.password = await argon2.hash(user.password);
 
-Here is when the user is logged out successfully.
-
-```json
-{
-  "data": {
-    "logout": {
-      "code": 200
-    }
-  }
-}
-```
-
-Here is what is returned if the user wasn’t actually logged in.
-
-```json
-{
-  "errors": [
+    return await prisma.user.create({
+      data: {
+        ...user,
+        emailVerified: true,
+      },
+    });
+  },
+  editUser: async (
+    _ = null,
     {
-      "message": "Not logged in.",
-      "locations": [
-        {
-          "line": 2,
-          "column": 3
-        }
-      ],
-      "path": [
-        "logout"
-      ],
-      "extensions": {
-        "code": "UNAUTHENTICATED",
-        "exception": {
-          "stacktrace": [
-            "AuthenticationError: Not logged in.",
-            "    at Object.logout (/usr/local/src/appetized-server/src/user/logout.ts:6:18)",
-            "    at field.resolve (/usr/local/src/appetized-server/node_modules/apollo-server-core/src/utils/schemaInstrumentation.ts:100:18)",
-            "    at resolveField (/usr/local/src/appetized-server/node_modules/graphql/execution/execute.js:464:18)",
-            "    at /usr/local/src/appetized-server/node_modules/graphql/execution/execute.js:261:18",
-            "    at /usr/local/src/appetized-server/node_modules/graphql/jsutils/promiseReduce.js:23:10",
-            "    at Array.reduce (<anonymous>)",
-            "    at promiseReduce (/usr/local/src/appetized-server/node_modules/graphql/jsutils/promiseReduce.js:20:17)",
-            "    at executeFieldsSerially (/usr/local/src/appetized-server/node_modules/graphql/execution/execute.js:258:37)",
-            "    at executeOperation (/usr/local/src/appetized-server/node_modules/graphql/execution/execute.js:236:55)",
-            "    at executeImpl (/usr/local/src/appetized-server/node_modules/graphql/execution/execute.js:116:14)"
-          ]
-        }
+      user: { name, username },
+    }: {
+      user: {
+        name: string;
+        username: string;
+      };
+    },
+    { id }: { id: string }
+  ) => {
+    if (!id) {
+      return {
+        // Not logged in
+        code: 401,
+        message: "Not logged in",
+      };
+    }
+
+    if (username) {
+      //Check username is valid
+      if (username.length < 3) {
+        return {
+          code: 400,
+          message: "Username must be at least 3 characters long",
+        };
+      }
+
+      if (username.length > 20) {
+        return {
+          code: 400,
+          message: "Username must be less than 20 characters long",
+        };
+      }
+
+      if (username.match(/^[a-z-]+$/) === null) {
+        return {
+          code: 400,
+          message: "Username must only contain lowercase letters and dashes",
+        };
+      }
+
+      if (username.match(/^[a-z][a-z-]+[a-z]$/) === null) {
+        return {
+          code: 400,
+          message: "Username must start and end with a lowercase letter",
+        };
+      }
+
+      // Check if username is taken
+      if (
+        await prisma.user.findFirst({
+          where: {
+            username,
+          },
+        })
+      ) {
+        return {
+          code: 400,
+          message: "Username is taken",
+        };
       }
     }
-  ],
-  "data": null
-}
-```
 
-Add user is the most complex resolver I have implemented in this sprint, this is because when you call it, a verification email is sent to the user, which they need to verify their account with to be able to use their account. To send the emails, I had to setup an AWS account and configure it to be able to send emails. 
-
-![SES Verified identities](https://raw.githubusercontent.com/hiluw/appetized-docs/main/assets/SES.png)
-
-Amazon SES puts your account into a sandbox when you are testing your application, meaning you can only send emails to and from verified identities. This meant I had to add my personal email address to be able to receive verification emails.
-
-I could then use my API key in the `.env` file to send emails with code.  
-
-So when I run a valid `addUser` query, I will receive an email to verify my account. 
-
-![Gmail inbox with a verification email](https://raw.githubusercontent.com/hiluw/appetized-docs/main/assets/VerifyEmail.png)
-
-Clicking the link will verify your email, this isn’t done with GraphQL and is instead done with a standard REST API endpoint. In the future, I plan to make the link lead to the homepage of the client with the email verification token as a query string.
-
-If you try to login without a verified email address, you will get an error. 
-
-```json
-{
-  "errors": [
-    {
-      "message": "Email not verified.",
-      "locations": [
-        {
-          "line": 2,
-          "column": 3
-        }
-      ],
-      "path": [
-        "login"
-      ],
-      "extensions": {
-        "code": "UNAUTHENTICATED",
-        "exception": {
-          "stacktrace": [
-            "AuthenticationError: Email not verified.",
-            "    at Object.login (/usr/local/src/appetized-server/src/user/login.ts:39:13)"
-          ]
-        }
-      }
+    return prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        name: name,
+        username: username,
+      },
+    });
+  },
+  deleteUser: async (_ = null, __ = null, { id }: { id: string }) => {
+    if (!id) {
+      return {
+        code: 401,
+        message: "Not logged in",
+      };
     }
-  ],
-  "data": null
-}
+
+    // Delete user's images
+    const images = await prisma.image.deleteMany({
+      where: {
+        OR: [
+          {
+            profile: {
+              id,
+            },
+          },
+          {
+            recipe: {
+              author: {
+                id,
+              },
+            },
+          },
+          {
+            step: {
+              recipe: {
+                author: {
+                  id,
+                },
+              },
+            },
+          },
+        ],
+      },
+    });
+
+    // Delete user's ingredients
+    const ingredients = await prisma.ingredient.deleteMany({
+      where: {
+        recipe: {
+          author: {
+            id,
+          },
+        },
+      },
+    });
+
+    // Delete user's steps
+    const steps = await prisma.step.deleteMany({
+      where: {
+        recipe: {
+          author: {
+            id,
+          },
+        },
+      },
+    });
+
+    // Delete user's recipes
+    const recipes = await prisma.recipe.deleteMany({
+      where: {
+        author: {
+          id,
+        },
+      },
+    });
+
+    await prisma.user.delete({ where: { id } });
+
+    return true;
+  },
+  followUser: async (
+    _ = null,
+    args: { id: string },
+    { id }: { id: string }
+  ) => {
+    if (!id) {
+      return {
+        code: 401,
+        message: "Not logged in",
+      };
+    }
+    if (args.id === id) {
+      return {
+        code: 400,
+        message: "You cannot follow yourself",
+      };
+    }
+    return await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        following: {
+          connect: {
+            id: args.id,
+          },
+        },
+      },
+    });
+  },
+  unfollowUser: async (
+    _ = null,
+    args: { id: string },
+    { id }: { id: string }
+  ) => {
+    if (!id) {
+      return {
+        code: 401,
+        message: "Not logged in",
+      };
+    }
+    if (args.id === id) {
+      return {
+        code: 400,
+        message: "You cannot unfollow yourself",
+      };
+    }
+    return await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        following: {
+          disconnect: {
+            id: args.id,
+          },
+        },
+      },
+    });
+  },
+};
 ```
 
+Here are the functions in `recipe`:
 
+```ts
+import { prisma } from "../../app";
 
-# References
+export default {
+  createRecipe: async (
+    _ = null,
+    {
+      recipe,
+    }: {
+      recipe: {
+        name: string;
+        description?: string;
+        category?: string;
+        cuisine?: string;
+        cookTime?: number;
+        prepTime?: number;
+      };
+    },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
 
-## Things `//TODO`
+    // Create recipe
+    return await prisma.recipe.create({
+      data: {
+        ...recipe,
+        author: {
+          connect: {
+            id: args.id,
+          },
+        },
+      },
+    });
+  },
+  editRecipe: async (
+    _ = null,
+    {
+      id,
+      recipe,
+    }: {
+      id: string;
+      recipe: {
+        name: string;
+        description?: string;
+        category?: string;
+        cuisine?: string;
+        cookTime?: number;
+        prepTime?: number;
+      };
+    },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
 
-- [ ] Intro benefits
-- [ ] How likely people are to cook https://www.food.gov.uk/research/food-and-you
-- [ ] How many percent of people get their recipes from social media
-- [ ] fix blogs grammarWhat You See Is What You Get
-- [ ] Inspiration
-- [ ] Write about frameworks
+    // Check if recipe exists
+    const recipeExists = await prisma.recipe.findUnique({
+      where: {
+        id: id,
+      },
+    });
 
----
+    if (!recipeExists) {
+      return {
+        code: 404,
+        message: "Recipe not found",
+      };
+    }
 
-[capacitor]: https://capacitorjs.com/docs "Capacitor: Cross-platform Native Runtime for Web Apps"
-[wysiwyg]: https://en.wikipedia.org/wiki/WYSIWYG "What You See Is What You Get"
-[structured data]: https://developers.google.com/search/docs/advanced/structured-data/intro-structured-data "Understand how structured data works"
-[work sans]: https://fonts.google.com/specimen/Work+Sans "Work sans "
-[recipe type]: https://schema.org/Recipe "Recipe Schema.org type"
+    if (recipeExists?.authorId !== args?.id) {
+      return {
+        code: 403,
+        message: "You are not authorized to edit this recipe",
+      };
+    }
 
-[^ dark theme]: https://material.io/design/color/dark-theme.html#usage
-[^ amazon rekognition ]: https://aws.amazon.com/rekognition/
+    if (recipeExists?.authorId !== args?.id) {
+      return {};
+    }
 
-[prisma]: https://www.prisma.io/	"Prisma"
-[SES]: https://aws.amazon.com/ses/	"AWS SES"
-[express]: https://expressjs.com/	"Express"
+    // Update recipe
+    return await prisma.recipe.update({
+      where: {
+        id,
+      },
+      data: {
+        ...recipe,
+      },
+    });
+  },
+  deleteRecipe: async (
+    _ = null,
+    { id }: { id: string },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
 
+    // Check if recipe exists
+    const recipeExists = await prisma.recipe.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        authorId: true,
+      },
+    });
 
+    if (!recipeExists) {
+      return {
+        code: 404,
+        message: "Recipe not found",
+      };
+    }
 
-[Apollo Server]: https://www.apollographql.com/docs/apollo-server/	"Apollo Server"
+    if (recipeExists?.authorId !== args?.id) {
+      return {
+        code: 403,
+        message: "You are not authorized to edit this recipe",
+      };
+    }
+
+    // Update recipe
+    return await prisma.recipe.delete({
+      where: {
+        id,
+      },
+    });
+  },
+  saveRecipe: async (
+    _ = null,
+    { id }: { id: string },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
+
+    // Check if recipe exists
+    const recipeExists = await prisma.recipe.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!recipeExists) {
+      return {
+        code: 404,
+        message: "Recipe not found",
+      };
+    }
+
+    await prisma.user.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        saved: {
+          connect: {
+            id: id,
+          },
+        },
+      },
+    });
+    return recipeExists;
+  },
+  unsaveRecipe: async (
+    _ = null,
+    { id }: { id: string },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
+
+    // Check if recipe exists
+    const recipeExists = await prisma.recipe.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    if (!recipeExists) {
+      return {
+        code: 404,
+        message: "Recipe not found",
+      };
+    }
+
+    await prisma.user.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        saved: {
+          disconnect: {
+            id: id,
+          },
+        },
+      },
+    });
+    return recipeExists;
+  },
+};
+```
+
+Here is the code in `step`:
+
+```ts
+import { prisma } from "../../app";
+
+export default {
+  createStep: async (
+    _ = null,
+    {
+      recipe,
+      step,
+    }: { recipe: string; step: { name?: string; content: string } },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
+
+    // Check if recipe exists
+    const recipeExists = await prisma.recipe.findMany({
+      where: {
+        id: recipe,
+        author: {
+          id: args.id,
+        },
+      },
+    });
+
+    if (recipeExists.length === 0) {
+      return {
+        code: 404,
+        message: "Recipe not found",
+      };
+    }
+
+    // Create step
+    return await prisma.step.create({
+      data: {
+        ...step,
+        recipe: {
+          connect: {
+            id: recipe,
+          },
+        },
+      },
+    });
+  },
+  editStep: async (
+    _ = null,
+    { id, step }: { id: string; step: { name?: string; content: string } },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
+
+    // Check if step exists
+    const recipeExists = await prisma.step.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        recipe: {
+          select: {
+            authorId: true,
+          },
+        },
+      },
+    });
+
+    if (!recipeExists) {
+      return {
+        code: 404,
+        message: "Step not found",
+      };
+    }
+
+    if (recipeExists?.recipe?.authorId !== args?.id) {
+      return {
+        code: 403,
+        message: "You are not authorized to edit this step",
+      };
+    }
+
+    // Update step
+    return await prisma.step.update({
+      where: {
+        id,
+      },
+      data: {
+        ...step,
+      },
+    });
+  },
+  deleteStep: async (
+    _ = null,
+    { id }: { id: string },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
+
+    // Check if step exists
+    const recipeExists = await prisma.step.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        recipe: {
+          select: {
+            authorId: true,
+          },
+        },
+      },
+    });
+
+    if (!recipeExists) {
+      return {
+        code: 404,
+        message: "Step not found",
+      };
+    }
+
+    if (recipeExists?.recipe?.authorId !== args?.id) {
+      return {
+        code: 403,
+        message: "You are not authorized to edit this step",
+      };
+    }
+
+    // Update step
+    return await prisma.step.delete({
+      where: {
+        id,
+      },
+    });
+  },
+};
+```
+
+Here is `ingredient`:
+
+```ts
+import { prisma } from "../../app";
+
+export default {
+  createIngredient: async (
+    _ = null,
+    {
+      recipe,
+      ingredient,
+    }: { recipe: string; ingredient: { name: string; quantity: string } },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
+
+    // Check if recipe exists
+    const recipeExists = await prisma.recipe.findMany({
+      where: {
+        id: recipe,
+        author: {
+          id: args.id,
+        },
+      },
+    });
+
+    if (recipeExists.length === 0) {
+      return {
+        code: 404,
+        message: "Recipe not found",
+      };
+    }
+
+    // Create ingredient
+    return await prisma.ingredient.create({
+      data: {
+        ...ingredient,
+        recipe: {
+          connect: {
+            id: recipe,
+          },
+        },
+      },
+    });
+  },
+  editIngredient: async (
+    _ = null,
+    {
+      id,
+      ingredient,
+    }: { id: string; ingredient: { name: string; quantity: string } },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
+
+    // Check if ingredient exists
+    const recipeExists = await prisma.ingredient.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        recipe: {
+          select: {
+            authorId: true,
+          },
+        },
+      },
+    });
+
+    if (!recipeExists) {
+      return {
+        code: 404,
+        message: "Ingredient not found",
+      };
+    }
+
+    if (recipeExists?.recipe?.authorId !== args?.id) {
+      return {
+        code: 403,
+        message: "You are not authorized to edit this ingredient",
+      };
+    }
+
+    // Update ingredient
+    return await prisma.ingredient.update({
+      where: {
+        id,
+      },
+      data: {
+        ...ingredient,
+      },
+    });
+  },
+  deleteIngredient: async (
+    _ = null,
+    { id }: { id: string },
+    args: { id: string }
+  ) => {
+    // Check if user is authenticated
+    if (!args.id) {
+      return {
+        code: 401,
+        message: "You must be logged in to perform this action",
+      };
+    }
+
+    // Check if ingredient exists
+    const recipeExists = await prisma.ingredient.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        recipe: {
+          select: {
+            authorId: true,
+          },
+        },
+      },
+    });
+
+    if (!recipeExists) {
+      return {
+        code: 404,
+        message: "Ingredient not found",
+      };
+    }
+
+    if (recipeExists?.recipe?.authorId !== args?.id) {
+      return {
+        code: 403,
+        message: "You are not authorized to edit this ingredient",
+      };
+    }
+
+    // Update ingredient
+    return await prisma.ingredient.delete({
+      where: {
+        id,
+      },
+    });
+  },
+};
+```
+
+There are also resolvers for individual fields, they sit in the `src/schema/` folder. There are two files `recipe. ts`
+and `user.ts`. Here is the `recipe.ts`:
+
+```ts
+import { prisma } from "../app";
+
+export default {
+  steps: async (
+    parent: any,
+    { take, from, sort }: { take: number; from: string; sort: any }
+  ) => {
+    return await prisma.step.findMany({
+      where: {
+        recipe: {
+          id: parent.id,
+        },
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+  ingredients: async (
+    parent: any,
+    { take, from, sort }: { take: number; from: string; sort: any }
+  ) => {
+    return await prisma.ingredient.findMany({
+      where: {
+        recipe: {
+          id: parent.id,
+        },
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+  savedBy: async (
+    parent: any,
+    { take, from, sort }: { take: number; from: string; sort: any }
+  ) => {
+    return await prisma.user.findMany({
+      where: {
+        saved: {
+          some: {
+            id: parent.id,
+          },
+        },
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+};
+```
+
+And here is the `user.ts`:
+
+```ts
+import { prisma } from "../app";
+
+export default {
+  recipes: async (
+    parent: any,
+    { take, from, sort }: { take: number; from: string; sort: any }
+  ) => {
+    return await prisma.recipe.findMany({
+      where: {
+        authorId: parent.id,
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+
+  savedRecipes: async (
+    parent: any,
+    { take, from, sort }: { take: number; from: string; sort: any }
+  ) => {
+    return await prisma.recipe.findMany({
+      where: {
+        savedBy: {
+          some: {
+            id: parent.id,
+          },
+        },
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+
+  followers: async (
+    parent: any,
+    { take, from, sort }: { take: number; from: string; sort: any }
+  ) => {
+    return await prisma.user.findMany({
+      where: {
+        following: {
+          some: {
+            id: parent.id,
+          },
+        },
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+
+  following: async (
+    parent: any,
+    { take, from, sort }: { take: number; from: string; sort: any }
+  ) => {
+    return await prisma.user.findMany({
+      where: {
+        followers: {
+          some: {
+            id: parent.id,
+          },
+        },
+      },
+      take,
+      cursor: from ? { id: from } : undefined,
+      orderBy: sort,
+    });
+  },
+};
+```
+
+## Testing
+
