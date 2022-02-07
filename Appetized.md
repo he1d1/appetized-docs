@@ -221,7 +221,7 @@ features, but requires someone to send requests in the terminal or API client, w
 ### Success Criteria
 
 | Module   | Reference | Criteria                                                                                   | Justification                                                                        | Testing                                                                                                                              |
-|----------|-----------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| -------- | --------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | Database | 1.1.1     | Database has a table containing recipes.                                                   | Allows the storage of recipes so they can be accessed by other users.                | Can check with SQL if the table has been created.                                                                                    |
 |          | 1.1.2     | The database contains a users table.                                                       | Allows for authentication to be developed.                                           | Can check with SQL if the table has been created.                                                                                    |
 |          | 1.1.3     | There is a table containing ratings for recipes.                                           | Makes it so the recipes can be better sorted to make users receive better recipes.   | Can check with SQL if the table has been created.                                                                                    |
@@ -322,56 +322,56 @@ will be exported, so it can be accessed in other file.
 The schema itself also falls under this header. There will be quite a few tables:
 
 - `users`: This table will contain all the users that are registered in the application.
-    - `id`: This is the primary key for the table. (Unique string)
-    - `name`: This is the name of the user. (Optional string)
-    - `email`: This is the email of the user. (Unique string)
-    - `password`: This is a hash of the user's password. (String)
-    - `profilePicture`: This is the URL of the user's profile picture. (Optional Image)
-    - `createdAt`: This is the date the user was created. (Date)
-    - `emailVerified`: This is a boolean that indicates whether the user has verified their email. (Boolean)
-    - `recipes`: This is a list of recipes that the user has created. (List of Recipe)
-    - `saved`: This is a list of recipes that the user has saved. (List of Recipe)
-    - `following`: This is a list of users that the user is following. (List of User)
-    - `followers`: This is a list of users that are following the user. (List of User)
-    - `iat`: This is the date that the most recent valid authentication token was issued. (Date)
+  - `id`: This is the primary key for the table. (Unique string)
+  - `name`: This is the name of the user. (Optional string)
+  - `email`: This is the email of the user. (Unique string)
+  - `password`: This is a hash of the user's password. (String)
+  - `profilePicture`: This is the URL of the user's profile picture. (Optional Image)
+  - `createdAt`: This is the date the user was created. (Date)
+  - `emailVerified`: This is a boolean that indicates whether the user has verified their email. (Boolean)
+  - `recipes`: This is a list of recipes that the user has created. (List of Recipe)
+  - `saved`: This is a list of recipes that the user has saved. (List of Recipe)
+  - `following`: This is a list of users that the user is following. (List of User)
+  - `followers`: This is a list of users that are following the user. (List of User)
+  - `iat`: This is the date that the most recent valid authentication token was issued. (Date)
 - `recipes`: This table will contain all the recipes that are uploaded by the users.
-    - `id` This is the primary key for the table. (Unique string)
-    - `name` This is the title of the recipe. (String)
-    - `author` This is the account that created the recipe. (User)
-    - `authorId` This is the ID of the account that created the recipe. (String)
-    - `description` This is the description of the recipe. (Optional string)
-    - `image` This is an image of the recipe. (Optional Image)
-    - `imageId` This is the ID of the image. (Unique string)
-    - `createdAt` This is the date the recipe was created. (Date)
-    - `steps` This is a list of steps that make up the recipe. (List of Step)
-    - `category` This is the category (For example: breakfast, starter, etc.). (Optional string)
-    - `cuisine` This is the cuisine of the recipe. (Optional string)
-    - `ingredients` This is a list of ingredients that are used in the recipe. (List of Ingredient)
-    - `cookTime` This is the amount of time it takes to cook the recipe. (Optional integer)
-    - `prepTime` This is the amount of time it takes to prepare the recipe. (Optional integer)
-    - `savedBy` This is a list of users that have saved the recipe. (List of User)
+  - `id` This is the primary key for the table. (Unique string)
+  - `name` This is the title of the recipe. (String)
+  - `author` This is the account that created the recipe. (User)
+  - `authorId` This is the ID of the account that created the recipe. (String)
+  - `description` This is the description of the recipe. (Optional string)
+  - `image` This is an image of the recipe. (Optional Image)
+  - `imageId` This is the ID of the image. (Unique string)
+  - `createdAt` This is the date the recipe was created. (Date)
+  - `steps` This is a list of steps that make up the recipe. (List of Step)
+  - `category` This is the category (For example: breakfast, starter, etc.). (Optional string)
+  - `cuisine` This is the cuisine of the recipe. (Optional string)
+  - `ingredients` This is a list of ingredients that are used in the recipe. (List of Ingredient)
+  - `cookTime` This is the amount of time it takes to cook the recipe. (Optional integer)
+  - `prepTime` This is the amount of time it takes to prepare the recipe. (Optional integer)
+  - `savedBy` This is a list of users that have saved the recipe. (List of User)
 - `ingredients`: This table will contain all the ingredients that are used in the recipes.
-    - `id` This is the primary key for the table. (Unique string)
-    - `name` This is the name of the ingredient. (String)
-    - `quantity` This is the quantity of the ingredient. (String)
-    - `recipe` This is the recipe that the ingredient is used in. (Recipe)
-    - `recipeId` This is the ID of the recipe that the ingredient is used in. (String)
+  - `id` This is the primary key for the table. (Unique string)
+  - `name` This is the name of the ingredient. (String)
+  - `quantity` This is the quantity of the ingredient. (String)
+  - `recipe` This is the recipe that the ingredient is used in. (Recipe)
+  - `recipeId` This is the ID of the recipe that the ingredient is used in. (String)
 - `images`: This table will contain all the images that are used across the solution.
-    - `id` This is the primary key for the table. (Unique string)
-    - `url` This is the URL of the image. (String)
-    - `recipe` This is the recipe that the image is used in. (Optional recipe)
-    - `step` This is the step that the image is used in. (Optional step)
-    - `profile` This is the profile that the image is used in. (Optional User)
-    - `userId` This is the ID of the user's profile that the image is used in. (Optional string)
+  - `id` This is the primary key for the table. (Unique string)
+  - `url` This is the URL of the image. (String)
+  - `recipe` This is the recipe that the image is used in. (Optional recipe)
+  - `step` This is the step that the image is used in. (Optional step)
+  - `profile` This is the profile that the image is used in. (Optional User)
+  - `userId` This is the ID of the user's profile that the image is used in. (Optional string)
 - `steps`: This table will contain each step of the recipe.
-    - `id` This is the primary key for the table. (Unique string)
-    - `name` This is the name of the step. (Optional string)
-    - `createdAt` This is the date the step was created. (Date)
-    - `content` This is the content of the step. (String)
-    - `image` This is an image of the step. (Optional Image)
-    - `imageId` This is the ID of the image. (Optional string)
-    - `recipe` This is the recipe that the step is used in. (Recipe)
-    - `recipeId` This is the ID of the recipe that the step is used in. (String)
+  - `id` This is the primary key for the table. (Unique string)
+  - `name` This is the name of the step. (Optional string)
+  - `createdAt` This is the date the step was created. (Date)
+  - `content` This is the content of the step. (String)
+  - `image` This is an image of the step. (Optional Image)
+  - `imageId` This is the ID of the image. (Optional string)
+  - `recipe` This is the recipe that the step is used in. (Recipe)
+  - `recipeId` This is the ID of the recipe that the step is used in. (String)
 
 ### Validation
 
@@ -563,7 +563,7 @@ we will need to create a Docker Compose file. This will be named `docker-compose
 the project. The file will look like this:
 
 ```yml
-version: '3'
+version: "3"
 
 services:
   db:
@@ -590,7 +590,7 @@ $ sudo docker exec -it ecf3bb60f406 mysql -p
 I then enter the password for the database (`test`) and I can run the command `show databases;` to check that the
 database has been created.
 
-```bash 
+```bash
 mysql> show databases;
 +--------------------+
 | Database           |
@@ -609,32 +609,593 @@ tests. This can be placed in the scripts section of the `package.json` file. The
 
 ```json
 "scripts": {
-  "test": "docker-compose up -d && dotenv -e .env.test nyc ts-mocha ./test/**.test.ts  && docker-compose down"
+"test": "docker-compose up -d && pnpm migrate:test && dotenv -e .env.test nyc --include=['src/schema/*.ts'] ts-mocha ./test/**.test.ts  && docker-compose down",
+"migrate:test": "dotenv -e .env.test -- npx prisma migrate dev --name test"
 }
 ```
 
 I then need to create a `.env.test` file. This file will contain the database connection information.
 
-Now I can create the file `test/prisma.test.ts` and start writing the tests. The file needs to have two funcitons that
-run before and after each test. These will create the testing suite and make sure the database has been cleared.
+Now I can create the file `test/prisma.test.ts` and start writing the tests. This file will contain tests written with
+the mocha framework, alongside chai assertions. To install mocha, I can run:
+
+```bash
+$ pnpm i -D mocha chai @types/mocha @types/chai ts-node dotenv-cli nyc
+```
+
+The `ts-node` and `dotenv-cli` packages are used to run the tests. The `dotenv-cli` package is used to load
+the `.env.test` and `.env` files, depending on if the test is being run in a development or test environment. The
+`ts-node` package is used to run the tests in TypeScript. The `nyc` package is used to report the coverage of the tests.
+
+Now to the tests themselves, they will each execute a CRUD operation on the database, 3 for each model. Here they are:
+
+```ts
+import prisma from "../src/prisma";
+import { expect } from "chai";
+
+describe("Prisma", function () {
+  describe("user", function () {
+    beforeEach(async () => {
+      // Clear the database
+      await prisma.image.deleteMany({});
+      await prisma.ingredient.deleteMany({});
+      await prisma.step.deleteMany({});
+      await prisma.recipe.deleteMany({});
+      await prisma.user.deleteMany({});
+
+      // Create a test suite
+      await prisma.user.createMany({
+        data: [
+          {
+            email: "lu@developer.lu",
+            password: "password",
+            name: "Lu",
+            username: "hiluw",
+            emailVerified: false,
+          },
+          {
+            email: "heidi@developer.lu",
+            password: "password",
+            name: "Heidi",
+            username: "dee",
+            emailVerified: true,
+          },
+        ],
+      });
+    });
+
+    afterEach(async () => {
+      await prisma.image.deleteMany({});
+      await prisma.ingredient.deleteMany({});
+      await prisma.step.deleteMany({});
+      await prisma.recipe.deleteMany({});
+      await prisma.user.deleteMany({});
+    });
+
+    it("should create a new user", async function () {
+      await prisma.user.create({
+        data: {
+          name: "John",
+          username: "xXJohnXx",
+          email: "john@example.com",
+          password: "password",
+          emailVerified: true,
+        },
+      });
+
+      const users = await prisma.user.findMany({});
+
+      expect(users).to.have.length(3);
+    });
+
+    it("should edit a user", async function () {
+      const user = await prisma.user.findUnique({
+        where: {
+          username: "hiluw",
+        },
+      });
+
+      const { id } = await prisma.user.update({
+        where: {
+          id: user?.id,
+        },
+        data: {
+          username: "aoeu",
+        },
+      });
+
+      const updatedUser = await prisma.user.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      expect(updatedUser?.username).to.equal("aoeu");
+    });
+    it("should delete a user", async function () {
+      const user = await prisma.user.findUnique({
+        where: {
+          username: "hiluw",
+        },
+      });
+
+      await prisma.user.delete({
+        where: {
+          id: user?.id,
+        },
+      });
+
+      const users = await prisma.user.findMany({});
+
+      expect(users).to.have.length(1);
+    });
+  });
+  describe("recipe", function () {
+    beforeEach(async () => {
+      // Clear the database
+      await prisma.image.deleteMany({});
+      await prisma.ingredient.deleteMany({});
+      await prisma.step.deleteMany({});
+      await prisma.recipe.deleteMany({});
+      await prisma.user.deleteMany({});
+
+      // Create a test suite
+      await prisma.user.createMany({
+        data: [
+          {
+            email: "lu@developer.lu",
+            password: "password",
+            name: "Lu",
+            username: "hiluw",
+            emailVerified: false,
+          },
+          {
+            email: "heidi@developer.lu",
+            password: "password",
+            name: "Heidi",
+            username: "dee",
+            emailVerified: true,
+          },
+        ],
+      });
+
+      await prisma.recipe.create({
+        data: {
+          name: "Bacon and Eggs",
+          description: "A classic",
+          author: {
+            connect: {
+              username: "hiluw",
+            },
+          },
+        },
+      });
+      await prisma.recipe.create({
+        data: {
+          name: "Sausage and Beans",
+          description: "Another classic",
+          author: {
+            connect: {
+              username: "dee",
+            },
+          },
+        },
+      });
+    });
+
+    afterEach(async () => {
+      await prisma.image.deleteMany({});
+      await prisma.ingredient.deleteMany({});
+      await prisma.step.deleteMany({});
+      await prisma.recipe.deleteMany({});
+      await prisma.user.deleteMany({});
+    });
+
+    it("should create a new recipe", async function () {
+      await prisma.recipe.create({
+        data: {
+          name: "Bacon and Eggs",
+          description: "A classic",
+          author: {
+            connect: {
+              username: "hiluw",
+            },
+          },
+        },
+      });
+
+      const recipes = await prisma.recipe.findMany({});
+      expect(recipes).to.have.length(3);
+    });
+    it("should edit a recipe", async function () {
+      const recipe = await prisma.recipe.findFirst({});
+
+      const { id } = await prisma.recipe.update({
+        where: {
+          id: recipe?.id,
+        },
+        data: {
+          name: "Bacon and Beans",
+        },
+      });
+
+      const updatedRecipe = await prisma.recipe.findUnique({
+        where: {
+          id,
+        },
+      });
+
+      expect(updatedRecipe?.name).to.equal("Bacon and Beans");
+    });
+    it("should delete a recipe", async function () {
+      const recipe = await prisma.recipe.findFirst({});
+
+      await prisma.recipe.delete({
+        where: {
+          id: recipe?.id,
+        },
+      });
+
+      const recipes = await prisma.recipe.findMany({});
+
+      expect(recipes).to.have.length(1);
+    });
+  });
+  describe("step", function () {
+    beforeEach(async () => {
+      // Clear the database
+      await prisma.image.deleteMany({});
+      await prisma.ingredient.deleteMany({});
+      await prisma.step.deleteMany({});
+      await prisma.recipe.deleteMany({});
+      await prisma.user.deleteMany({});
+
+      // Create a test suite
+      await prisma.user.createMany({
+        data: [
+          {
+            email: "lu@developer.lu",
+            password: "password",
+            name: "Lu",
+            username: "hiluw",
+            emailVerified: false,
+          },
+          {
+            email: "heidi@developer.lu",
+            password: "password",
+            name: "Heidi",
+            username: "dee",
+            emailVerified: true,
+          },
+        ],
+      });
+
+      await prisma.recipe.create({
+        data: {
+          name: "Bacon and Eggs",
+          description: "A classic",
+          author: {
+            connect: {
+              username: "hiluw",
+            },
+          },
+        },
+      });
+      await prisma.recipe.create({
+        data: {
+          name: "Sausage and Beans",
+          description: "Another classic",
+          author: {
+            connect: {
+              username: "dee",
+            },
+          },
+        },
+      });
+    });
+
+    afterEach(async () => {
+      await prisma.image.deleteMany({});
+      await prisma.ingredient.deleteMany({});
+      await prisma.step.deleteMany({});
+      await prisma.recipe.deleteMany({});
+      await prisma.user.deleteMany({});
+    });
+
+    it("should create a new step", async function () {
+      const [{ id }] = await prisma.recipe.findMany({});
+
+      await prisma.step.create({
+        data: {
+          content: "Step 1",
+          recipe: {
+            connect: { id },
+          },
+        },
+      });
+
+      const steps = await prisma.step.findMany({});
+      expect(steps).to.have.length(1);
+    });
+
+    it("should edit a step", async function () {
+      const [{ id: recipeId }] = await prisma.recipe.findMany({});
+
+      // create the step
+      const step = await prisma.step.create({
+        data: {
+          content: "Step 1",
+          recipe: {
+            connect: {
+              id: recipeId,
+            },
+          },
+        },
+      });
+
+      const { id: stepId } = await prisma.step.update({
+        where: {
+          id: step?.id,
+        },
+        data: {
+          content: "Step 2",
+        },
+      });
+
+      const updatedStep = await prisma.step.findUnique({
+        where: {
+          id: stepId,
+        },
+      });
+
+      expect(updatedStep?.content).to.equal("Step 2");
+    });
+    it("should delete a step", async function () {
+      const [{ id: recipeId }] = await prisma.recipe.findMany({});
+
+      // create the step
+      const step = await prisma.step.create({
+        data: {
+          content: "Step 1",
+          recipe: {
+            connect: {
+              id: recipeId,
+            },
+          },
+        },
+      });
+
+      await prisma.step.delete({
+        where: {
+          id: step?.id,
+        },
+      });
+
+      const steps = await prisma.step.findMany({});
+      expect(steps).to.have.length(0);
+    });
+  });
+  describe("ingredient", function () {
+    beforeEach(async () => {
+      // Clear the database
+      await prisma.image.deleteMany({});
+      await prisma.ingredient.deleteMany({});
+      await prisma.step.deleteMany({});
+      await prisma.recipe.deleteMany({});
+      await prisma.user.deleteMany({});
+
+      // Create a test suite
+      await prisma.user.createMany({
+        data: [
+          {
+            email: "lu@developer.lu",
+            password: "password",
+            name: "Lu",
+            username: "hiluw",
+            emailVerified: false,
+          },
+          {
+            email: "heidi@developer.lu",
+            password: "password",
+            name: "Heidi",
+            username: "dee",
+            emailVerified: true,
+          },
+        ],
+      });
+
+      await prisma.recipe.create({
+        data: {
+          name: "Bacon and Eggs",
+          description: "A classic",
+          author: {
+            connect: {
+              username: "hiluw",
+            },
+          },
+        },
+      });
+      await prisma.recipe.create({
+        data: {
+          name: "Sausage and Beans",
+          description: "Another classic",
+          author: {
+            connect: {
+              username: "dee",
+            },
+          },
+        },
+      });
+    });
+
+    afterEach(async () => {
+      await prisma.image.deleteMany({});
+      await prisma.ingredient.deleteMany({});
+      await prisma.step.deleteMany({});
+      await prisma.recipe.deleteMany({});
+      await prisma.user.deleteMany({});
+    });
+
+    it("should create a new ingredient", async function () {
+      const [{ id }] = await prisma.recipe.findMany({});
+
+      await prisma.ingredient.create({
+        data: {
+          name: "Bacon",
+          quantity: "1",
+          recipe: {
+            connect: { id },
+          },
+        },
+      });
+
+      const ingredient = await prisma.ingredient.findMany({});
+      expect(ingredient).to.have.length(1);
+    });
+
+    it("should edit an ingredient", async function () {
+      const [{ id: recipeId }] = await prisma.recipe.findMany({});
+
+      // create the step
+      const ingredient = await prisma.ingredient.create({
+        data: {
+          name: "Bacon",
+          quantity: "1",
+          recipe: {
+            connect: {
+              id: recipeId,
+            },
+          },
+        },
+      });
+
+      const { id: ingredientId } = await prisma.ingredient.update({
+        where: {
+          id: ingredient?.id,
+        },
+        data: {
+          name: "Crispy Bacon",
+        },
+      });
+
+      const updatedStep = await prisma.step.findUnique({
+        where: {
+          id: ingredientId,
+        },
+      });
+
+      expect(updatedStep?.content).to.equal("Crispy Bacon");
+    });
+    it("should delete an ingredient", async function () {
+      const [{ id: recipeId }] = await prisma.recipe.findMany({});
+
+      // create the step
+      const ingredient = await prisma.ingredient.create({
+        data: {
+          name: "Bacon",
+          quantity: "1",
+          recipe: {
+            connect: {
+              id: recipeId,
+            },
+          },
+        },
+      });
+
+      await prisma.ingredient.delete({
+        where: {
+          id: ingredient?.id,
+        },
+      });
+
+      const ingredients = await prisma.ingredient.findMany({});
+      expect(ingredients).to.have.length(0);
+    });
+  });
+});
+```
+
+Now I can run the tests to see if everything works.
+
+```bash
+$ sudo pnpm test
+```
+
+The reason I used the `sudo` command is because starting up the database requires superuser privileges. The result of
+that command looks like this.
+
+```bash
+  Prisma
+    user
+      ✔ should create a new user
+      ✔ should edit a user
+      ✔ should delete a user
+    recipe
+      ✔ should create a new recipe
+      ✔ should edit a recipe
+      ✔ should delete a recipe
+    step
+      ✔ should create a new step
+      ✔ should edit a step
+      ✔ should delete a step
+    ingredient
+      ✔ should create a new ingredient
+      1) should edit an ingredient
+      ✔ should delete an ingredient
 
 
+  11 passing (575ms)
+  1 failing
+
+  1) Prisma
+       ingredient
+         should edit an ingredient:
+     AssertionError: expected undefined to equal 'Crispy Bacon'
+      at Context.<anonymous> (test/prisma.test.ts:455:36)
+
+
+
+-----------|---------|----------|---------|---------|-------------------
+File       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+-----------|---------|----------|---------|---------|-------------------
+All files  |     100 |      100 |     100 |     100 |
+ prisma.ts |     100 |      100 |     100 |     100 |
+-----------|---------|----------|---------|---------|-------------------
+ ELIFECYCLE  Test failed. See above for more details.
+
+```
+
+As you can see, one of the tests failed. I can see that the `should edit an ingredient` test failed because the test
+case was written incorrectly. I have updated a part of that test case to make it pass:
+
+```ts
+const updatedIngredient = await prisma.ingredient.findUnique({
+  where: {
+    id: ingredientId,
+  },
+});
+
+expect(updatedIngredient?.name).to.equal("Crispy Bacon");
+```
+
+Now if I run the tests again, I can see that the test case passed. All the tests have now passed meaning that the code
+is working as expected, as a result, the sprint is complete, so the code can be committed to the repository.
 
 ## Evaluation
 
 This sprint has been successfully completed, here are the success criteria that have been finished:
 
 | Reference | Criteria                                                           |     Testing      | Completion |
-|:---------:|--------------------------------------------------------------------|:----------------:|:----------:|
-|   1.1.1   | Database has a table containing recipes.                           | All tests passed |     ✅      |
-|   1.1.2   | The database contains a users table.                               | All tests passed |     ✅      |      
-|   1.1.3   | There is a table containing ratings for recipes.                   | All tests passed |     ✅      |
-|   1.1.4   | A table containing users following other users exists.             | All tests passed |     ✅      |
-|   1.1.5   | A table containing ingredients exists.                             | All tests passed |     ✅      |
-|   1.1.6   | A table containing users saving a recipe exists.                   | All tests passed |     ✅      |
-|   1.1.7   | There is a table containing images.                                | All tests passed |     ✅      |
-|   1.1.8   | There is a table including steps of a recipe.                      | All tests passed |     ✅      |
-|   2.2.2   | The location of uploaded images are stored in the site’s database. |       N/A        |     ❎      |
+| :-------: | ------------------------------------------------------------------ | :--------------: | :--------: |
+|   1.1.1   | Database has a table containing recipes.                           | All tests passed |     ✅     |
+|   1.1.2   | The database contains a users table.                               | All tests passed |     ✅     |
+|   1.1.3   | There is a table containing ratings for recipes.                   | All tests passed |     ✅     |
+|   1.1.4   | A table containing users following other users exists.             | All tests passed |     ✅     |
+|   1.1.5   | A table containing ingredients exists.                             | All tests passed |     ✅     |
+|   1.1.6   | A table containing users saving a recipe exists.                   | All tests passed |     ✅     |
+|   1.1.7   | There is a table containing images.                                | All tests passed |     ✅     |
+|   1.1.8   | There is a table including steps of a recipe.                      | All tests passed |     ✅     |
+|   2.2.2   | The location of uploaded images are stored in the site’s database. |       N/A        |     ❎     |
 
 All of this sprint’s finished success criteria are similar, so I will discuss them as one. They have been successful, as
 the database is now up and running along with the database client. Now the database has been created, it will be
@@ -688,7 +1249,7 @@ available to the client, and the resolvers are functions that process the reques
 There are two different ways GraphQL is being implemented in TypeScript, one is using the schema-first approach, and the
 other is using a code-first approach. Schema driven development is the first way GraphQL was implemented, and is more
 easily readable and writable. Code-first development is more difficult to read and write, but tends to be more type
-safe. I am going to go with the schema-first approach, because the extra time spent on writing the more type safe  
+safe. I am going to go with the schema-first approach, because the extra time spent on writing the more type safe
 code-first schema could instead be used on writing type declarations, which achieves the same purpose, but is more
 readable.
 
@@ -756,7 +1317,7 @@ client. The fields that I am going to include are:
   recipe.
 
 The resolvers for `Image` will not be implemented in this sprint. This is because image handling is being implemented
-later on in the project. However, I think that creating the type definition for `Image`  should be done now, so that I
+later on in the project. However, I think that creating the type definition for `Image` should be done now, so that I
 don't have to implement breaking changes in the schema later on.
 
 The next type definition is going to be `Recipe`. This will contain the information about a recipe on the site. The
@@ -880,34 +1441,34 @@ Next in the type definitions are the different input types, these are used to de
 type definitions.
 
 - `CreateUserInput`: this is the input type for the `createUser` mutation. It has the following fields:
-    - `name`: this is the name of the user.
-    - `email`: this is the email of the user.
-    - `username`: this is the username of the user.
-    - `password`: this is the password of the user.
+  - `name`: this is the name of the user.
+  - `email`: this is the email of the user.
+  - `username`: this is the username of the user.
+  - `password`: this is the password of the user.
 - `EditUserInput`: The username and password will not be editable by the user at this stage of the project. I am going
   to add the ability to do this when adding the email functionality.
-    - `name`: this is the name of the user.
-    - `username`: this is the username of the user.
+  - `name`: this is the name of the user.
+  - `username`: this is the username of the user.
 - `CreateRecipeInput`: this is the input type for the `createRecipe` mutation. It has the following fields:
-    - `name`: this is the title of the recipe.
-    - `description`: this is the description of the recipe.
-    - `category`: this is the category of the recipe.
-    - `cuisine`: this is the cuisine of the recipe.
-    - `cookTime`: this is the cook time of the recipe.
-    - `prepTime`: this is the prep time of the recipe.
+  - `name`: this is the title of the recipe.
+  - `description`: this is the description of the recipe.
+  - `category`: this is the category of the recipe.
+  - `cuisine`: this is the cuisine of the recipe.
+  - `cookTime`: this is the cook time of the recipe.
+  - `prepTime`: this is the prep time of the recipe.
 - `EditRecipeInput`: this is the input type for the `editRecipe` mutation. It has the following fields:
-    - `name`: this is the title of the recipe.
-    - `description`: this is the description of the recipe.
-    - `category`: this is the category of the recipe.
-    - `cuisine`: this is the cuisine of the recipe.
-    - `cookTime`: this is the cook time of the recipe.
-    - `prepTime`: this is the prep time of the recipe.
+  - `name`: this is the title of the recipe.
+  - `description`: this is the description of the recipe.
+  - `category`: this is the category of the recipe.
+  - `cuisine`: this is the cuisine of the recipe.
+  - `cookTime`: this is the cook time of the recipe.
+  - `prepTime`: this is the prep time of the recipe.
 - `StepInput`: this is the input type for the `createStep` mutation. It has the following fields:
-    - `name`: this is the name of the step.
-    - `content`: this is the actual message of the step.
+  - `name`: this is the name of the step.
+  - `content`: this is the actual message of the step.
 - `IngredientInput`: this is the input type for the `createIngredient` mutation. It has the following fields:
-    - `name`: this is the name of the ingredient.
-    - `quantity`: this is the quantity of the ingredient.
+  - `name`: this is the name of the ingredient.
+  - `quantity`: this is the quantity of the ingredient.
 - `UserSort`: this is used to sort an array of users. It will contain all the fields in the `User` type with an
   additional `_count` field. Each of the fields will either be of the type `Direction` or a different kind of sorting
   input.
@@ -1052,8 +1613,8 @@ resolvers. They will both have the same rules, here they are:
 ### Testing
 
 I will test this sprint with a combination of unit tests and integration tests. The unit tests will take place in the
-same way as the database client, in the `test/test.ts` file. The integration tests will be done by hand using Apollo
-Studio, a GraphQL client.
+same way as the database client, in the `test/index.test.ts` file. The integration tests will be done by hand using
+Apollo Studio, a GraphQL client.
 
 ## Development
 
@@ -1091,11 +1652,11 @@ new file called `src/server.ts`.
 Now `src/app.ts` will look like this:
 
 ```ts
-import { startApolloServer } from './server';
+import { startApolloServer } from "./server";
 import { config } from "dotenv";
-import { PrismaClient } from '@prisma/client';
-import resolvers from './schema/resolvers';
-import typeDefs from './schema/typeDefs';
+import { PrismaClient } from "@prisma/client";
+import resolvers from "./schema/resolvers";
+import typeDefs from "./schema/typeDefs";
 
 // Sets .env config as default.
 config();
@@ -1511,7 +2072,6 @@ export default gql`
     DESC
   }
 `;
-
 ```
 
 Now if I start the server and open the Apollo Playground, I can see the schema I just created. However, there is
@@ -1535,7 +2095,7 @@ Now I can edit the `package.json` file and change the `scripts` section to this:
     "start": "cross-env NODE_ENV=production ts-node src/app.ts",
     "dev": "cross-env NODE_ENV=development nodemon --exec ts-node src/app.ts",
     "build": "tsc --build",
-    "test": "mocha -r ts-node/register test/test.ts"
+    "test": "mocha -r ts-node/register test/index.test.ts"
   }
 }
 ```
@@ -3002,4 +3562,3 @@ export default {
 ```
 
 ## Testing
-
