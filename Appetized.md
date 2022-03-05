@@ -221,7 +221,7 @@ features, but requires someone to send requests in the terminal or API client, w
 ### Success Criteria
 
 | Module   | Reference | Criteria                                                                                   | Justification                                                                        | Testing                                                                                                                              |
-|----------|-----------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| -------- | --------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | Database | 1.1.1     | Database has a table containing recipes.                                                   | Allows the storage of recipes so they can be accessed by other users.                | Can check with SQL if the table has been created.                                                                                    |
 |          | 1.1.2     | The database contains a users table.                                                       | Allows for authentication to be developed.                                           | Can check with SQL if the table has been created.                                                                                    |
 |          | 1.1.3     | There is a table containing ratings for recipes.                                           | Makes it so the recipes can be better sorted to make users receive better recipes.   | Can check with SQL if the table has been created.                                                                                    |
@@ -322,56 +322,56 @@ will be exported, so it can be accessed in other file.
 The schema itself also falls under this header. There will be quite a few tables:
 
 - `users`: This table will contain all the users that are registered in the application.
-	- `id`: This is the primary key for the table. (Unique string)
-	- `name`: This is the name of the user. (Optional string)
-	- `email`: This is the email of the user. (Unique string)
-	- `password`: This is a hash of the user's password. (String)
-	- `profilePicture`: This is the URL of the user's profile picture. (Optional Image)
-	- `createdAt`: This is the date the user was created. (Date)
-	- `emailVerified`: This is a boolean that indicates whether the user has verified their email. (Boolean)
-	- `recipes`: This is a list of recipes that the user has created. (List of Recipe)
-	- `saved`: This is a list of recipes that the user has saved. (List of Recipe)
-	- `following`: This is a list of users that the user is following. (List of User)
-	- `followers`: This is a list of users that are following the user. (List of User)
-	- `iat`: This is the date that the most recent valid authentication token was issued. (Date)
+  - `id`: This is the primary key for the table. (Unique string)
+  - `name`: This is the name of the user. (Optional string)
+  - `email`: This is the email of the user. (Unique string)
+  - `password`: This is a hash of the user's password. (String)
+  - `profilePicture`: This is the URL of the user's profile picture. (Optional Image)
+  - `createdAt`: This is the date the user was created. (Date)
+  - `emailVerified`: This is a boolean that indicates whether the user has verified their email. (Boolean)
+  - `recipes`: This is a list of recipes that the user has created. (List of Recipe)
+  - `saved`: This is a list of recipes that the user has saved. (List of Recipe)
+  - `following`: This is a list of users that the user is following. (List of User)
+  - `followers`: This is a list of users that are following the user. (List of User)
+  - `iat`: This is the date that the most recent valid authentication token was issued. (Date)
 - `recipes`: This table will contain all the recipes that are uploaded by the users.
-	- `id` This is the primary key for the table. (Unique string)
-	- `name` This is the title of the recipe. (String)
-	- `author` This is the account that created the recipe. (User)
-	- `authorId` This is the ID of the account that created the recipe. (String)
-	- `description` This is the description of the recipe. (Optional string)
-	- `image` This is an image of the recipe. (Optional Image)
-	- `imageId` This is the ID of the image. (Unique string)
-	- `createdAt` This is the date the recipe was created. (Date)
-	- `steps` This is a list of steps that make up the recipe. (List of Step)
-	- `category` This is the category (For example: breakfast, starter, etc.). (Optional string)
-	- `cuisine` This is the cuisine of the recipe. (Optional string)
-	- `ingredients` This is a list of ingredients that are used in the recipe. (List of Ingredient)
-	- `cookTime` This is the amount of time it takes to cook the recipe. (Optional integer)
-	- `prepTime` This is the amount of time it takes to prepare the recipe. (Optional integer)
-	- `savedBy` This is a list of users that have saved the recipe. (List of User)
+  - `id` This is the primary key for the table. (Unique string)
+  - `name` This is the title of the recipe. (String)
+  - `author` This is the account that created the recipe. (User)
+  - `authorId` This is the ID of the account that created the recipe. (String)
+  - `description` This is the description of the recipe. (Optional string)
+  - `image` This is an image of the recipe. (Optional Image)
+  - `imageId` This is the ID of the image. (Unique string)
+  - `createdAt` This is the date the recipe was created. (Date)
+  - `steps` This is a list of steps that make up the recipe. (List of Step)
+  - `category` This is the category (For example: breakfast, starter, etc.). (Optional string)
+  - `cuisine` This is the cuisine of the recipe. (Optional string)
+  - `ingredients` This is a list of ingredients that are used in the recipe. (List of Ingredient)
+  - `cookTime` This is the amount of time it takes to cook the recipe. (Optional integer)
+  - `prepTime` This is the amount of time it takes to prepare the recipe. (Optional integer)
+  - `savedBy` This is a list of users that have saved the recipe. (List of User)
 - `ingredients`: This table will contain all the ingredients that are used in the recipes.
-	- `id` This is the primary key for the table. (Unique string)
-	- `name` This is the name of the ingredient. (String)
-	- `quantity` This is the quantity of the ingredient. (String)
-	- `recipe` This is the recipe that the ingredient is used in. (Recipe)
-	- `recipeId` This is the ID of the recipe that the ingredient is used in. (String)
+  - `id` This is the primary key for the table. (Unique string)
+  - `name` This is the name of the ingredient. (String)
+  - `quantity` This is the quantity of the ingredient. (String)
+  - `recipe` This is the recipe that the ingredient is used in. (Recipe)
+  - `recipeId` This is the ID of the recipe that the ingredient is used in. (String)
 - `images`: This table will contain all the images that are used across the solution.
-	- `id` This is the primary key for the table. (Unique string)
-	- `url` This is the URL of the image. (String)
-	- `recipe` This is the recipe that the image is used in. (Optional recipe)
-	- `step` This is the step that the image is used in. (Optional step)
-	- `profile` This is the profile that the image is used in. (Optional User)
-	- `userId` This is the ID of the user's profile that the image is used in. (Optional string)
+  - `id` This is the primary key for the table. (Unique string)
+  - `url` This is the URL of the image. (String)
+  - `recipe` This is the recipe that the image is used in. (Optional recipe)
+  - `step` This is the step that the image is used in. (Optional step)
+  - `profile` This is the profile that the image is used in. (Optional User)
+  - `userId` This is the ID of the user's profile that the image is used in. (Optional string)
 - `steps`: This table will contain each step of the recipe.
-	- `id` This is the primary key for the table. (Unique string)
-	- `name` This is the name of the step. (Optional string)
-	- `createdAt` This is the date the step was created. (Date)
-	- `content` This is the content of the step. (String)
-	- `image` This is an image of the step. (Optional Image)
-	- `imageId` This is the ID of the image. (Optional string)
-	- `recipe` This is the recipe that the step is used in. (Recipe)
-	- `recipeId` This is the ID of the recipe that the step is used in. (String)
+  - `id` This is the primary key for the table. (Unique string)
+  - `name` This is the name of the step. (Optional string)
+  - `createdAt` This is the date the step was created. (Date)
+  - `content` This is the content of the step. (String)
+  - `image` This is an image of the step. (Optional Image)
+  - `imageId` This is the ID of the image. (Optional string)
+  - `recipe` This is the recipe that the step is used in. (Recipe)
+  - `recipeId` This is the ID of the recipe that the step is used in. (String)
 
 ### Validation
 
@@ -635,8 +635,8 @@ Now to the tests themselves, they will each execute a CRUD operation on the data
 import prisma from "../src/prisma";
 import { expect } from "chai";
 
-describe("Prisma", function() {
-  describe("user", function() {
+describe("Prisma", function () {
+  describe("user", function () {
     beforeEach(async () => {
       // Clear the database
       await prisma.image.deleteMany({});
@@ -674,7 +674,7 @@ describe("Prisma", function() {
       await prisma.user.deleteMany({});
     });
 
-    it("should create a new user", async function() {
+    it("should create a new user", async function () {
       await prisma.user.create({
         data: {
           name: "John",
@@ -690,7 +690,7 @@ describe("Prisma", function() {
       expect(users).to.have.length(3);
     });
 
-    it("should edit a user", async function() {
+    it("should edit a user", async function () {
       const user = await prisma.user.findUnique({
         where: {
           username: "hiluw",
@@ -714,7 +714,7 @@ describe("Prisma", function() {
 
       expect(updatedUser?.username).to.equal("aoeu");
     });
-    it("should delete a user", async function() {
+    it("should delete a user", async function () {
       const user = await prisma.user.findUnique({
         where: {
           username: "hiluw",
@@ -732,7 +732,7 @@ describe("Prisma", function() {
       expect(users).to.have.length(1);
     });
   });
-  describe("recipe", function() {
+  describe("recipe", function () {
     beforeEach(async () => {
       // Clear the database
       await prisma.image.deleteMany({});
@@ -793,7 +793,7 @@ describe("Prisma", function() {
       await prisma.user.deleteMany({});
     });
 
-    it("should create a new recipe", async function() {
+    it("should create a new recipe", async function () {
       await prisma.recipe.create({
         data: {
           name: "Bacon and Eggs",
@@ -809,7 +809,7 @@ describe("Prisma", function() {
       const recipes = await prisma.recipe.findMany({});
       expect(recipes).to.have.length(3);
     });
-    it("should edit a recipe", async function() {
+    it("should edit a recipe", async function () {
       const recipe = await prisma.recipe.findFirst({});
 
       const { id } = await prisma.recipe.update({
@@ -829,7 +829,7 @@ describe("Prisma", function() {
 
       expect(updatedRecipe?.name).to.equal("Bacon and Beans");
     });
-    it("should delete a recipe", async function() {
+    it("should delete a recipe", async function () {
       const recipe = await prisma.recipe.findFirst({});
 
       await prisma.recipe.delete({
@@ -843,7 +843,7 @@ describe("Prisma", function() {
       expect(recipes).to.have.length(1);
     });
   });
-  describe("step", function() {
+  describe("step", function () {
     beforeEach(async () => {
       // Clear the database
       await prisma.image.deleteMany({});
@@ -904,7 +904,7 @@ describe("Prisma", function() {
       await prisma.user.deleteMany({});
     });
 
-    it("should create a new step", async function() {
+    it("should create a new step", async function () {
       const [{ id }] = await prisma.recipe.findMany({});
 
       await prisma.step.create({
@@ -920,7 +920,7 @@ describe("Prisma", function() {
       expect(steps).to.have.length(1);
     });
 
-    it("should edit a step", async function() {
+    it("should edit a step", async function () {
       const [{ id: recipeId }] = await prisma.recipe.findMany({});
 
       // create the step
@@ -952,7 +952,7 @@ describe("Prisma", function() {
 
       expect(updatedStep?.content).to.equal("Step 2");
     });
-    it("should delete a step", async function() {
+    it("should delete a step", async function () {
       const [{ id: recipeId }] = await prisma.recipe.findMany({});
 
       // create the step
@@ -977,7 +977,7 @@ describe("Prisma", function() {
       expect(steps).to.have.length(0);
     });
   });
-  describe("ingredient", function() {
+  describe("ingredient", function () {
     beforeEach(async () => {
       // Clear the database
       await prisma.image.deleteMany({});
@@ -1038,7 +1038,7 @@ describe("Prisma", function() {
       await prisma.user.deleteMany({});
     });
 
-    it("should create a new ingredient", async function() {
+    it("should create a new ingredient", async function () {
       const [{ id }] = await prisma.recipe.findMany({});
 
       await prisma.ingredient.create({
@@ -1055,7 +1055,7 @@ describe("Prisma", function() {
       expect(ingredient).to.have.length(1);
     });
 
-    it("should edit an ingredient", async function() {
+    it("should edit an ingredient", async function () {
       const [{ id: recipeId }] = await prisma.recipe.findMany({});
 
       // create the step
@@ -1088,7 +1088,7 @@ describe("Prisma", function() {
 
       expect(updatedStep?.content).to.equal("Crispy Bacon");
     });
-    it("should delete an ingredient", async function() {
+    it("should delete an ingredient", async function () {
       const [{ id: recipeId }] = await prisma.recipe.findMany({});
 
       // create the step
@@ -1188,16 +1188,16 @@ is working as expected, as a result, the sprint is complete, so the code can be 
 This sprint has been successfully completed, here are the success criteria that have been finished:
 
 | Reference | Criteria                                                           |     Testing      | Completion |
-|:---------:|--------------------------------------------------------------------|:----------------:|:----------:|
-|   1.1.1   | Database has a table containing recipes.                           | All tests passed |     ✅      |
-|   1.1.2   | The database contains a users table.                               | All tests passed |     ✅      |
-|   1.1.3   | There is a table containing ratings for recipes.                   | All tests passed |     ✅      |
-|   1.1.4   | A table containing users following other users exists.             | All tests passed |     ✅      |
-|   1.1.5   | A table containing ingredients exists.                             | All tests passed |     ✅      |
-|   1.1.6   | A table containing users saving a recipe exists.                   | All tests passed |     ✅      |
-|   1.1.7   | There is a table containing images.                                | All tests passed |     ✅      |
-|   1.1.8   | There is a table including steps of a recipe.                      | All tests passed |     ✅      |
-|   2.2.2   | The location of uploaded images are stored in the site’s database. |       N/A        |     ❎      |
+| :-------: | ------------------------------------------------------------------ | :--------------: | :--------: |
+|   1.1.1   | Database has a table containing recipes.                           | All tests passed |     ✅     |
+|   1.1.2   | The database contains a users table.                               | All tests passed |     ✅     |
+|   1.1.3   | There is a table containing ratings for recipes.                   | All tests passed |     ✅     |
+|   1.1.4   | A table containing users following other users exists.             | All tests passed |     ✅     |
+|   1.1.5   | A table containing ingredients exists.                             | All tests passed |     ✅     |
+|   1.1.6   | A table containing users saving a recipe exists.                   | All tests passed |     ✅     |
+|   1.1.7   | There is a table containing images.                                | All tests passed |     ✅     |
+|   1.1.8   | There is a table including steps of a recipe.                      | All tests passed |     ✅     |
+|   2.2.2   | The location of uploaded images are stored in the site’s database. |       N/A        |     ❎     |
 
 All of this sprint’s finished success criteria are similar, so I will discuss them as one. They have been successful, as
 the database is now up and running along with the database client. Now the database has been created, it will be
@@ -1443,34 +1443,34 @@ Next in the type definitions are the different input types, these are used to de
 type definitions.
 
 - `CreateUserInput`: this is the input type for the `createUser` mutation. It has the following fields:
-	- `name`: this is the name of the user.
-	- `email`: this is the email of the user.
-	- `username`: this is the username of the user.
-	- `password`: this is the password of the user.
+  - `name`: this is the name of the user.
+  - `email`: this is the email of the user.
+  - `username`: this is the username of the user.
+  - `password`: this is the password of the user.
 - `EditUserInput`: The username and password will not be editable by the user at this stage of the project. I am going
   to add the ability to do this when adding the email functionality.
-	- `name`: this is the name of the user.
-	- `username`: this is the username of the user.
+  - `name`: this is the name of the user.
+  - `username`: this is the username of the user.
 - `CreateRecipeInput`: this is the input type for the `createRecipe` mutation. It has the following fields:
-	- `name`: this is the title of the recipe.
-	- `description`: this is the description of the recipe.
-	- `category`: this is the category of the recipe.
-	- `cuisine`: this is the cuisine of the recipe.
-	- `cookTime`: this is the cook time of the recipe.
-	- `prepTime`: this is the prep time of the recipe.
+  - `name`: this is the title of the recipe.
+  - `description`: this is the description of the recipe.
+  - `category`: this is the category of the recipe.
+  - `cuisine`: this is the cuisine of the recipe.
+  - `cookTime`: this is the cook time of the recipe.
+  - `prepTime`: this is the prep time of the recipe.
 - `EditRecipeInput`: this is the input type for the `editRecipe` mutation. It has the following fields:
-	- `name`: this is the title of the recipe.
-	- `description`: this is the description of the recipe.
-	- `category`: this is the category of the recipe.
-	- `cuisine`: this is the cuisine of the recipe.
-	- `cookTime`: this is the cook time of the recipe.
-	- `prepTime`: this is the prep time of the recipe.
+  - `name`: this is the title of the recipe.
+  - `description`: this is the description of the recipe.
+  - `category`: this is the category of the recipe.
+  - `cuisine`: this is the cuisine of the recipe.
+  - `cookTime`: this is the cook time of the recipe.
+  - `prepTime`: this is the prep time of the recipe.
 - `StepInput`: this is the input type for the `createStep` mutation. It has the following fields:
-	- `name`: this is the name of the step.
-	- `content`: this is the actual message of the step.
+  - `name`: this is the name of the step.
+  - `content`: this is the actual message of the step.
 - `IngredientInput`: this is the input type for the `createIngredient` mutation. It has the following fields:
-	- `name`: this is the name of the ingredient.
-	- `quantity`: this is the quantity of the ingredient.
+  - `name`: this is the name of the ingredient.
+  - `quantity`: this is the quantity of the ingredient.
 - `UserSort`: this is used to sort an array of users. It will contain all the fields in the `User` type with an
   additional `_count` field. Each of the fields will either be of the type `Direction` or a different kind of sorting
   input.
@@ -3575,7 +3575,7 @@ import prisma from "../src/prisma";
 import { expect } from "chai";
 import resolvers from "../src/schema/resolvers";
 
-describe("Resolvers", function() {
+describe("Resolvers", function () {
   beforeEach(async () => {
     // Clear the database
     await prisma.image.deleteMany({});
@@ -3635,10 +3635,10 @@ describe("Resolvers", function() {
     await prisma.recipe.deleteMany({});
     await prisma.user.deleteMany({});
   });
-  describe("Mutation", function() {
-    describe("user", function() {
-      describe("createUser", function() {
-        it("should create user", async function() {
+  describe("Mutation", function () {
+    describe("user", function () {
+      describe("createUser", function () {
+        it("should create user", async function () {
           await resolvers.Mutation.createUser(null, {
             user: {
               name: "John",
@@ -3650,7 +3650,7 @@ describe("Resolvers", function() {
 
           expect(await prisma.user.findMany({})).to.have.length(3);
         });
-        it("should fail if username and email are both taken", async function() {
+        it("should fail if username and email are both taken", async function () {
           expect(
             await resolvers.Mutation.createUser(null, {
               user: {
@@ -3662,8 +3662,8 @@ describe("Resolvers", function() {
             })
           ).to.have.property("message", "Username and email already exists");
         });
-        describe("username", function() {
-          it("should fail if no username is entered", async function() {
+        describe("username", function () {
+          it("should fail if no username is entered", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3676,7 +3676,7 @@ describe("Resolvers", function() {
             ).to.have.property("message", "Username is required");
           });
           // unique
-          it("should fail if username is not unique", async function() {
+          it("should fail if username is not unique", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3690,7 +3690,7 @@ describe("Resolvers", function() {
           });
 
           // length
-          it("should fail if the username is less than 3 characters long", async function() {
+          it("should fail if the username is less than 3 characters long", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3706,7 +3706,7 @@ describe("Resolvers", function() {
             );
           });
 
-          it("should fail if the username is greater than 20 characters long", async function() {
+          it("should fail if the username is greater than 20 characters long", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3722,7 +3722,7 @@ describe("Resolvers", function() {
             );
           });
 
-          it("should fail if the username contains a capital letter", async function() {
+          it("should fail if the username contains a capital letter", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3737,7 +3737,7 @@ describe("Resolvers", function() {
               "Username must only contain lowercase letters, numbers and dashes"
             );
           });
-          it("should fail if the username contains something other than a lowercase letter, number or dash", async function() {
+          it("should fail if the username contains something other than a lowercase letter, number or dash", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3752,7 +3752,7 @@ describe("Resolvers", function() {
               "Username must only contain lowercase letters, numbers and dashes"
             );
           });
-          it("should fail if the username starts or ends with a dash", async function() {
+          it("should fail if the username starts or ends with a dash", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3768,9 +3768,9 @@ describe("Resolvers", function() {
             );
           });
         });
-        describe("email", function() {
+        describe("email", function () {
           // unique
-          it("should fail if email is not unique", async function() {
+          it("should fail if email is not unique", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3782,7 +3782,7 @@ describe("Resolvers", function() {
               })
             ).to.have.property("message", "Email already exists");
           });
-          it("should fail if email is not valid", async function() {
+          it("should fail if email is not valid", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3794,7 +3794,7 @@ describe("Resolvers", function() {
               })
             ).to.have.property("message", "Email is invalid");
           });
-          it("should fail if email is empty", async function() {
+          it("should fail if email is empty", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3806,7 +3806,7 @@ describe("Resolvers", function() {
               })
             ).to.have.property("message", "Email is required");
           });
-          it("should fail if email is greater than 100 characters", async function() {
+          it("should fail if email is greater than 100 characters", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3823,8 +3823,8 @@ describe("Resolvers", function() {
             );
           });
         });
-        describe("password", function() {
-          it("should fail if password is empty", async function() {
+        describe("password", function () {
+          it("should fail if password is empty", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3836,7 +3836,7 @@ describe("Resolvers", function() {
               })
             ).to.have.property("message", "Password is required");
           });
-          it("should fail if password is less than 8 characters long", async function() {
+          it("should fail if password is less than 8 characters long", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3851,7 +3851,7 @@ describe("Resolvers", function() {
               "Password must be at least 8 characters long"
             );
           });
-          it("should fail if password is greater than 100 characters long", async function() {
+          it("should fail if password is greater than 100 characters long", async function () {
             await expect(
               await resolvers.Mutation.createUser(null, {
                 user: {
@@ -3869,8 +3869,8 @@ describe("Resolvers", function() {
           });
         });
       });
-      describe("editUser", function() {
-        it("should edit the user", async function() {
+      describe("editUser", function () {
+        it("should edit the user", async function () {
           const { id: userId } = (await prisma.user.findUnique({
             where: { username: "hiluw" },
           })) ?? { id: "" };
@@ -3890,7 +3890,7 @@ describe("Resolvers", function() {
             )
           ).to.have.property("name", "John");
         });
-        it("should fail if user is not logged in", async function() {
+        it("should fail if user is not logged in", async function () {
           await expect(
             await resolvers.Mutation.editUser(
               null,
@@ -3904,9 +3904,9 @@ describe("Resolvers", function() {
             )
           ).to.have.property("message", "Not logged in");
         });
-        describe("username", function() {
+        describe("username", function () {
           // unique
-          it("should fail if username is not unique", async function() {
+          it("should fail if username is not unique", async function () {
             // find user
             const [{ id }] = await prisma.user.findMany({});
 
@@ -3925,7 +3925,7 @@ describe("Resolvers", function() {
           });
 
           // length
-          it("should fail if the username is less than 3 characters long", async function() {
+          it("should fail if the username is less than 3 characters long", async function () {
             const [{ id }] = await prisma.user.findMany({});
 
             await expect(
@@ -3945,7 +3945,7 @@ describe("Resolvers", function() {
             );
           });
 
-          it("should fail if the username is greater than 20 characters long", async function() {
+          it("should fail if the username is greater than 20 characters long", async function () {
             const [{ id }] = await prisma.user.findMany({});
 
             await expect(
@@ -3965,7 +3965,7 @@ describe("Resolvers", function() {
             );
           });
 
-          it("should fail if the username contains a capital letter", async function() {
+          it("should fail if the username contains a capital letter", async function () {
             const [{ id }] = await prisma.user.findMany({});
 
             await expect(
@@ -3984,7 +3984,7 @@ describe("Resolvers", function() {
               "Username must only contain lowercase letters, numbers and dashes"
             );
           });
-          it("should fail if the username contains something other than a lowercase letter, number or dash", async function() {
+          it("should fail if the username contains something other than a lowercase letter, number or dash", async function () {
             const [{ id }] = await prisma.user.findMany({});
             await expect(
               await resolvers.Mutation.editUser(
@@ -4002,7 +4002,7 @@ describe("Resolvers", function() {
               "Username must only contain lowercase letters, numbers and dashes"
             );
           });
-          it("should fail if the username starts or ends with a dash", async function() {
+          it("should fail if the username starts or ends with a dash", async function () {
             const [{ id }] = await prisma.user.findMany({});
             await expect(
               await resolvers.Mutation.editUser(
@@ -4022,20 +4022,20 @@ describe("Resolvers", function() {
           });
         });
       });
-      describe("deleteUser", function() {
-        it("should delete a user", async function() {
+      describe("deleteUser", function () {
+        it("should delete a user", async function () {
           const [{ id }] = await prisma.user.findMany({});
           await resolvers.Mutation.deleteUser(null, null, { id });
           expect(await prisma.user.findMany({})).to.have.length(1);
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           await expect(
             await resolvers.Mutation.deleteUser(null, null, { id: "" })
           ).to.have.property("message", "Not logged in");
         });
       });
-      describe("followUser", function() {
-        it("should follow a user", async function() {
+      describe("followUser", function () {
+        it("should follow a user", async function () {
           const [{ id: followerId }, { id: userId }] =
             await prisma.user.findMany({});
           await resolvers.Mutation.followUser(
@@ -4050,12 +4050,12 @@ describe("Resolvers", function() {
             }).followers
           ).to.have.length(1);
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           await expect(
             await resolvers.Mutation.followUser(null, { id: "" }, { id: "" })
           ).to.have.property("message", "Not logged in");
         });
-        it("should not let the user follow themself", async function() {
+        it("should not let the user follow themself", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           await expect(
             await resolvers.Mutation.followUser(
@@ -4066,8 +4066,8 @@ describe("Resolvers", function() {
           ).to.have.property("message", "You cannot follow yourself");
         });
       });
-      describe("unfollowUser", function() {
-        beforeEach(async function() {
+      describe("unfollowUser", function () {
+        beforeEach(async function () {
           const { id: userId } = (await prisma.user.findUnique({
             where: { username: "hiluw" },
           })) ?? { id: "" };
@@ -4080,7 +4080,7 @@ describe("Resolvers", function() {
             { id: followerId }
           );
         });
-        it("should unfollow a user", async function() {
+        it("should unfollow a user", async function () {
           const { id: userId } = (await prisma.user.findUnique({
             where: { username: "hiluw" },
           })) ?? { id: "" };
@@ -4100,12 +4100,12 @@ describe("Resolvers", function() {
 
           expect(user?.followers).to.have.length(0);
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           await expect(
             await resolvers.Mutation.unfollowUser(null, { id: "" }, { id: "" })
           ).to.have.property("message", "Not logged in");
         });
-        it("should not let the user unfollow themself", async function() {
+        it("should not let the user unfollow themself", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           await expect(
             await resolvers.Mutation.unfollowUser(
@@ -4117,9 +4117,9 @@ describe("Resolvers", function() {
         });
       });
     });
-    describe("recipe", function() {
-      describe("createRecipe", function() {
-        it("should create a recipe", async function() {
+    describe("recipe", function () {
+      describe("createRecipe", function () {
+        it("should create a recipe", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           await resolvers.Mutation.createRecipe(
             null,
@@ -4133,7 +4133,7 @@ describe("Resolvers", function() {
           );
           expect(await prisma.recipe.findMany({})).to.have.length(3);
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           await expect(
             await resolvers.Mutation.createRecipe(
               null,
@@ -4146,8 +4146,8 @@ describe("Resolvers", function() {
           );
         });
       });
-      describe("editRecipe", function() {
-        it("should edit a recipe", async function() {
+      describe("editRecipe", function () {
+        it("should edit a recipe", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           await resolvers.Mutation.editRecipe(
@@ -4165,7 +4165,7 @@ describe("Resolvers", function() {
           });
           expect(recipe).to.have.property("name", "Bacon and Beans");
         });
-        it("should fail if the recipe is not found", async function() {
+        it("should fail if the recipe is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           await expect(
             await resolvers.Mutation.editRecipe(
@@ -4180,7 +4180,7 @@ describe("Resolvers", function() {
             )
           ).to.have.property("message", "Recipe not found");
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           return expect(
             await resolvers.Mutation.editRecipe(
               null,
@@ -4192,7 +4192,7 @@ describe("Resolvers", function() {
             "You must be logged in to perform this action"
           );
         });
-        it("should fail if the user does not own the recipe", async function() {
+        it("should fail if the user does not own the recipe", async function () {
           const [{ id: authorId }, { id: editorId }] =
             await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({
@@ -4210,8 +4210,8 @@ describe("Resolvers", function() {
           );
         });
       });
-      describe("deleteRecipe", function() {
-        it("should delete a recipe", async function() {
+      describe("deleteRecipe", function () {
+        it("should delete a recipe", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           await resolvers.Mutation.deleteRecipe(
@@ -4221,7 +4221,7 @@ describe("Resolvers", function() {
           );
           expect(await prisma.recipe.findMany({})).to.have.length(1);
         });
-        it("should fail if the recipe is not found", async function() {
+        it("should fail if the recipe is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           await expect(
             await resolvers.Mutation.deleteRecipe(
@@ -4231,7 +4231,7 @@ describe("Resolvers", function() {
             )
           ).to.have.property("message", "Recipe not found");
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           return expect(
             await resolvers.Mutation.deleteRecipe(
@@ -4244,7 +4244,7 @@ describe("Resolvers", function() {
             "You must be logged in to perform this action"
           );
         });
-        it("should fail if the user does not own the recipe", async function() {
+        it("should fail if the user does not own the recipe", async function () {
           const [{ id: authorId }, { id: deleterId }] =
             await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({
@@ -4262,8 +4262,8 @@ describe("Resolvers", function() {
           );
         });
       });
-      describe("saveRecipe", function() {
-        it("should save a recipe", async function() {
+      describe("saveRecipe", function () {
+        it("should save a recipe", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           await resolvers.Mutation.saveRecipe(
@@ -4278,7 +4278,7 @@ describe("Resolvers", function() {
           expect(user.saved.map((r: { id: any }) => r.id).includes(recipeId)).to
             .be.true;
         });
-        it("should fail if the recipe is not found", async function() {
+        it("should fail if the recipe is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           await expect(
             await resolvers.Mutation.saveRecipe(
@@ -4288,7 +4288,7 @@ describe("Resolvers", function() {
             )
           ).to.have.property("message", "Recipe not found");
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           return expect(
             await resolvers.Mutation.saveRecipe(
@@ -4302,8 +4302,8 @@ describe("Resolvers", function() {
           );
         });
       });
-      describe("unsaveRecipe", async function() {
-        it("should unsave a recipe", async function() {
+      describe("unsaveRecipe", async function () {
+        it("should unsave a recipe", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           await resolvers.Mutation.unsaveRecipe(
@@ -4318,7 +4318,7 @@ describe("Resolvers", function() {
           expect(user.saved.map((r: { id: any }) => r.id).includes(recipeId)).to
             .be.false;
         });
-        it("should fail if the recipe is not found", async function() {
+        it("should fail if the recipe is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           return expect(
             await resolvers.Mutation.unsaveRecipe(
@@ -4328,7 +4328,7 @@ describe("Resolvers", function() {
             )
           ).to.have.property("message", "Recipe not found");
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           return expect(
             await resolvers.Mutation.unsaveRecipe(
@@ -4343,9 +4343,9 @@ describe("Resolvers", function() {
         });
       });
     });
-    describe("step", function() {
-      describe("createStep", function() {
-        it("should create a step", async function() {
+    describe("step", function () {
+      describe("createStep", function () {
+        it("should create a step", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           const step = await resolvers.Mutation.createStep(
@@ -4358,7 +4358,7 @@ describe("Resolvers", function() {
           );
           expect(step).to.have.property("content", "step");
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           return expect(
             await resolvers.Mutation.createStep(
@@ -4374,7 +4374,7 @@ describe("Resolvers", function() {
             "You must be logged in to perform this action"
           );
         });
-        it("should fail if the recipe is not found", async function() {
+        it("should fail if the recipe is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           return expect(
             await resolvers.Mutation.createStep(
@@ -4388,8 +4388,8 @@ describe("Resolvers", function() {
           ).to.have.property("message", "Recipe not found");
         });
       });
-      describe("editStep", function() {
-        it("should edit a step", async function() {
+      describe("editStep", function () {
+        it("should edit a step", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           const [{ id: stepId }] = await prisma.step.findMany({});
@@ -4403,7 +4403,7 @@ describe("Resolvers", function() {
           );
           expect(step).to.have.property("content", "step");
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           const [{ id: stepId }] = await prisma.step.findMany({});
           return expect(
@@ -4420,7 +4420,7 @@ describe("Resolvers", function() {
             "You must be logged in to perform this action"
           );
         });
-        it("should fail if the recipe is not found", async function() {
+        it("should fail if the recipe is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: stepId }] = await prisma.step.findMany({});
           return expect(
@@ -4435,8 +4435,8 @@ describe("Resolvers", function() {
           ).to.have.property("message", "Step not found");
         });
       });
-      describe("deleteStep", function() {
-        it("should delete a step", async function() {
+      describe("deleteStep", function () {
+        it("should delete a step", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           const [{ id: stepId }] = await prisma.step.findMany({});
@@ -4447,7 +4447,7 @@ describe("Resolvers", function() {
           );
           expect(step).to.have.property("id", stepId);
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           const [{ id: stepId }] = await prisma.step.findMany({});
           return expect(
@@ -4461,7 +4461,7 @@ describe("Resolvers", function() {
             "You must be logged in to perform this action"
           );
         });
-        it("should fail if the recipe is not found", async function() {
+        it("should fail if the recipe is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: stepId }] = await prisma.step.findMany({});
           return expect(
@@ -4474,9 +4474,9 @@ describe("Resolvers", function() {
         });
       });
     });
-    describe("ingredient", function() {
-      describe("createIngredient", function() {
-        it("should create an ingredient", async function() {
+    describe("ingredient", function () {
+      describe("createIngredient", function () {
+        it("should create an ingredient", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           const ingredient = await resolvers.Mutation.createIngredient(
@@ -4489,7 +4489,7 @@ describe("Resolvers", function() {
           );
           expect(ingredient).to.have.property("name", "ingredient");
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           return expect(
             await resolvers.Mutation.createIngredient(
@@ -4505,7 +4505,7 @@ describe("Resolvers", function() {
             "You must be logged in to perform this action"
           );
         });
-        it("should fail if the recipe is not found", async function() {
+        it("should fail if the recipe is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           return expect(
             await resolvers.Mutation.createIngredient(
@@ -4519,8 +4519,8 @@ describe("Resolvers", function() {
           ).to.have.property("message", "Recipe not found");
         });
       });
-      describe("editIngredient", function() {
-        it("should edit an ingredient", async function() {
+      describe("editIngredient", function () {
+        it("should edit an ingredient", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           const [{ id: ingredientId }] = await prisma.ingredient.findMany({});
@@ -4534,7 +4534,7 @@ describe("Resolvers", function() {
           );
           expect(ingredient).to.have.property("name", "ingredient");
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           const [{ id: ingredientId }] = await prisma.ingredient.findMany({});
           return expect(
@@ -4551,7 +4551,7 @@ describe("Resolvers", function() {
             "You must be logged in to perform this action"
           );
         });
-        it("should fail if the ingredient is not found", async function() {
+        it("should fail if the ingredient is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           return expect(
             await resolvers.Mutation.editIngredient(
@@ -4564,7 +4564,7 @@ describe("Resolvers", function() {
             )
           ).to.have.property("message", "Ingredient not found");
         });
-        it("should fail if the recipe is not found", async function() {
+        it("should fail if the recipe is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: ingredientId }] = await prisma.ingredient.findMany({});
           return expect(
@@ -4579,8 +4579,8 @@ describe("Resolvers", function() {
           ).to.have.property("message", "Recipe not found");
         });
       });
-      describe("deleteIngredient", function() {
-        it("should delete an ingredient", async function() {
+      describe("deleteIngredient", function () {
+        it("should delete an ingredient", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           const [{ id: ingredientId }] = await prisma.ingredient.findMany({});
@@ -4591,7 +4591,7 @@ describe("Resolvers", function() {
           );
           expect(ingredient).to.have.property("id", ingredientId);
         });
-        it("should fail if the user is not logged in", async function() {
+        it("should fail if the user is not logged in", async function () {
           const [{ id: recipeId }] = await prisma.recipe.findMany({});
           const [{ id: ingredientId }] = await prisma.ingredient.findMany({});
           return expect(
@@ -4605,7 +4605,7 @@ describe("Resolvers", function() {
             "You must be logged in to perform this action"
           );
         });
-        it("should fail if the ingredient is not found", async function() {
+        it("should fail if the ingredient is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           return expect(
             await resolvers.Mutation.deleteIngredient(
@@ -4615,7 +4615,7 @@ describe("Resolvers", function() {
             )
           ).to.have.property("message", "Ingredient not found");
         });
-        it("should fail if the recipe is not found", async function() {
+        it("should fail if the recipe is not found", async function () {
           const [{ id: userId }] = await prisma.user.findMany({});
           const [{ id: ingredientId }] = await prisma.ingredient.findMany({});
           return expect(
@@ -4638,12 +4638,12 @@ Upon running the tests, we can see that the tests are passing, indicating that t
 
 During the sprint I completed the following success criteria:
 
-|  Reference  | Criteria                                                                          | Testing    |  Completion  |
-|:-----------:|-----------------------------------------------------------------------------------|------------|:------------:|
-|    1.2.1    | Allow the user to create, read, update, and delete their own recipes on the site. | Unit tests |      ✅       |
-|    1.2.2    | Allow anyone to read, save and unsaved recipes on the site.                       | Unit tests |      ✅       |
-|    1.2.3    | Allow the user to create, read, update and delete their own account and profile.  | Unit tests |      ✅       |
-|    1.2.4    | Allow users to access other user’s profiles.                                      | Unit tests |      ✅       |
+| Reference | Criteria                                                                          | Testing    | Completion |
+| :-------: | --------------------------------------------------------------------------------- | ---------- | :--------: |
+|   1.2.1   | Allow the user to create, read, update, and delete their own recipes on the site. | Unit tests |     ✅     |
+|   1.2.2   | Allow anyone to read, save and unsaved recipes on the site.                       | Unit tests |     ✅     |
+|   1.2.3   | Allow the user to create, read, update and delete their own account and profile.  | Unit tests |     ✅     |
+|   1.2.4   | Allow users to access other user’s profiles.                                      | Unit tests |     ✅     |
 
 **1.2.1** During the sprint I had to implement recipes to the API. This was dependent on user accounts, but once those
 were in place, I successfully added all the features to the API.
@@ -4667,4 +4667,97 @@ recipes, as users would need to send HTTP requests and read the JSON returned fr
 completed up to sprint 5 to be usable.
 
 # Sprint 3
+
+Sprint 3 is will make it possible for images to be uploaded to a content delivery network (CDN), allowing for recipes and
+users to display more rich content.
+
+## Design
+
+The main downside of GraphQL is that it doesn't have built in support for file uploads. As a result, I will have to
+pick from a few different ways of implementing this feature.
+
+- There is a library, [graphql-upload-server](https://www.npmjs.com/package/graphql-upload), which adds support for file uploads to GraphQL. However, in my opinion, the package adds complexity to both the client and server, and therefore I am going to look for an alternative.
+- I could create a REST API just for uploading images. Implementing two seperate APIs is quite overkill, and I am going to look for an alternative.
+- Images can be encoded as a base64 string, which can then be used as a parameter in the GraphQL query. This is a very simple solution, so I am going to go with it.
+
+I will upload the images to a cloud provider (AWS S3), because it is fast and reliable.
+This will also give me better access to things like caching, and if necessary, I can implement image resizing.
+
+### Decomposition
+
+The main problem to solve in this sprint is to implement images to the site.
+This means that I will have to handle uploading, storing, and retrieving images on the server.
+In addition, I will have to handle the uploading and retrieval of images on the client.
+In total, there will need to be five different parts of this sprint.
+
+- Client
+  - Uploading images
+  - Retrieving images
+- Server
+  - Uploading images
+  - Storing images
+  - Retrieving images
+
+The client will be implemented in sprint 5, so I don't have to worry about implementing it within this sprint, however, planning it out here
+will ensure that the server is going to be optimal.
+
+### Structure
+
+Clientside, the uploading of images will be done using a form. This will sit on areas that images need to be uploaded, such as creating a recipe, or editing your profile. Images will be retrieved when the client requests its URL, this can then be placed into the `src` attribute of an image.
+
+On the server, images will be uploaded inside of the existing GraphQL mutations. This will allow for the images to be uploaded only when
+needed. Storing images will be done by using the [AWS SDK](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-sdk.html). This makes sure that it is a secure and up to date implementation. Images will be able to be requested from a GraphQL query, which will fetch their URL from the database.
+
+### Algorithms
+
+This is a rough outline of how images will be uploaded:
+
+1. On the client, the user will use a form to upload an image.
+2. The client will encode the image as a base64 string.
+3. The client will send the encoded image as a parameter to the GraphQL query, along with the alt text.
+4. On the server, the string will be received and decoded. This can be done using a [Buffer](https://nodejs.org/docs/latest/api/buffer.html).
+5. The decoded image can then be uploaded to AWS S3.
+6. The URL and alt text can then be stored in the database.
+7. If the user requests the image in the mutation, it can be sent from the database.
+
+I am going about it in this way because it ensures that the image is valid and not too large. Additionally, keeping my AWS keys safe is important, becasue if somebody gets access to them, they could maliciously use my AWS account, which would cost a lot of money.
+
+Images will be retrieved like this:
+
+1. The URL is requested in a GraphQL query.
+2. The URL is retrieved from the database.
+3. The URL is sent to the client.
+4. The client places the URL in the `src` attribute of an image.
+5. The image is displayed.
+
+This seems quite long winded, but I think that its important there wont be a context where an image is requested without the content it is associated with. As a result, the proccess of getting the image's URL from the database will be done along side the content of the page.
+
+### Usability
+
+On the client I plan to use a skeleton loader while the image is being downloaded to ensure that there isn't a huge layout shift after the image is downloaded. I also plan to make the forms display an image preview before the user submits it so they know that they aren't uploading the wrong image.
+
+### Key Variables and Data Structures
+
+The main variables that will be used in this sprint are:
+
+- `aws`: The AWS SDK.
+- `s3`: The AWS S3 bucket.
+- `proccess.env.AWS_REGION`: The AWS region.
+- `proccess.env.AWS_ACCESS_KEY_ID`: The AWS access key ID.
+- `proccess.env.AWS_SECRET_ACCESS_KEY`: The AWS secret access key.
+- `proccess.env.AWS_S3_BUCKET`: The AWS S3 bucket.
+- `args`: The arguments passed to the resolver. This will be an object that contains the image.
+- `args.image`: The image that was passed to the resolver.
+- `args.image.base64`: The base64 string of the image.
+- `args.image.alt`: The filename of the image.
+- `buffer`: A [`Buffer`](https://nodejs.org/docs/latest/api/buffer.html) object containing the decoded image.
+
+## Validation
+
+User's uploaded files will be validated before they are uploaded. This is to prevent malicious files from being uploaded.
+A good way to validate files is to check its extension. If the extension is not allowed, the file will be rejected.
+This way, it will be easy to check that only images are being uploaded.
+
+Using a cloud provider, like AWS, means that it will be important to check the file size. If users can upload extremely
+large files, this could cost me a lot of money, as S3 charges per gigabyte.
 
