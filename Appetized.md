@@ -4673,7 +4673,7 @@ users to display more rich content.
 
 ## Design
 
-The main downside of GraphQL is that it doesn't have built in support for file uploads. As a result, I will have to
+A big downside of GraphQL is that it doesn't have built in support for file uploads. As a result, I will have to
 pick from a few different ways of implementing this feature.
 
 - There is a library, [graphql-upload-server](https://www.npmjs.com/package/graphql-upload), which adds support for file uploads to GraphQL. However, in my opinion, the package adds complexity to both the client and server, and therefore I am going to look for an alternative.
@@ -4732,6 +4732,18 @@ Images will be retrieved like this:
 
 This seems quite long winded, but I think that its important there wont be a context where an image is requested without the content it is associated with. As a result, the proccess of getting the image's URL from the database will be done along side the content of the page.
 
+This is how the unit tests will be implemented: 
+
+1. Image is uploaded to S3 with the mutation.
+
+2. Image is requested from S3 using Node.js' `https` module
+
+    a. I will initialise a string called `data` to store incoming packets. Its initial value is the start of a base64 encoded image.
+
+    b. When a packet is recieved, it will be pushed to the end of the string.
+
+    c. When the entire image is recieved, it will be tested against the local image.
+
 ### Usability
 
 On the client I plan to use a skeleton loader while the image is being downloaded to ensure that there isn't a huge layout shift after the image is downloaded. I also plan to make the forms display an image preview before the user submits it so they know that they aren't uploading the wrong image.
@@ -4752,7 +4764,7 @@ The main variables that will be used in this sprint are:
 - `args.image.alt`: The filename of the image.
 - `buffer`: A [`Buffer`](https://nodejs.org/docs/latest/api/buffer.html) object containing the decoded image.
 
-## Validation
+### Validation
 
 User's uploaded files will be validated before they are uploaded. This is to prevent malicious files from being uploaded.
 A good way to validate files is to check its extension. If the extension is not allowed, the file will be rejected.
@@ -4760,4 +4772,870 @@ This way, it will be easy to check that only images are being uploaded.
 
 Using a cloud provider, like AWS, means that it will be important to check the file size. If users can upload extremely
 large files, this could cost me a lot of money, as S3 charges per gigabyte.
+
+The API being built using GraphQL makes validation easy. GraphQL handles most of the validation for us.
+
+### Testing
+
+I will test images with a combination of unit and integration tests. This will ensure that the images are working as expected in isolation, 
+and within the server as a whole.
+
+I will test the uploading of images to the server, and then retrieving them. If both of these are successful, the storage must also be
+working, so tetsing that is unnecessary.
+
+Here is some of the test data I plan to use:
+
+- A PNG image. This is expected to work.
+- A JPEG image. This is expected to work.
+- A GIF image. This is expected to work.
+- A MP4 video. This is expected to fail because it is not an image.
+- An image which is too large. This is expected to fail.
+- An image which is invalid base64. This is expected to fail.
+- An image which is not an image. This is expected to fail.
+
+The unit tests developed throughout the project so far will be run often to ensure that the code is working as expected.
+
+## Development
+
+First of all, I will need to create a new AWS S3 bucket.
+
+![AWS S3 bucket](https://github.com/he1d1/appetized-docs/raw/main/assets/AWS.png)
+
+The setting '**Block _all_ public access**' will need to be turned off to allow the images to be downloaded. I am going to keep the two settings: '**Block public access to buckets and objects granted through _new_ access control lists (ACLs)**' and '**Block public access to buckets and objects granted through _any_ access control lists (ACLs)**' turned on. This is because it will ensure that the bucket is secure.
+
+Next, I will need to write the bucket policy:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicRead",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::appetizedcdn.developer.lu/*"
+        }
+    ]
+}
+```
+
+This policy allows the images to be publically downloaded, due to the `*` in the `Principal` field.
+
+I now need to use AWS's IAM to grant the server write permissions to the bucket. I do this by creating a new user group, which I give the following permission policies:
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject"
+            ],
+            "Resource": "arn:aws:s3:::appetizedcdn.developer.lu/*"
+        }
+    ]
+}
+```
+
+This means that the server can handle requests to upload or remove images, and ensure that the user has permission to do so.
+
+Now I can put the AWS credentials in the `.env` file.
+
+I should also create a new branch for this sprint.
+
+```bash
+$ git checkout -b sprint-2
+```
+
+I also need to install the AWS SDK.
+
+```bash
+$ pnpm install aws-sdk
+```
+
+Now I can start writing the code for this sprint.
+
+First of all, I need to initialise the AWS SDK in the `app.ts` file.
+
+```ts
+import aws from "aws-sdk";
+
+// ✂ Snip
+
+// Configures AWS S3.
+export const s3 = new aws.S3({
+  params: { bucket: process.env.AWS_S3_BUCKET },
+  region: process.env.AWS_REGION,
+  endpoint: `https://s3.${process.env.AWS_REGION}.amazonaws.com`,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? "",
+  },
+});
+```
+
+This code initialeses the AWS SDK and connects it to the S3 bucket. The variable `s3` is used to upload images and is exported so that it can be used in the resolvers.
+
+It uses environmental variables so that my AWS key wont be stored in the git repository.
+
+The next thing I will do is add the capability to upload images on account creation. This will sit in the `createUser` mutation in the `src/schema/mutations/user.ts` file.
+
+The whole resolver needs a bit of tweaking to make sure that if the upload fails, the user is not created.
+Here is the resolver with unchanged parts removed:
+
+```ts
+  createUser: async (
+    _ = null,
+    {
+      user,
+      image,
+    }: {
+      user: {
+        name?: string;
+        username: string;
+        email: string;
+        password: string;
+      };
+      image: {
+        base64: string;
+      };
+    }
+  ) => {
+
+    // ✂ Snip
+
+    // Image buffer stores the decoded base64 image.
+    let imageBuffer;
+    // Check if there is an image
+    if (image?.base64) {
+      // Check if the image is a valid base64 string
+      try {
+        imageBuffer = Buffer.from(image.base64.split(",")[1], "base64");
+        if (imageBuffer.length > 1000000) {
+          return {
+            code: 400,
+            message: "Image is too large",
+          };
+        }
+      } catch (e) {
+        return {
+          code: 400,
+          message: "Image is not a valid base64 string",
+        };
+      }
+
+      // Check the image file type
+      const imageType = image.base64.split(";")[0].split("/")[1];
+      if (!["jpeg", "png", "jpg"].includes(imageType)) {
+        return {
+          code: 400,
+          message: "Image type is not supported",
+        };
+      }
+
+      // Check if the image is a valid image
+      // Image is valid if it starts with data:image/
+      // then has a file type of jpeg, png, or jpg
+      // then has a semicolon
+      // then says base64
+      // then has a comma
+
+      if (imageBuffer.toString().match(/^data:image\/[a-zA-Z]+;base64,/)) {
+        return {
+          code: 400,
+          message: "Image is not a valid image",
+        };
+      }
+    }
+
+    // ✂ Snip
+
+    if (!imageBuffer) {
+      return await prisma.user.create({
+        data: {
+          ...user,
+          // TODO add email verification
+          emailVerified: true,
+        },
+      });
+    } else {
+      // Generate userID
+      const { id } = await prisma.user.create({
+        data: {
+          ...user,
+          // TODO add email verification
+          emailVerified: true,
+        },
+      });
+
+      // Upload image to S3
+      const imageName = `${id}/profile.${
+        image.base64.toString().split(";")[0].split("/")[1]
+      }`;
+
+      try {
+        s3.putObject(
+          {
+            Bucket: process.env.AWS_S3_BUCKET ?? "",
+            Key: imageName,
+            Body: imageBuffer,
+            ContentEncoding: "base64",
+            ContentType: image.base64.split(";")[0],
+          },
+          (err, data) => {
+            if (err) {
+              throw err;
+            }
+          }
+        );
+      } catch (error) {
+        // Delete user if image upload fails
+        await prisma.user.delete({
+          where: {
+            id,
+          },
+        });
+
+        console.error(error);
+
+        return {
+          code: 500,
+          message: "Error uploading image to S3",
+        };
+      }
+      // Update user with image
+      return await prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          profilePicture: {
+            create: {
+              url:
+                (process.env.CDN_URL ??
+                  `https://${process.env.AWS_S3_BUCKET ?? ""}.s3.${
+                    process.env.AWS_REGION
+                  }.amazonaws.com/`) + 
+                "/" +
+                imageName,
+            },
+          },
+        },
+      });
+    }
+  },
+```
+
+As you can see, the resolver now takes an `image` object as a part of `args`. This contains the base64 of the image which can be used to create a buffer and upload it to S3.
+
+Images are placed into the `profilePicture` field of the user in the database.
+The images are stored at the url `https://appetizedcdn.developer.lu/<userID>/profile.<fileType>`
+
+`editUser` also needs to be updated to allow for uploads. It will use the `upsert` method overwrite existing images or create new ones. The changes on the `editUser` mutation will be similar to the `createUser` mutation. Here they are:
+
+```ts
+  editUser: async (
+    _ = null,
+    {
+      user,
+      image,
+    }: {
+      user: {
+        name?: string;
+        username?: string;
+      };
+      image: {
+        base64: string;
+      };
+    },
+    { id }: { id: string }
+  ) => {
+
+    // ✂ Snip
+
+    // Image buffer stores the decoded base64 image.
+    let imageBuffer;
+    // Check if there is an image
+    if (image?.base64) {
+      // Check if the image is a valid base64 string
+
+      try {
+        imageBuffer = Buffer.from(image.base64.split(",")[1], "base64");
+        if (imageBuffer.length > 1000000) {
+          return {
+            code: 400,
+            message: "Image is too large",
+          };
+        }
+      } catch (e) {
+        return {
+          code: 400,
+          message: "Image is not a valid base64 string",
+        };
+      }
+      // Check the image file type
+      const imageType = image.base64.split(";")[0].split("/")[1];
+      if (!["jpeg", "png", "jpg"].includes(imageType)) {
+        return {
+          code: 400,
+          message: "Image type is not supported",
+        };
+      }
+
+      // Check if the image is a valid image
+      // Image is valid if it starts with data:image/
+      // then has a file type of jpeg, png, or jpg
+      // then has a semicolon
+      // then says base64
+      // then has a comma
+      if (imageBuffer.toString().match(/^data:image\/[a-zA-Z]+;base64,/)) {
+        return {
+          code: 400,
+          message: "Image is not a valid image",
+        };
+      }
+    }
+
+    if (!imageBuffer) {
+      return await prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          name: name,
+          username: username,
+        },
+      });
+    } else {
+      // Upload image to S3
+      const imageName = `${id}/profile.${
+        image.base64.toString().split(";")[0].split("/")[1]
+      }`;
+
+      try {
+        s3.putObject(
+          {
+            Bucket: process.env.AWS_S3_BUCKET ?? "",
+            Key: imageName,
+            Body: imageBuffer,
+            ContentEncoding: "base64",
+            ContentType: image.base64.split(";")[0],
+          },
+          (err, data) => {
+            if (err) {
+              throw err;
+            }
+          }
+        );
+      } catch (error) {
+        console.error(error);
+
+        return {
+          code: 500,
+          message: "Error uploading image to S3",
+        };
+      }
+      // Update user with image
+      // Generate userID
+      return await prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          name: name,
+          username: username,
+          profilePicture: {
+            upsert: {
+              create: {
+                url:
+                  (process.env.CDN_URL ??
+                    `https://${process.env.AWS_S3_BUCKET ?? ""}.s3.${
+                      process.env.AWS_REGION
+                    }.amazonaws.com`) +
+                  "/" +
+                  imageName,
+              },
+
+              update: {
+                url:
+                  (process.env.CDN_URL ??
+                    `https://${process.env.AWS_S3_BUCKET ?? ""}.s3.${
+                      process.env.AWS_REGION
+                    }.amazonaws.com`) +
+                  "/" +
+                  imageName,
+              },
+            },
+          },
+        },
+      });
+    }
+  },
+```
+
+Now that profile pictures have been added to the `editUser` mutation it means that profile pictures have been fully implemented.
+
+There is some validation going on in the resolver that ensures the image is valid and that the image is not too large. This is done by checking the image buffer. If the image buffer is too large, the resolver returns an error. If the image buffer is valid, the resolver uploads the image to S3. We also check the format of the image by checking the start of the base64.
+
+They also need to be added to recipes, so that each recipe can have a cover image. This is required for some SEO reasons and to make the recipe page look nicer. This will also be done by adding code to existing resolvers to upload to S3.
+
+Here is how the `createRecipe` mutation looks, after adding the ability to upload images, without unchanged code:
+
+```ts
+createRecipe: async (
+    _ = null,
+    {
+      recipe,
+      image,
+    }: {
+      recipe: {
+        name: string;
+        description?: string;
+        category?: string;
+        cuisine?: string;
+        cookTime?: number;
+        prepTime?: number;
+      };
+      image: {
+        base64: string;
+      };
+    },
+    args: { id: string }
+  ) => {
+
+    // ✂ Snip
+
+    // Image buffer stores the decoded base64 image.
+    let imageBuffer;
+    // Check if there is an image
+    if (image?.base64) {
+      // Check if the image is a valid base64 string
+      try {
+        imageBuffer = Buffer.from(image.base64.split(",")[1], "base64");
+        if (imageBuffer.length > 1000000) {
+          return {
+            code: 400,
+            message: "Image is too large",
+          };
+        }
+      } catch (e) {
+        return {
+          code: 400,
+          message: "Image is not a valid base64 string",
+        };
+      }
+
+      // Check the image file type
+      const imageType = image.base64.split(";")[0].split("/")[1];
+      if (!["jpeg", "png", "jpg"].includes(imageType)) {
+        return {
+          code: 400,
+          message: "Image type is not supported",
+        };
+      }
+
+      // Check if the image is a valid image
+      // Image is valid if it starts with data:image/
+      // then has a file type of jpeg, png, or jpg
+      // then has a semicolon
+      // then says base64
+      // then has a comma
+
+      if (imageBuffer.toString().match(/^data:image\/[a-zA-Z]+;base64,/)) {
+        return {
+          code: 400,
+          message: "Image is not a valid image",
+        };
+      }
+    }
+
+    // Create recipe
+    if (!imageBuffer) {
+      return await prisma.recipe.create({
+        data: {
+          ...recipe,
+          author: {
+            connect: {
+              id: args.id,
+            },
+          },
+        },
+      });
+    } else {
+      // generate id for recipe
+      const { id } = await prisma.recipe.create({
+        data: {
+          ...recipe,
+          author: {
+            connect: {
+              id: args.id,
+            },
+          },
+        },
+      });
+      // Upload image to S3
+      const imageName = `${args.id}/${id}/cover.${
+        image.base64.toString().split(";")[0].split("/")[1]
+      }`;
+
+      try {
+        s3.putObject(
+          {
+            Bucket: process.env.AWS_S3_BUCKET ?? "",
+            Key: imageName,
+            Body: imageBuffer,
+            ContentEncoding: "base64",
+            ContentType: image.base64.split(";")[0],
+          },
+          (err, data) => {
+            if (err) {
+              throw err;
+            }
+          }
+        );
+      } catch (error) {
+        // Delete user if image upload fails
+        await prisma.recipe.delete({
+          where: {
+            id,
+          },
+        });
+
+        console.error(error);
+
+        return {
+          code: 500,
+          message: "Error uploading image to S3",
+        };
+      }
+      return await prisma.recipe.update({
+        where: {
+          id,
+        },
+        data: {
+          image: {
+            create: {
+              url:
+                (process.env.CDN_URL ??
+                  `https://${process.env.AWS_S3_BUCKET ?? ""}.s3.${
+                    process.env.AWS_REGION
+                  }.amazonaws.com`) +
+                "/" +
+                imageName,
+            },
+          },
+        },
+      });
+    }
+  },
+```
+
+This works in the same way as the `createUser` mutation.
+
+Images are stored in the `image` field in the database. The files are stored 
+in S3 at the path `https://appetizedcdn.developer.lu/<userID>/<recipeID>/cover.<imageType>`.
+
+If a user wants to change the they can do so with the `editUser` mutation.
+Here are the changes to that funciton:
+
+```ts
+editRecipe: async (
+    _ = null,
+    {
+      id,
+      recipe,
+      image,
+    }: {
+      id: string;
+      recipe: {
+        name: string;
+        description?: string;
+        category?: string;
+        cuisine?: string;
+        cookTime?: number;
+        prepTime?: number;
+      };
+      image: {
+        base64: string;
+      };
+    },
+    args: { id: string }
+  ) => {
+
+    // ✂ Snip
+
+    // Image buffer stores the decoded base64 image.
+    let imageBuffer;
+    // Check if there is an image
+    if (image?.base64) {
+      // Check if the image is a valid base64 string
+      try {
+        imageBuffer = Buffer.from(image.base64.split(",")[1], "base64");
+        if (imageBuffer.length > 1000000) {
+          return {
+            code: 400,
+            message: "Image is too large",
+          };
+        }
+      } catch (e) {
+        return {
+          code: 400,
+          message: "Image is not a valid base64 string",
+        };
+      }
+
+      // Check the image file type
+      const imageType = image.base64.split(";")[0].split("/")[1];
+      if (!["jpeg", "png", "jpg"].includes(imageType)) {
+        return {
+          code: 400,
+          message: "Image type is not supported",
+        };
+      }
+
+      // Check if the image is a valid image
+      // Image is valid if it starts with data:image/
+      // then has a file type of jpeg, png, or jpg
+      // then has a semicolon
+      // then says base64
+      // then has a comma
+
+      if (imageBuffer.toString().match(/^data:image\/[a-zA-Z]+;base64,/)) {
+        return {
+          code: 400,
+          message: "Image is not a valid image",
+        };
+      }
+    }
+
+    // Update recipe
+    if (!imageBuffer) {
+      return await prisma.recipe.update({
+        where: {
+          id,
+        },
+        data: {
+          ...recipe,
+        },
+      });
+    } else {
+      // Upload image to S3
+      const imageName = `${args.id}/${id}/cover.${
+        image.base64.toString().split(";")[0].split("/")[1]
+      }`;
+
+      try {
+        s3.putObject(
+          {
+            Bucket: process.env.AWS_S3_BUCKET ?? "",
+            Key: imageName,
+            Body: imageBuffer,
+            ContentEncoding: "base64",
+            ContentType: image.base64.split(";")[0],
+          },
+          (err, data) => {
+            if (err) {
+              throw err;
+            }
+          }
+        );
+      } catch (error) {
+        console.error(error);
+
+        return {
+          code: 500,
+          message: "Error uploading image to S3",
+        };
+      }
+      return await prisma.recipe.update({
+        where: {
+          id,
+        },
+        data: {
+          image: {
+            upsert: {
+              create: {
+                url:
+                  (process.env.CDN_URL ??
+                    `https://${process.env.AWS_S3_BUCKET ?? ""}.s3.${
+                      process.env.AWS_REGION
+                    }.amazonaws.com`) +
+                  "/" +
+                  imageName,
+              },
+              update: {
+                url:
+                  (process.env.CDN_URL ??
+                    `https://${process.env.AWS_S3_BUCKET ?? ""}.s3.${
+                      process.env.AWS_REGION
+                    }.amazonaws.com`) +
+                  "/" +
+                  imageName,
+              },
+            },
+          },
+        },
+      });
+    }
+  },
+```
+
+Now, all that's left to do is add the ability to add images to each step of a recipe.
+
+This will be almost identical to the changes in the `createRecipe` and `editRecipe` mutations. As a result, I will not document it here.
+
+Now that the code has been written, we can test it.
+
+## Testing
+
+As I mentioned before, I will be testing with unit and integration tests.
+First and foremost I will be completing the unit tests.
+They will sit in the `test/s3.test.ts` file. They will upload an image to S3, then download it back and compare the two.
+The images will be uploaded with the `createRecipe`, `editRecipe`, `createUser`, and `editUser` mutations.
+
+Luckily, to test S3, a test suite does not need to be written. This is becasue 
+there is no need to test on existing data.
+
+As a result, all that needs to happen before and after each test is clearing the database.
+
+This is done with the `beforeEach` and `afterEach` functions. Here is the code:
+
+```ts
+import { s3 } from "../src/app";
+import user from "../src/schema/mutations/user";
+import recipe from "../src/schema/mutations/recipe";
+import prisma from "../src/prisma";
+
+const { createUser, editUser } = user;
+const { createRecipe, editRecipe } = recipe;
+
+describe("S3", function () {
+  beforeEach(async () => {
+    // Clear the database
+    await prisma.image.deleteMany({});
+    await prisma.ingredient.deleteMany({});
+    await prisma.step.deleteMany({});
+    await prisma.recipe.deleteMany({});
+    await prisma.user.deleteMany({});
+  });
+
+  afterEach(async () => {
+    // Clear the database
+    await prisma.image.deleteMany({});
+    await prisma.ingredient.deleteMany({});
+    await prisma.step.deleteMany({});
+    await prisma.recipe.deleteMany({});
+    await prisma.user.deleteMany({});
+  });
+});
+```
+
+Now I can test the `createUser` mutation.
+
+
+While creating the unit test, I was running into a strange error. When requesting the image from S3, I was getting an error instead of the image saying: 
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Error><Code>AccessDenied</Code><Message>Access Denied</Message><RequestId>Q92FY933RSV600C8</RequestId><HostId>Ww0wvs7Wy+0WwqP+zRn7IcTRbTv8QJb547aHeFydCMaJ1+n3iuh5GOnfvgpTerPLH3XhSQduN2k=</HostId></Error>
+```
+
+I investigated the error and manually requested the image from S3 with an identical HTTP request, this was successful. I was really confused becasue it seemed like the error was coming from the way I was requesting the image. I tried a bunch of different requests and libraries and I was still getting the same error.
+
+After a few hours of debugging I realised that the image was being requested
+before it was publically available. I could fix this by adding a small delay between uploading and requesting the image. While this solution is slightly hacky, it works, and it is for testing purposes, so it is not a big deal.
+
+Now that I have gotten requests to S3 working, I can get the rest of the test complete. The way the test is written is as follows:
+
+```ts
+describe("createUser", function () {
+    it("should upload an image", async () => {
+      // Upload image
+      await resolvers.Mutation.createUser(null, {
+        user: {
+          name: "John",
+          username: "x-john-x",
+          email: "john@example.com",
+          password: "password1",
+        },
+        image: {
+          base64,
+        },
+      });
+      // Get URL of image
+      const {
+        profilePicture: { url },
+      } = (await prisma.user.findUnique({
+        where: {
+          username: "x-john-x",
+        },
+        select: {
+          profilePicture: {
+            select: {
+              url: true,
+            },
+          },
+        },
+      })) as { profilePicture: { url: string } };
+
+      // Wait for image to be uploaded
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      const res = await new Promise((resolve) =>
+        https.get(url, (res) => {
+          res.setEncoding("base64");
+          let data = res.headers["content-type"] + ";base64,";
+          res.on("data", (chunk) => (data += chunk));
+          res.on("end", () => resolve(data));
+        })
+      );
+
+      expect(res).to.equal(base64);
+    });
+  });
+```
+
+`base64` is a constant containing the test image.
+
+I implemented similar tests for the other 5 mutations that deal with images.
+They will not be documented here as they are similar to the test above.
+
+The unit tests are now complete and passing. Now it is time to run some integration tests.
+
+I will be manually testing the resolvers with the GraphQL sandbox, then I will be using the returned URL to see if the image was uploaded correctly.
+
+
+
+## Evaluation
+
+The sprint was completed in a relatively short amount of time. I was able to get the code to work, and I was able to get the tests to pass. This sprint was a good learning experience because it was a great opportunity to learn about the cloud and how to leverage it to build a scalable application.
+
+Here are the success criteria completed in this sprint: 
+| Criteria  | Description | Tests | Success |
+| --------- | ----------- | ----- | ------- |
+|   2.2.1   | Users can upload images to the site.                               |     Unit testing    |     ✅     |
+|   2.2.2   | The location of uploaded images are stored in the site’s database. |     Unit testing    |     ✅     |
+|   2.2.3   |  Images uploaded can be accessed by the client.                    | Integration testing |     ❎     | 
+
+
+**2.2.1** and **2.2.2** were both implemented successfully, they were both added without issue, other than in testing.
+
+**2.2.3** is going to be implemented in sprint 5, therefore only parts of it were completed.
+
+### Drawbacks
+
+There are a few improvements that could be made to the image uploads.
+
+Primarily, when an image is deleted from the database, the image should be deleted from S3. This is not currently implemented and as a result, images will have to be manually deleted from S3. This can cause unnecessary costs.
+
+Another issue is that using base64 to upload images is not an ideal solution,
+it requires a specific format which will need to be done on the client. This makes the developer expirience worse when developing the client. 
+
+Finally, the images are currently uploaded to S3 without being compressed, and the size they are uploaded at, is the size they will be downloaded at. This could be fixed by compressing the images server side before uploading them to S3. Also, a serverless function could be used to implement image resizing.
+
 
