@@ -262,7 +262,7 @@ ORM I am going to be using is called Prisma.
 ## Design
 
 <figure>
-	<img style="border-radius: 1rem" alt="Entity relation diagram of the database" src="https://github.com/hiluw/appetized-docs/blob/main/assets/railway.png?raw=true">
+	<img style="border-radius: 1rem" alt="Entity relation diagram of the database" src="https://github.com/he1d1/appetized-docs/blob/main/assets/railway.png?raw=true">
 	<!--suppress HtmlUnknownAttribute -->
     <figcaption align="center"><b>Figure 1</b>: Entity relationship diagram of the database</figcaption>
 </figure>
@@ -2122,11 +2122,11 @@ GraphQL explorer at: http://localhost:4000/
 
 By clicking the link, I get bought to this page:
 
-![A landing page for Apollo Explorer](https://github.com/hiluw/appetized-docs/raw/main/assets/Apollo.png)
+![A landing page for Apollo Explorer](https://github.com/he1d1/appetized-docs/raw/main/assets/Apollo.png)
 
 The button leads to the GraphQL explorer. I can now see the schema I just created.
 
-![A GraphQL schema](https://github.com/hiluw/appetized-docs/raw/main/assets/explorer.png)
+![A GraphQL schema](https://github.com/he1d1/appetized-docs/raw/main/assets/explorer.png)
 
 The type definitions have now been successfully created! However, I still need to create the resolvers. The typedefs on
 their own don't do much, but the resolvers are the heart of the Apollo server.
@@ -5494,7 +5494,28 @@ Now that the code has been written, we can test it.
 ## Testing
 
 As I mentioned before, I will be testing with unit and integration tests.
-First and foremost I will be completing the unit tests.
+First and foremost I will be completing the integration tests.
+
+I will be manually testing the resolvers with the GraphQL sandbox, then I will be using the returned URL to see if the image was uploaded correctly.
+
+![Integration Test](https://github.com/he1d1/appetized-docs/raw/main/assets/Upload%20Image.png)
+
+As you can see, I am running a request that uploads an image to S3. I can then request for the URL of the image with the request:
+
+```graphql
+Query ($id: ID!) {
+  user(id: $id) {
+    profilePicture {
+      url
+    }
+  }
+}
+```
+
+This will return the URL of the image, which I can use to see weather the image was uploaded correctly. These tests can be repeated for all the mutations.
+
+Now that the integration tests are complete, I will write and complete the unit tests.
+
 They will sit in the `test/s3.test.ts` file. They will upload an image to S3, then download it back and compare the two.
 The images will be uploaded with the `createRecipe`, `editRecipe`, `createUser`, and `editUser` mutations.
 
@@ -5605,11 +5626,7 @@ describe("createUser", function () {
 I implemented similar tests for the other 5 mutations that deal with images.
 They will not be documented here as they are similar to the test above.
 
-The unit tests are now complete and passing. Now it is time to run some integration tests.
-
-I will be manually testing the resolvers with the GraphQL sandbox, then I will be using the returned URL to see if the image was uploaded correctly.
-
-
+Now that the unit tests are complete, the sprint is complete.
 
 ## Evaluation
 
@@ -5637,5 +5654,32 @@ Another issue is that using base64 to upload images is not an ideal solution,
 it requires a specific format which will need to be done on the client. This makes the developer expirience worse when developing the client. 
 
 Finally, the images are currently uploaded to S3 without being compressed, and the size they are uploaded at, is the size they will be downloaded at. This could be fixed by compressing the images server side before uploading them to S3. Also, a serverless function could be used to implement image resizing.
+
+### Usability
+
+The usability of the image uploads has room for improvement. This is becasue of the fact that the images have to be uploaded in base64. The client wont see this, however, if somebody is using the API, it may be a hassle for them to upload images.
+
+### Maintenance
+
+I think that this will be easy to maintain because the images are stored in S3, meaning that I don't have to handle the storage of images manually. However, I haven't implemented the ability to delete images from S3, so I will have to do that manually. I think that the costs of runing the S3 bucket will be minimal, so I am not too worried about it.
+
+### Next Steps
+
+I think that after the main development of the project is complete, it will be important to come back to this sprint and implement the following:
+
+- Serverside image compression
+- Serverless image resizing (and maybe cropping)
+- Serverless image conversion
+- Support for the WebP format. Not all browsers support this format, so I would have to look at the `User-Agent` and `Accept` headers to determine if the client supports it. If they don't I could just send the image in the JPG format.
+- Support for the GIF format. This could be a monetization opportunity, like how Discord allows the user to upload GIF profile pictures as a feature of their subscription.
+- Support for SVGs.
+- Support for multiple images per recipe.
+- Video uploads for recipes.
+
+All of these features can be implemented, but I think that they are lower on the priority list than the other sprints.
+
+# Sprint 4
+
+Sprint 4 will be focused on implementing email verification to the application. This will be done with AWS's SES service. This is becasue it is simple and easy to implement, and it is a good way to ensure that users are not spamming the site.
 
 
