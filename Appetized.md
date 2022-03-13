@@ -5682,4 +5682,22 @@ All of these features can be implemented, but I think that they are lower on the
 
 Sprint 4 will be focused on implementing email verification to the application. This will be done with AWS's SES service. This is becasue it is simple and easy to implement, and it is a good way to ensure that users are not spamming the site.
 
+## Design
+
+Emails can be used in a few different situations. The most important one is account creation. This is because it reduces spam and ensures that users have entered their email address correctly. This is because if a user enters an incorrect email address, they will not be able to recover their account. Another situation is when a user forgets their password. If a user wants to change their password, its important to verify that they are actually the owner of the account. The best way to do this is to send an email to the user with a link to a page that allows them to change their password.
+
+### Decomposition
+
+There are a few different parts to this process:
+
+- The SMTP server is used to actually send the email to the user. I will be using Amazon's SES service because it means I don't have to maintain it manually.
+
+- The API will need some resolvers to handle the different situations.
+
+- The client will need to be able to handle the different situations.
+
+- The database will need to store things like the verification code, the email address, and the verification status. This is a good situation to use something like Redis, because it is a fast key-value store.
+
+### Structure
+
 
