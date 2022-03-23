@@ -5678,7 +5678,7 @@ I think that after the main development of the project is complete, it will be i
 
 All of these features can be implemented, but I think that they are lower on the priority list than the other sprints.
 
-# Sprint 4
+<!-- # Sprint 4
 
 Sprint 4 will be focused on implementing email verification to the application. This will be done with AWS's SES service. This is becasue it is simple and easy to implement, and it is a good way to ensure that users are not spamming the site.
 
@@ -5699,5 +5699,124 @@ There are a few different parts to this process:
 - The database will need to store things like the verification code, the email address, and the verification status. This is a good situation to use something like Redis, because it is a fast key-value store.
 
 ### Structure
+ -->
 
+# Sprint 5
 
+This is going to be the largest sprint and will focus on the development of the client. 
+
+## Design
+
+The design for this sprint is important becasue it is user facing. This is important becasue the user will need a good user expirience (UX)
+
+### Decomposition
+
+```mermaid
+  flowchart LR
+    subgraph Navbar
+      Home
+      Create
+      Saved
+      subgraph Profile
+        me["@[me]"]
+        id["@[id]"]
+      end
+      Home <--> Profile
+      Saved <--> Profile
+    end
+    Navbar <--> Recipe
+    Recipe --> Edit
+    Edit --> Navbar
+    Profile --> Settings
+    Settings --> in[Sign In]
+    Settings --> up[Sign Up]
+    up --> in
+    in --> Home
+```
+
+The frontent will be made up of different pages, these pages will be made up of reusable components. The reason I am going to be using components is that they save time rewriting identical code, they allow for the site to be more consistant because changes will propagate throughout the app.
+
+I will need quite a few components because the app will have a unified design system.
+
+- Firstly, I will need a `Button` component, this will act similarly to the default `<button>` in HTML, but will have custom styling and allow for different types of interactions.
+
+- Next up, there will be a `Card` component to contain content on the site. This will act like the `Button` having different states and interactions to a normal `div` as well as styling.
+
+- `IconButton` will be a container for a icon that acts like a button.
+
+- `Image` will be a form that allows the user to upload an image to the site and have a preview.
+
+- `Input` will be a form that takes text as an input which will have extra features like being able to add icons inside of the input. 
+
+- `Logo` will be an SVG that contains an animated version of the logo.
+
+- `TextArea` will be an Input that is large.
+
+- Finally, `User` will display a users name, username and profile picture, which can be clicked to visit that user's profile.
+
+### Structure
+
+The client will be using SvelteKit to handle routing. SvelteKit's router creates routes from the structure of the files in the `routes` directory. SvelteKit has a feature called a layout. If a file is called `__layout.svelte` all of the child and sibling routes will be embedded inside of the layout's `<slot>`. You can also use something called a slug. If a file or directory contains a something surrounded by square brackets (`[example].svelte`) you can access the value of what is in the square brackets as a variable. Using these two features, I can make a intuitive and dynamic site. 
+
+`routes/__layout.svelte` will contain the navigation bar and page title because they will be shown on every page. It will also contain things like modals becasue they can be shown on top of the whole app if placed in this file.
+
+`routes/__error.svelte` will show any errors that have occured on the app. I will probably be seeing this a lot during development so I will make sure to make it friendly.
+
+`routes/index.svelte` is the root of the app, it will be the homepage of the app. It will show the recipes uploaded by followed users, if the user is logged in. If the user isn't authenticated it will prompt them to log in.
+
+`routes/create.svelte` will be the page used to create recipes. It will have a card which the user can use to enter details of a recipe.
+
+`routes/saved.svelte` will show the user recipes they have saved. 
+
+`routes/sign-in.svelte` will have the sign in page for the app, this will redirect to the homepage on sign-in.
+
+`routes/sign-up.svelte` will have a form allowing the user to create an account for the site, it will redirect the user to the login page after account creation.
+
+`routes/@[id]/` will be a directory containing the profiles of users. The `id` slug will be used to display the correct profile. If the supplied `id` is `"me"`, the logged in user will be displayed.
+
+`routes/@[id]/__layout.svelte` will contain the basic information about a user and a small tab list to go between different peices of information about a user.
+
+`routes/@[id]/index.svelte` will be where you can see the recipes uploaded by a user.
+
+`routes/@[id]/followers.svelte` is going to be where you can see the followers of a user.
+
+`routes/@[id]/following.svelte` will show the list of users that the user is following.
+
+`routes/@[id]/saved.svelte` is going to show the recipes that the user has saved.
+
+`routes/recipe/[id]/` will be a directory that will be used to display the recipe with the uuid: `id`. It will not have a layout.
+
+`routes/recipe/[id]/index.svelte` will be the page used to display a recipe.
+
+`routes/recipe/[id]/edit.svelte` will be the page used to edit a recipe if owned by the user.
+
+`routes/recipe/[id]/_Step.svelte` will be a component used in the modal to edit a step in a recipe.
+
+`routes/settings/index.svelte` will be the settings page for the app.
+
+`routes/settings/_EditProfile.svelte` will be a component used in the modal to edit a user`s details.
+
+The components mentioned in decomposition will be stored in the `lib` directory.
+
+### Algorithms
+
+There will be a lot of different algorithms in the app. A lot of them are going to be making requests to the GraphQL API developed in sprint 2. The general flow of a GraphQL request will be:
+
+1. Make request to server and store the response in a variable. 
+
+2. Get the JSON from the response.
+
+3. If there are any errors thrown by the server (Internal server error, e.g. database) throw them also on the client
+
+4. If there are any errors specific to the user (e.g. bad intput) send the user to an error page, or include them in the page's content.
+
+This ensures that any critical errors do not cause the server to break, and it makes debugging easier.
+
+When a user first connects to the client, their session will also need to be fetched. This will request key information about the user from the cilent which will be needed for subsequent requests and for certain pages. This can be achieved by using a hook. SvelteKit's `getSession` hook is going to be used to request the id, name, username, profile picture, amount of recipes posted, amount of users they are followed by and following, and the id's of the recipes that they have saved.
+If the user is not logged in they wont have a session.
+
+On the main layout for the site, `__layout.svelte`, there will be a back button. This button will need to know how many times that the user has navigated to be able to display a back button if nescecary. Therefore I will use a queue of visited sites. When the user loads the page, the place they are navigating to and from will be added to the queue. This will cause a back button to be displayed. When the user presses the button, something will be poped from the queue and if the queue is now empty the back button will disapear. 
+
+On the home page, I will need to use infinite scrolling. This ensures that not too much data is given to the user. When the page is first loaded, the site will check weather the third to last recipe is on screen. If it is, more recipes will be loaded. If there are not any more recipes a message saying that there are none left will be shown.
+
+On the create page, there will be a multi page form that will display the different stages of creating a recipe. The buttons on the page will be either disabled or shown based on weather the required information has been entered. If the button has been pressed, a variable will be incremented and the next page will be displayed. 
