@@ -7338,6 +7338,7 @@ There is a lot to break down here...
     passed to the modal which then are put inside a `<Button>` component.
 
 - There is another `{#if}` below this:
+
   - The `{:else}` block for this displays the loading screen which contains a
     `<Logo>` component.
   - If the app is mounted, the actual layout is displayed.
@@ -7349,6 +7350,818 @@ There is a lot to break down here...
 
 - There is also some CSS styling in the `<style>` tag.
 
-Here is what the page looks like: 
+Here is what the layout looks like:
 
-![Page](/images/page.png)
+![Page](https://github.com/he1d1/appetized-docs/raw/main/assets/__layout.png)
+
+After creating the layout page I wanted to create the error page, since I would
+probably be seeing this a lot throughout development. The error page acts like a
+loyout page and will be located at `/routes/__error.svelte`. Here is the source
+code for it:
+
+```svelte
+<script context="module">
+	/** @type {import('@sveltejs/kit').ErrorLoad} */
+	export function load({ error, status }) {
+		return {
+			props: {
+				status,
+				message: error.message
+			}
+		};
+	}
+</script>
+
+<script>
+	import Button from '$lib/Button.svelte';
+	import { goto, prefetch } from '$app/navigation';
+	import { authed, currentRoute } from '../store';
+	import { onMount } from 'svelte';
+	import { page, session } from '$app/stores';
+	export let status, message;
+	const ascii = [
+		'¯\\_(ツ)_/¯',
+		'(╯°□°）╯︵ ┻━┻',
+		'┻━┻ ︵ヽ(`Д´)ﾉ︵﻿ ┻━┻',
+		'ヽ(ಠ益ಠ)ﾉ',
+		'┬─┬﻿ ノ( ゜-゜ノ)',
+		'OwO',
+		'UwU',
+		'T_T',
+		'( ͡° ͜ʖ ͡°)',
+		'[o_0]',
+		"<( -'.'- )>",
+		'ಠ_ಠ',
+		'ಠ‿ಠ'
+	];
+	onMount(() => {
+		$currentRoute = {
+			name: status.toString(),
+			route: $page.url.pathname,
+            buttons: []
+		};
+	});
+</script>
+
+<div class="flex flex-col items-center justify-center gap-4">
+	<h1 class="text-error dark:text-errorDark not-italic">
+		{ascii[Math.floor(Math.random() * ascii.length)]}
+	</h1>
+	<p class="text-center">
+		{message}
+	</p>
+	{#if status === 401 && !$session?.user}
+		<div class="flex gap-4">
+			<Button
+				on:click={() => goto('/sign-in')}
+				on:hover|once={() => prefetch('/sign-in')}
+				secondary
+			>
+				Sign In
+			</Button>
+			<Button on:click={() => goto('/sign-up')} on:hover|once={() => prefetch('/sign-up')} primary>
+				Sign Up
+			</Button>
+		</div>
+	{/if}
+</div>
+```
+
+I have made it randomly display some ascii art to maek the page more friendly.
+Additionally, if the error is caused by the user not being logged in, I show a
+sign in and sign up button.
+
+Currently, logging in requires me to change over to the development server,
+login there and then change back to production. The best way to fix this is to
+add a sign-in route to the site. Here is what I have made for
+`routes/sign-in.svelte`:
+
+```svelte
+<script>
+	import Button from '$lib/Button.svelte';
+	import Input from '$lib/Input.svelte';
+	import { goto } from '$app/navigation';
+	import { authed, currentRoute } from '../store';
+	import { onMount } from 'svelte';
+	import { session } from '$app/stores';
+	let email, password;
+	onMount(() => {
+		$currentRoute = {
+			buttons: [],
+			route: '/sign-in',
+			name: 'Sign In'
+		};
+	});
+</script>
+
+<div class="flex flex-col gap-4">
+	<Input bind:value={email} id="email" label="Email or Username" type="email" />
+	<Input bind:value={password} id="password" label="Password" type="password" />
+	<Button
+		on:click={async () => {
+			await fetch('http://localhost:4000', {
+				method: 'POST',
+				credentials: 'include',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					query: `
+                    mutation loginUser($usernameOrEmail: String!, $password: String!) {
+                        loginUser(usernameOrEmail: $usernameOrEmail, password: $password) {
+                            ... on User {
+                              id
+                              name
+                              username
+                              profilePicture {
+                                url
+                              }
+                                recipesCount
+                                followerCount
+                                followingCount
+                            }
+                            ... on Error {
+                              code
+                              message
+                            }
+                        }
+                    }
+                `,
+					variables: {
+						usernameOrEmail: email,
+						password: password
+					}
+				})
+			})
+				.then((res) => res.json())
+				.then((res) => {
+					if (res.data.loginUser.code) {
+						alert(res.data.loginUser.message);
+					} else {
+						$authed = true;
+						$session.user = res.data.loginUser;
+						goto('/');
+					}
+				});
+		}}
+		primary
+		>Sign in
+	</Button>
+</div>
+```
+
+As you can see, I am requesting the `loginUSer` mutation from the server and
+then redirecting the user to the home page if the login was successful. The way
+I am getting the value of the email and password fields is by binding them to
+the variables in the `loginUser` mutation.
+
+Now I have a good platform to build the rest of the site. It is a good idea to
+add all of the pages present on the navigation bar to the site,
+`routes/index.svelte` is the first one and will show the recipes by user's that
+the logged in user follows. It will use infinite scroll to load more recipes
+when the user scrolls nealy to the bottom of the page. This is important because
+it makes the site more interactive and user friendly, but also doesn't make the
+site slow. Here is the code for that page.
+
+```svelte
+<script context="module">
+	export async function load({ session, fetch }) {
+		if (!session?.user) {
+			return {
+				status: 401,
+				error: 'Login to access great features like the feed!'
+			};
+		}
+		const response = await fetch('http://localhost:4000', {
+			method: 'POST',
+			credentials: 'include',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				query: `
+                    query Feed($id: String) {
+                      recipes(
+                        take: 10
+                        where: {
+                      author: {
+                          followers: {
+                            some: {
+                              id: {equals: $id}
+                            }
+                          }
+                        }
+                      }
+                        sort: {
+                          createdAt: DESC
+                        }
+                      ) {
+                        id
+                        name
+                        description
+                        createdAt
+                        cuisine
+                        category
+                        author {
+                          id
+                          name
+                          username
+                          profilePicture {
+                            url
+                          }
+                        }
+                      }
+                    }
+			`,
+				variables: {
+					id: session.user.id
+				}
+			})
+		}).then((response) => response.json());
+		if (response.errors) {
+			return {
+				error: response.errors[0].message,
+				status: response.status
+			};
+		}
+		return {
+			props: {
+				user: session.user,
+				recipes: response.data.recipes
+			}
+		};
+	}
+</script>
+<script>
+	import { onMount } from 'svelte';
+	import { currentRoute } from '../store';
+	import Card from '$lib/Card.svelte';
+	export let user, recipes;
+	let observer;
+	onMount(() => {
+		$currentRoute = {
+			name: 'Home',
+			route: '/',
+			buttons: []
+		};
+		let loading = false;
+		observer = new IntersectionObserver(async (entries) => {
+			if (entries[0].isIntersecting) {
+				observer.unobserve(elements[elements.length - 3]);
+				await fetch('http://localhost:4000', {
+					method: 'POST',
+					credentials: 'include',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						query: `
+                            query Feed($id: String $from: ID) {
+                              recipes(
+                                take: 1
+                                from: $from
+                                skip: 1
+                                where: {
+                                author: {
+                          followers: {
+                            some: {
+                              id: {equals: $id}
+                            }
+                          }
+                        }
+                      }
+                        sort: {
+                          createdAt: DESC
+                        }
+                      ) {
+                        id
+                        name
+                        description
+                        createdAt
+                        cuisine
+                        category
+                        author {
+                          id
+                          name
+                          username
+                          profilePicture {
+                            url
+                          }
+                        }
+                      }
+                    }
+                    `,
+						variables: {
+							id: user.id,
+							from: recipes[recipes.length - 1].id
+						}
+					})
+				})
+					.then((response) => response.json())
+					.then((response) => {
+						if (response.errors) {
+							return {
+								error: response.errors[0].message,
+								status: response.status
+							};
+						}
+						if (response.data.recipes.length > 0) {
+							recipes.push(response.data.recipes[0]);
+							recipes = recipes;
+						}
+					});
+			}
+		});
+	});
+	let elements = [];
+	$: if (elements.length > 2) observer?.observe(elements[elements.length - 3]);
+</script>
+{#if recipes?.length}
+	<div class="flex flex-col gap-4">
+		{#each recipes as recipe, i}
+			<a class="recipe" sveltekit:prefetch href={`/recipe/${recipe.id}`} bind:this={elements[i]}>
+				<Card neutral>
+					<h2>{recipe.name}</h2>
+					{#if recipe?.description}<p>{recipe.description}</p>{/if}
+					<small
+						>{new Date(parseInt(recipe.createdAt)).toLocaleDateString()}
+						&middot; {recipe?.category ?? ''}
+						{#if recipe?.category && recipe?.cuisine}&middot;{/if}{recipe?.cuisine ?? ''}</small
+					>
+					<br />
+					<a href={`/@${recipe.author.id}`} class="text-primary dark:text-primaryDark"
+						>by {recipe.author.name ?? '@' + recipe.author.username}</a
+					>
+				</Card>
+			</a>
+		{/each}
+		<div class="my-4">
+			<h1 class="text-center">That's all</h1>
+			<p class="text-center">Follow more people to see more recipes.</p>
+		</div>
+	</div>
+{:else}
+	<h1 class="text-center">Nothing to see here</h1>
+	<p class="text-center">Start following people to have them show up in the feed.</p>
+{/if}
+<style>
+	a {
+		--tw-bg-opacity: 0.05;
+		text-overflow: ellipsis;
+	}
+</style>
+```
+
+As you can see I am using a pretty advanced GraphQL query to fetch the recipes.
+This is because I want to fetch the recipes in a way that will allow me to
+paginate the results. I am using the `skip` and `take` parameters to fetch the
+first 10 recipes, and when the user reaches the penultimate recipe, It will
+fetch the next recipe. I can then use `{#if}` blocks to show the recipes and
+messages when there aren't any more to show.
+
+The next page on the navigation bar is `routes/create.svelte`. This is used to
+create a new recipe on the site. It is a multiple page form that takes in the
+details of the recipe and at the end it will redirect to the recipe page.
+
+The pages will be created by using the `{#if}` blocks which will change what is
+displayed based on a variable `step`. Each time the user clicks the next button,
+the `step` variable will be incremented by one and subsequent pages will be
+displayed.
+
+The first step asks for the title and description of the recipe. The second step
+asks for a category and cuisine. Finally, the last step asks for an image. The
+title is the only required field, so the user won't be able to continue to the
+second page without entering a title.
+
+Here is the code for the create page:
+
+```svelte
+<script context="module">
+	export async function load({ session }) {
+		if (!session?.user) {
+			return {
+				error: 'You are not logged in. Sign in below to post recipes.',
+				status: 401
+			};
+		}
+		return {
+			status: 200,
+			props: {
+				user: session.user
+			}
+		};
+	}
+</script>
+<script>
+	import { onMount } from 'svelte';
+	import { currentRoute } from '../store';
+	import Card from '$lib/Card.svelte';
+	import Input from '$lib/Input.svelte';
+	import Button from '$lib/Button.svelte';
+	import TextArea from '$lib/TextArea.svelte';
+	import Next from 'svelte-material-icons/ArrowRight.svelte';
+	import Back from 'svelte-material-icons/ArrowLeft.svelte';
+	import Party from 'svelte-material-icons/PartyPopper.svelte';
+	import { goto } from '$app/navigation';
+	import Image from '$lib/Image.svelte';
+	onMount(() => {
+		$currentRoute = {
+			name: 'Create',
+			buttons: [],
+			route: '/create'
+		};
+		reader = new FileReader();
+	});
+	export let user;
+	let name, description, base64, reader, category, cuisine;
+	let step = 0;
+	async function createRecipe() {
+		return await fetch('http://localhost:4000', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			credentials: 'include',
+			body: JSON.stringify({
+				query: `
+                    mutation CreateRecipe ($name: String! $description: String $cuisine: String $category: String $image: ImageInput) {
+                      createRecipe(
+                        recipe: {
+                          name: $name
+                          description: $description
+                          cuisine: $cuisine
+                          category: $category
+                        },
+                        image: $image
+                      ) {
+                        ... on Recipe {
+                          name
+                          id
+                        }
+                        ... on Error {
+                          code
+                          message
+                        }
+                      }
+                    }
+                    `,
+				variables: {
+					name,
+					description,
+					cuisine,
+					category,
+					image: base64 ? { base64 } : undefined
+				}
+			})
+		})
+			.then((res) => res.json())
+			.then((res) => goto(`recipe/${res.data.createRecipe.id}`));
+	}
+	let imageValue;
+</script>
+<Card neutral>
+	<div class="flex flex-col gap-4">
+		<div class="flex items-center">
+			<h1 class="flex-1">
+				<!--Title and description-->
+				{#if step === 0}Whats Cooking?{/if}
+				<!--Category and cuisine-->
+				{#if step === 1}When and Where?{/if}
+				<!--Image-->
+				{#if step === 2}Upload an image!{/if}
+			</h1>
+			{#if step !== 3}<p>Step <sup>{step + 1}</sup>/<sub>3</sub></p>{/if}
+		</div>
+		{#if step === 0}
+			<Input
+				required
+				id="name"
+				label="Recipe Name"
+				type="text"
+				bind:value={name}
+				placeholder="My New Recipe"
+			/>
+			<TextArea
+				id="description"
+				label="Description"
+				bind:value={description}
+				placeholder="Describe your recipe..."
+			/>
+		{:else if step === 1}
+			<Input
+				id="category"
+				label="Category"
+				type="text"
+				bind:value={category}
+				placeholder="Breakfast, Dessert..."
+			/>
+			<Input
+				id="cuisine"
+				label="Cuisine"
+				type="text"
+				bind:value={cuisine}
+				placeholder="Italian, Mexican..."
+			/>
+		{:else if step === 2}
+			<Image bind:base64 bind:imageValue />
+		{:else}
+			<div class="flex flex-col items-center justify-center gap-2">
+				<Party size="32" />
+				<p class="text-center">Recipe Created!</p>
+			</div>
+		{/if}
+		<div class="flex gap-2 justify-end">
+			{#if step !== 3}
+				{#if step > 0}
+					<Button secondary on:click={() => step--}>
+						<span class="leading-none flex items-center justify-center gap-1"
+							>Back <Back size="16" /></span
+						>
+					</Button>
+				{/if}
+				{#if step !== 2}
+					<Button primary on:click={() => step++} disabled={!name}>
+						<span class="leading-none flex items-center justify-center gap-1"
+							>Next <Next size="16" /></span
+						>
+					</Button>
+				{:else}
+					<Button
+						primary
+						on:click={() => {
+							step++;
+							createRecipe();
+						}}
+					>
+						<span class="leading-none flex items-center justify-center gap-1">Submit</span>
+					</Button>
+				{/if}
+			{/if}
+		</div>
+	</div>
+</Card>
+```
+
+Now that this page is done, it is probably a good idea to create the recipe
+page.
+
+This will be located at `https://url.tld/recipe/id` so I will be using a slug to
+get the id. As a result the file path will be `routes/recipe/[id]/index.svelte`.
+I will then be able to get the id from the url. Here is the code for the recipe
+page:
+
+```svelte
+<script context="module">
+	export async function load({ fetch, params }) {
+		const res = await fetch(`http://localhost:4000`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			credentials: 'include',
+			body: JSON.stringify({
+				query: `
+                        query ($id: ID!) {
+                            recipe(id: $id) {
+                                ... on Recipe {
+                                    id
+                                    name
+                                    description
+                                    createdAt
+                                    category
+                                    cuisine
+                                    image {
+                                        url
+                                    }
+                                    author {
+                                        id
+                                        name
+                                        username
+                                        profilePicture {
+                                            url
+                                        }
+                                    }
+                                    ingredients {
+                                        name
+                                        quantity
+                                    }
+                                    steps {
+										position
+                                        name
+                                        content
+                                        image {
+                                            url
+                                        }
+                                    }
+                                }
+                                ... on Error {
+                                    code
+                                    message
+                                }
+                            }
+                        }
+                    `,
+				variables: {
+					id: params.id
+				}
+			})
+		});
+		const json = await res.json();
+		if (json?.errors) {
+			return {
+				status: 500,
+				error: json.errors[0].message
+			};
+		}
+		if (json.data.recipe?.code) {
+			return {
+				error: json.data.recipe.message,
+				status: json.data.recipe.code
+			};
+		}
+		json.data?.recipe?.steps.sort((a, b) => a.position - b.position);
+		return { props: { recipe: json.data?.recipe } };
+	}
+</script>
+<script>
+	import { page, session } from '$app/stores';
+	import { onMount } from 'svelte';
+	import { currentRoute } from '../../../store';
+	import User from '$lib/User.svelte';
+	import Card from '$lib/Card.svelte';
+	import Saved from 'svelte-material-icons/Bookmark.svelte';
+	import NotSaved from 'svelte-material-icons/BookmarkOutline.svelte';
+	import Pencil from 'svelte-material-icons/Pencil.svelte';
+	import { goto } from '$app/navigation';
+	export let recipe;
+	async function saveRecipe() {
+		const res = await fetch(`http://localhost:4000`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			credentials: 'include',
+			body: JSON.stringify({
+				query: `
+                    mutation ($id: ID!) {
+                        saveRecipe(id: $id) {
+                            ... on Recipe {
+                                id
+                            }
+                            ... on Error {
+                                code
+                                message
+                            }
+                        }
+                    }
+                `,
+				variables: {
+					id: recipe.id
+				}
+			})
+		});
+		const json = await res.json();
+		if (json?.errors) {
+			return {
+				status: 500,
+				error: json.errors[0].message
+			};
+		}
+		if (json.data.recipe?.code) {
+			return {
+				error: json.data.recipe.message,
+				status: json.data.recipe.code
+			};
+		}
+		$currentRoute.buttons[0].component = Saved;
+		$currentRoute.buttons[0].click = unsaveRecipe;
+		$session?.user?.savedRecipes?.push(recipe.id);
+		$session.user.savedRecipes = $session?.user?.savedRecipes;
+	}
+	async function unsaveRecipe() {
+		const res = await fetch(`http://localhost:4000`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			credentials: 'include',
+			body: JSON.stringify({
+				query: `
+                    mutation ($id: ID!) {
+                        unsaveRecipe(id: $id) {
+                            ... on Recipe {
+                                id
+                            }
+                            ... on Error {
+                                code
+                                message
+                            }
+                        }
+                    }
+                `,
+				variables: {
+					id: recipe.id
+				}
+			})
+		});
+		const json = await res.json();
+		if (json?.errors) {
+			return {
+				status: 500,
+				error: json.errors[0].message
+			};
+		}
+		if (json.data.recipe?.code) {
+			return {
+				error: json.data.recipe.message,
+				status: json.data.recipe.code
+			};
+		}
+		// @ts-ignore
+		$currentRoute.buttons[0].component = NotSaved;
+		$currentRoute.buttons[0].click = saveRecipe;
+		$session?.user?.savedRecipes?.filter((id) => id !== recipe.id);
+		$session.user.savedRecipes = $session?.user?.savedRecipes;
+	}
+	onMount(() => {
+		$currentRoute = {
+			route: $page.url.pathname,
+			name: recipe?.name,
+			buttons: [
+				// @ts-ignore
+				$session?.user?.savedRecipes?.map((recipe) => recipe.id).includes(recipe.id)
+					? {
+							component: Saved,
+							click: () => unsaveRecipe()
+					  }
+					: {
+							component: NotSaved,
+							click: () => saveRecipe()
+					  }
+			]
+		};
+		if ($session?.user.id === recipe?.author?.id) {
+			$currentRoute.buttons.push({
+				// @ts-ignore
+				component: Pencil,
+				click: () => goto(`/recipe/${recipe.id}/edit`)
+			});
+		}
+	});
+</script>
+<article class="flex flex-col gap-4">
+	{#if recipe?.image?.url}
+		<img
+			class="rounded-lg my-2 max-h-[50vh] object-cover"
+			src={recipe.image.url}
+			alt={recipe.name}
+		/>
+	{/if}
+	<User user={recipe?.author} />
+	{#if recipe?.description}
+		<p>
+			{recipe.description}
+		</p>
+	{/if}
+	<h2>Ingredients</h2>
+	{#if !recipe?.ingredients?.length}
+		<p>No ingredients</p>
+	{:else}
+		<ul>
+			{#each recipe?.ingredients as ingredient}
+				{#if ingredient.quantity !== '' && ingredient.name !== ''}<li
+						class="flex items-center before:content-['•'] ml-2 before:-ml-2 before:mr-2"
+					>
+						{ingredient.quantity}
+						{#if isNaN(parseInt(ingredient.quantity))}of{/if}
+						{ingredient.name}
+					</li>
+				{/if}
+			{/each}
+		</ul>
+	{/if}
+	<h2>Steps</h2>
+	{#if !recipe?.steps?.length}
+		<p>No steps</p>
+	{:else}
+		{#each recipe?.steps as step, i}
+			<Card neutral>
+				<h3>{i + 1}. {step?.name ?? ''}</h3>
+				<p>{step.content}</p>
+			</Card>
+		{/each}
+	{/if}
+</article>
+```
+
+This page has two buttons:
+
+- A button that toggles the recipe between saved and unsaved.
+- A button that takes you to the recipe editor.
+
+These are passed into the `currentRoute` store which then will display the
+buttons on the layout page. As you can see, the edit button is only shown if the
+user is the author of the recipe.
+
+The rest of the page is quite simple and just displays the content of the
+recipe.
